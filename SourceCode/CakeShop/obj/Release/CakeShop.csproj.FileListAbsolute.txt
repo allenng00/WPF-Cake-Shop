@@ -1,14 +1,11 @@
 E:\Desktop\WPF.PROJECT03.CAKESHOP\ReleaseCode\CakeShop.exe.config
 E:\Desktop\WPF.PROJECT03.CAKESHOP\ReleaseCode\CakeShop.exe
 E:\Desktop\WPF.PROJECT03.CAKESHOP\ReleaseCode\CakeShop.pdb
-E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\MainWindow.g.cs
 E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\App.g.cs
 E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop_MarkupCompile.cache
-E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop_MarkupCompile.lref
-E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\MainWindow.baml
-E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop.g.resources
 E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop.Properties.Resources.resources
 E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop.csproj.GenerateResource.cache
 E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop.csproj.CoreCompileInputs.cache
 E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop.exe
 E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop.pdb
+E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\obj\Release\CakeShop.csprojAssemblyReference.cache
