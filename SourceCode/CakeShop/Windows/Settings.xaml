@@ -1,0 +1,45 @@
+﻿<Window x:Class="CakeShop.Windows.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CakeShop.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        mc:Ignorable="d"
+                Height="293.293" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Visibility="Visible" WindowStyle="None" Closing="Window_Closing">
+
+    <Border BorderBrush="LightBlue"  BorderThickness="2">
+
+        <StackPanel>
+            <Grid x:Name="tabMenuGrid" Height="70" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+
+                    <materialDesign:PackIcon Kind="Settings" Height="30" Width="30" Margin="10"/>
+
+                    <TextBlock Text="Settings" FontSize="28" Height="40" />
+                </StackPanel>
+                <Button x:Name="closeSettingButton" Click="closeSettingButton_Click" Margin="0" Padding="0" Background="Transparent" VerticalAlignment="Top"  Foreground="Red" HorizontalAlignment="Right" BorderThickness="0">
+                    <materialDesign:PackIcon Kind="Close"  Height="40" Width="40"></materialDesign:PackIcon>
+                </Button>
+            </Grid>
+            <Grid Height="55" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
+                    <Button x:Uid="0" Width ="150" Content="SPLASH SCREEN" Height="50" BorderBrush="{x:Null}"  Background="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                    <Button x:Uid="1" Width ="150" Content="COLOR" Height="50" BorderBrush="{x:Null}"  Background="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+                </StackPanel>
+                <Grid VerticalAlignment="Bottom" x:Name="GridCursor" Width="130" Height="5" Background="#FF2196F3" Margin="20 0" HorizontalAlignment="Left"/>
+            </Grid>
+            <Grid x:Name="settingGrid" Height="101" Margin="10">
+                <Grid x:Name="settingGrid0" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="Visible" Margin="30">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="10,0" Text="Show Splash Screen when start" Width="300" FontSize="20"/>
+                        <ToggleButton x:Name="splashScreenToggleBtn" Foreground="Red" ></ToggleButton>
+                    </StackPanel>
+                </Grid>
+                <Grid x:Name="settingGrid1" Visibility="Hidden" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
