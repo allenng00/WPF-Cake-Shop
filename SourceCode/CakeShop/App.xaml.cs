@@ -33,18 +33,19 @@ namespace CakeShop
         {
             var value = ConfigurationManager.AppSettings["ShowSplashScreen"];
             var showSplash = bool.Parse(value);
+            var appDao = new CakeShopDAO();
 
-            // Nếu hiển thị SlashScreen
+            // Nếu không hiển thị SlashScreen
             if (showSplash == false)
             {
                 mainWindow = new Windows.MainWindow();
                 mainWindow.Show();
             }
+            // Hiển thị SplashScreen
             else
             {
-                //var dao = new CakeShopDAO();
 
-                //var cakes = dao.CakeList("Cake", 10);
+                //var cakes = appDao.CakeList("Cake", 10);
                 //var _rng = new Random();
                 //var index = _rng.Next(cakes.Count);
                 //var cake = cakes[index];

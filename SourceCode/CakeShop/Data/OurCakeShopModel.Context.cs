@@ -27,5 +27,9 @@ namespace CakeShop.Data
     
         public virtual DbSet<CAKE> CAKEs { get; set; }
         public virtual DbSet<CATEGORY> CATEGORies { get; set; }
+        public virtual DbSet<ORDER> ORDERs { get; set; }
+        public virtual DbSet<ORDER_DETAIL> ORDER_DETAIL { get; set; }
+        public virtual DbSet<RECEIVE> RECEIVEs { get; set; }
+        public virtual DbSet<STATUS> STATUS { get; set; }
     }
 }

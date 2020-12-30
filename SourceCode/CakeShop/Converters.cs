@@ -162,6 +162,7 @@ namespace CakeShop
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Byte[] array = value as Byte[];
+
             using (var stream = new MemoryStream(array))
             {
                 var image = new BitmapImage();
@@ -174,6 +175,22 @@ namespace CakeShop
                 image.Freeze();
                 return image;
             }
+            // Nếu ảnh null
+            //else
+            //{
+            //    var path = AppDomain.CurrentDomain.BaseDirectory;
+            //    var image = new BitmapImage();
+
+            //    image.BeginInit();
+            //    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+            //    image.CacheOption = BitmapCacheOption.OnLoad;
+            //    image.UriSource = new Uri(path + @"Data\Images\cart.png");
+            //    image.EndInit();
+            //    image.Freeze();
+
+            //    return image;
+
+            //}
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

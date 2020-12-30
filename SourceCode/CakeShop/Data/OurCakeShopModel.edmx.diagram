@@ -4,10 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8365dfcadd0f48d9b8b7c38175f4c7ae" Name="Diagram1">
+      <Diagram DiagramId="8365dfcadd0f48d9b8b7c38175f4c7ae" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="OurCakeShopModel.CAKE" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="OurCakeShopModel.CATEGORY" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="OurCakeShopModel.FK_CAKE_CATEGORY" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OurCakeShopModel.ORDER" Width="1.5" PointX="7.625" PointY="1" />
+        <EntityTypeShape EntityType="OurCakeShopModel.ORDER_DETAIL" Width="1.5" PointX="9.875" PointY="1.625" />
+        <EntityTypeShape EntityType="OurCakeShopModel.RECEIVE" Width="1.5" PointX="3.25" PointY="5.625" />
+        <EntityTypeShape EntityType="OurCakeShopModel.STATUS" Width="1.5" PointX="5.375" PointY="1.5" />
+        <AssociationConnector Association="OurCakeShopModel.FK_ORDER_DETAIL_CAKE" />
+        <AssociationConnector Association="OurCakeShopModel.FK_RECEIVE_CAKE" />
+        <AssociationConnector Association="OurCakeShopModel.FK_ORDER_DETAIL_ORDER" />
+        <AssociationConnector Association="OurCakeShopModel.FK_ORDER_STATUS" />
+        <AssociationConnector Association="OurCakeShopModel.FK_ORDER_STATUS1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

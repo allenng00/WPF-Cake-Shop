@@ -94,5 +94,10 @@ namespace CakeShop.Data
         {
             Database = new OurCakeShopEntities();
         }
+
+        public void UpdateDatabase()
+        {
+            Database.SaveChanges();
+        }
     }
 }

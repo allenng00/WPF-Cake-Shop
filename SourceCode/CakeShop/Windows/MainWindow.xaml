@@ -4,9 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CakeShop.Windows"
+        xmlns:global="clr-namespace:CakeShop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <global:ByteArrayToImageConveter x:Key="Converter"/>
+    </Window.Resources>
+
     <Grid>
-      
+        <ComboBox Name="cakesComboBox" Margin="30,122,412,247">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <Rectangle RadiusX="10" RadiusY="10" Height="50" Width="50">
+                            <Rectangle.Fill>
+                                <ImageBrush Stretch="UniformToFill" ImageSource="{Binding AvatarImage, Converter={StaticResource Converter}}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button x:Name="addImgButton" Click="addImgButton_Click"
+                    Height="50" Width="100" Margin="473,133,219,236"/>
+
     </Grid>
 </Window>

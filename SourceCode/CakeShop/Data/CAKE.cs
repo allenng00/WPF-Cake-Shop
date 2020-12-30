@@ -14,6 +14,13 @@ namespace CakeShop.Data
     
     public partial class CAKE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CAKE()
+        {
+            this.ORDER_DETAIL = new HashSet<ORDER_DETAIL>();
+            this.RECEIVEs = new HashSet<RECEIVE>();
+        }
+    
         public long ID { get; set; }
         public string Name { get; set; }
         public Nullable<long> CatID { get; set; }
@@ -23,7 +30,12 @@ namespace CakeShop.Data
         public byte[] AvatarImage { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> DateAdded { get; set; }
+        public string Introduction { get; set; }
     
         public virtual CATEGORY CATEGORY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDER_DETAIL> ORDER_DETAIL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RECEIVE> RECEIVEs { get; set; }
     }
 }
