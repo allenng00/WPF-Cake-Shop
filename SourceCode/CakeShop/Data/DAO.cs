@@ -41,7 +41,7 @@ namespace CakeShop.Data
         }
 
         /// <summary>
-        /// Hàm lấy dánh sách bánh của cửa hàng có bán
+        /// Hàm lấy dánh sách bánh theo tên loại và lượng tồn
         /// </summary>
         /// <param name="catName">Tên loại (Category Name)</param>
         /// <param name="inventoryNum">Số lượng tồn (Iventory Number)</param>
@@ -64,7 +64,7 @@ namespace CakeShop.Data
         }
 
         /// <summary>
-        /// Hàm lấy dánh sách tất cả bánh của cửa hàng có bán
+        /// Hàm lấy dánh sách tất cả bánh theo tên loại, lượng tồn và ngày thêm
         /// </summary>
         /// <param name="catName">Tên loại (Category Name)</param>
         /// <param name="inventoryNum">Số lượng tồn (Iventory Number)</param>

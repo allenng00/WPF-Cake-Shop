@@ -3,32 +3,71 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CakeShop.Windows"
+        xmlns:local="clr-namespace:CakeShop.Windows"        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:global="clr-namespace:CakeShop"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" 
+        WindowStyle="None"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        Height="1000" 
+        Width="1400">
     <Window.Resources>
         <global:ByteArrayToImageConveter x:Key="Converter"/>
     </Window.Resources>
 
-    <Grid>
-        <ComboBox Name="cakesComboBox" Margin="30,122,412,247">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
-                        <Rectangle RadiusX="10" RadiusY="10" Height="50" Width="50">
-                            <Rectangle.Fill>
-                                <ImageBrush Stretch="UniformToFill" ImageSource="{Binding AvatarImage, Converter={StaticResource Converter}}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+    <DockPanel> 
+        <Grid  x:Name="headerBarGrid" 
+               Height="60" Background="#2C2C2C"
+               VerticalAlignment="Top" DockPanel.Dock="Top" 
+               MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
 
-        <Button x:Name="addImgButton" Click="addImgButton_Click"
-                    Height="50" Width="100" Margin="473,133,219,236"/>
+            <StackPanel Orientation="Horizontal"> 
+                
+            <Image x:Name="appIconImage" 
+                Source= "..\Data\Images\cake.ico" RenderOptions.BitmapScalingMode="HighQuality" 
+                       Height="45" Width="45" 
+                       Margin="20 0" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="appTitleTextBlock"
+                           VerticalAlignment="Center" Margin="5 0"
+                           FontSize="20" Foreground="White" FontFamily="Roboto"
+                Text="Our Cake shop - Bring our sweet to customers"/>
+                
+            </StackPanel>
+            <StackPanel x:Name="appbuttonsStackPanel" 
+                        Orientation="Horizontal" HorizontalAlignment="Right" >
 
-    </Grid>
+                <Button x:Name="minimiseButton" Background="{x:Null}" BorderBrush="{x:Null}" 
+                    Click="minimiseButtonClick" Padding="5"  Margin="5 0">
+                    <materialDesign:PackIcon Kind="WindowMinimize" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightYellow"/>
+                </Button>
+                <!--<Button x:Name="truButton" Background="{x:Null}" BorderBrush=" {x:Null}" 
+                    Click="maximiseButtonClick" Padding="0" Margin="5 0">
+                            <materialDesign:PackIcon Kind="WindowMaximize" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightYellow"/>
+                        </Button>-->
+                <Button x:Name="closeButton" Background="{x:Null}" BorderBrush="{x:Null}" 
+                    Click="closeButtonClick" Padding="0" Margin="5 0 10 0">
+                    <materialDesign:PackIcon Kind="WindowClose" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightYellow"/>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+        <Grid Name="menuTabGrid"
+              Height="50" Background="#2D2D2D"
+            DockPanel.Dock="Top" VerticalAlignment="Top"
+              >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
+                <Button Content="Cakes" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <Button Content="Orders" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <Button Content="Receives" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <Button Content="Statistic" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            </StackPanel>
+
+        </Grid>
+        <Grid x:Name="cursorGrid" Background="LightBlue"
+              DockPanel.Dock="Top" VerticalAlignment="Top"
+            Height="10">
+
+        </Grid>
+    </DockPanel>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace CakeShop.Windows
 {
@@ -15,7 +16,54 @@ namespace CakeShop.Windows
             
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var move = sender as System.Windows.Controls.Grid;
+            var win = Window.GetWindow(move);
+            win.DragMove();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void minimiseButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void maximiseButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButtonClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
         //private void addImgButton_Click(object sender, RoutedEventArgs e)
         //{
         //    if (cakesComboBox.SelectedIndex >= 0)

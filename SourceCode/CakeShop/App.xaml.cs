@@ -11,18 +11,10 @@ namespace CakeShop
     /// </summary>
     public partial class App : Application
     {
+        public static CakeShopDAO AppDAO;
+
         public static Windows.MainWindow mainWindow;
-
-        public static void AddConnectionStringSettings(
-             System.Configuration.Configuration config,
-               System.Configuration.ConnectionStringSettings conStringSettings)
-
-        {
-            ConnectionStringsSection connectionStringsSection = config.ConnectionStrings;
-            connectionStringsSection.ConnectionStrings.Add(conStringSettings);
-            config.Save(ConfigurationSaveMode.Minimal);
-            ConfigurationManager.RefreshSection("connectionStrings");
-        }
+        //public static 
 
         /// <summary>
         /// Hàm xử lí các sự kiện khi áp được khởi động
@@ -31,9 +23,9 @@ namespace CakeShop
         /// <param name="e"></param>
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            AppDAO = new CakeShopDAO();
             var value = ConfigurationManager.AppSettings["ShowSplashScreen"];
             var showSplash = bool.Parse(value);
-            var appDao = new CakeShopDAO();
 
             // Nếu không hiển thị SlashScreen
             if (showSplash == false)
@@ -44,15 +36,25 @@ namespace CakeShop
             // Hiển thị SplashScreen
             else
             {
-
-                //var cakes = appDao.CakeList("Cake", 10);
-                //var _rng = new Random();
-                //var index = _rng.Next(cakes.Count);
-                //var cake = cakes[index];
+                var cakes = AppDAO.CakeList();
+                var _rng = new Random();
+                var cakeIndex = _rng.Next(cakes.Count);
+                var cake = cakes[cakeIndex];
                
-                //var screen = new Windows.SplashScreen();
-                //screen.Show();
+                var screen = new Windows.SplashScreen();
+                screen.Show();
             }
+        }
+
+        public static void AddConnectionStringSettings(
+           System.Configuration.Configuration config,
+             System.Configuration.ConnectionStringSettings conStringSettings)
+
+        {
+            ConnectionStringsSection connectionStringsSection = config.ConnectionStrings;
+            connectionStringsSection.ConnectionStrings.Add(conStringSettings);
+            config.Save(ConfigurationSaveMode.Minimal);
+            ConfigurationManager.RefreshSection("connectionStrings");
         }
 
     }
