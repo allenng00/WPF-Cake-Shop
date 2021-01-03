@@ -10,21 +10,21 @@
         WindowStyle="None"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
-        Height="1000" 
-        Width="1400">
+        Height="1000" Width="1400"
+        Loaded="Window_Loaded">
     <Window.Resources>
-        <global:ByteArrayToImageConveter x:Key="Converter"/>
+        <global:ByteArrayToImageConveter x:Key="Conve rter"/>
     </Window.Resources>
 
-    <DockPanel> 
+    <DockPanel>
         <Grid  x:Name="headerBarGrid" 
                Height="60" Background="#2C2C2C"
                VerticalAlignment="Top" DockPanel.Dock="Top" 
                MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
 
-            <StackPanel Orientation="Horizontal"> 
-                
-            <Image x:Name="appIconImage" 
+            <StackPanel Orientation="Horizontal">
+
+                <Image x:Name="appIconImage" 
                 Source= "..\Data\Images\cake.ico" RenderOptions.BitmapScalingMode="HighQuality" 
                        Height="45" Width="45" 
                        Margin="20 0" HorizontalAlignment="Left"/>
@@ -32,7 +32,7 @@
                            VerticalAlignment="Center" Margin="5 0"
                            FontSize="20" Foreground="White" FontFamily="Roboto"
                 Text="Our Cake shop - Bring our sweet to customers"/>
-                
+
             </StackPanel>
             <StackPanel x:Name="appbuttonsStackPanel" 
                         Orientation="Horizontal" HorizontalAlignment="Right" >
@@ -57,17 +57,53 @@
             DockPanel.Dock="Top" VerticalAlignment="Top"
               >
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
-                <Button Content="Cakes" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                <Button Content="Orders" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                <Button Content="Receives" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                <Button Content="Statistic" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <Button Uid="0" x:Name="Button00"
+                    Background="{x:Null}" BorderBrush="{x:Null}" 
+                        Height="50">
+                    <Label Name="Label00" 
+                        Content="Cakes"  Foreground="Wheat" FontSize="22" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                </Button>
+                <Button Uid="1" x:Name="Button01"
+                        Background="{x:Null}" BorderBrush="{x:Null}"
+                        Height="50">
+                    <Label 
+                        Content="Orders"  Foreground="Wheat" FontSize="22"/>
+                </Button>
+                <Button  Uid="2" x:Name="Button02"
+                         Background="{x:Null}" BorderBrush="{x:Null}" 
+                         Height="50">
+                    <Label Content="Receives" Foreground="Wheat" FontSize="22"/>
+                </Button>
+                <Button  Uid="3" x:Name="Button03"
+                    Background="{x:Null}" BorderBrush="{x:Null}" 
+                         Click="Button03_Click"
+                         Height="50">
+                    <Label Content="Statistics" Foreground="Wheat" FontSize="22"/>
+                </Button>
+                <Button  Uid="4" x:Name="Button04"
+                    Background="{x:Null}" BorderBrush="{x:Null}" 
+                         Height="50">
+                    <Label Content="Settings" Foreground="Wheat" FontSize="22"/>
+                </Button>
+                <Button  Uid="5" x:Name="Button05"
+                    Background="{x:Null}" BorderBrush="{x:Null}" 
+                         Height="50">
+                    <Label Content="About " Foreground="Wheat" FontSize="22"/>
+                </Button>
             </StackPanel>
 
         </Grid>
-        <Grid x:Name="cursorGrid" Background="LightBlue"
-              DockPanel.Dock="Top" VerticalAlignment="Top"
-            Height="10">
-
+        <Grid
+            DockPanel.Dock="Top" VerticalAlignment="Top"
+              >
+            <StackPanel  x:Name="cursorStackPanel"
+                         Background="LightBlue"
+                         HorizontalAlignment="Left" Panel.ZIndex="999"
+                         Width="66" Height="10" Margin="26 0"
+                         />
         </Grid>
+        <Frame Name="mainContentFrame">
+            
+        </Frame>
     </DockPanel>
 </Window>

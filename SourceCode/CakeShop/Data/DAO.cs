@@ -88,13 +88,44 @@ namespace CakeShop.Data
         }
 
         /// <summary>
-        /// 
+        /// Hàm thêm một loại bánh mới vào cơ sở dữ liệu
+        /// </summary>
+        /// <param name="tempCake"></param>
+        public void AddCake(CAKE tempCake)
+        {
+            var cakes = CakeList();
+
+            cakes.Add(tempCake);
+            Database.SaveChanges();
+        }
+
+        public void Statistics(DateTime start, DateTime end = default(DateTime))
+        {
+            var newEnd = (end == default(DateTime)) ? DateTime.Now : end;
+            var orderlist = Database.ORDERs
+                .Select(o => o.DateCompleted >= start && o.DateCompleted <= newEnd)
+                ;
+
+            var orderlist2 = Database.ORDERs
+                //.GroupBy(o=> o.DateCompleted.Month == 1)
+                .Select(o => o.DateCompleted >= start && o.DateCompleted <= newEnd)
+                ;
+
+            var receivelist = Database.RECEIVEs
+               .Select(r => r.DateAdded >= start && r.DateAdded <= newEnd);
+        }
+
+        /// <summary>
+        /// Hàm khởi tạo kết nối cơ sở dữ liệu
         /// </summary>
         public CakeShopDAO()
         {
             Database = new OurCakeShopEntities();
         }
 
+        /// <summary>
+        /// Hàm cập nhật cơ sở dữ liệu
+        /// </summary>
         public void UpdateDatabase()
         {
             Database.SaveChanges();
