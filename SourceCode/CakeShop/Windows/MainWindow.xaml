@@ -10,10 +10,11 @@
         WindowStyle="None"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
-        Height="1000" Width="1400"
+        Height="800" Width="1200"
         Loaded="Window_Loaded">
     <Window.Resources>
-        <global:ByteArrayToImageConveter x:Key="Conve rter"/>
+        <global:ByteArrayToImageConveter x:Key="Converter"/>
+       
     </Window.Resources>
 
     <DockPanel>
@@ -57,53 +58,51 @@
             DockPanel.Dock="Top" VerticalAlignment="Top"
               >
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
-                <Button Uid="0" x:Name="Button00"
-                    Background="{x:Null}" BorderBrush="{x:Null}" 
+                <RadioButton Uid="0" x:Name="Button00"
+                             IsChecked="True"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                   Style="{StaticResource MaterialDesignTabRadioButton}"
                         Height="50">
                     <Label Name="Label00" 
-                        Content="Cakes"  Foreground="Wheat" FontSize="22" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                </Button>
-                <Button Uid="1" x:Name="Button01"
-                        Background="{x:Null}" BorderBrush="{x:Null}"
+                           
+                        Content="Cakes"  Foreground="Wheat" FontSize="22" 
+                           ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                </RadioButton>
+                <RadioButton Uid="1" x:Name="Button01"
+                       Style="{StaticResource MaterialDesignTabRadioButton}"
                         Height="50">
                     <Label 
                         Content="Orders"  Foreground="Wheat" FontSize="22"/>
-                </Button>
-                <Button  Uid="2" x:Name="Button02"
-                         Background="{x:Null}" BorderBrush="{x:Null}" 
+                </RadioButton>
+                <RadioButton  Uid="2" x:Name="Button02"
+                         Style="{StaticResource MaterialDesignTabRadioButton}"
                          Height="50">
                     <Label Content="Receives" Foreground="Wheat" FontSize="22"/>
-                </Button>
-                <Button  Uid="3" x:Name="Button03"
-                    Background="{x:Null}" BorderBrush="{x:Null}" 
+                </RadioButton>
+                <RadioButton  Uid="3" x:Name="Button03"
+                    Style="{StaticResource MaterialDesignTabRadioButton}"
                          Click="Button03_Click"
                          Height="50">
                     <Label Content="Statistics" Foreground="Wheat" FontSize="22"/>
-                </Button>
-                <Button  Uid="4" x:Name="Button04"
-                    Background="{x:Null}" BorderBrush="{x:Null}" 
-                         Height="50">
+                </RadioButton>
+                <RadioButton  Uid="4" x:Name="Button04"
+                     Style="{StaticResource MaterialDesignTabRadioButton}"
+         Height="50">
                     <Label Content="Settings" Foreground="Wheat" FontSize="22"/>
-                </Button>
-                <Button  Uid="5" x:Name="Button05"
-                    Background="{x:Null}" BorderBrush="{x:Null}" 
-                         Height="50">
+                </RadioButton>
+                <RadioButton  Uid="5" x:Name="Button05"
+                         Style="{StaticResource MaterialDesignTabRadioButton}"
+        Height="50">
                     <Label Content="About " Foreground="Wheat" FontSize="22"/>
-                </Button>
+                </RadioButton>
             </StackPanel>
-
         </Grid>
         <Grid
             DockPanel.Dock="Top" VerticalAlignment="Top"
-              >
-            <StackPanel  x:Name="cursorStackPanel"
-                         Background="LightBlue"
-                         HorizontalAlignment="Left" Panel.ZIndex="999"
-                         Width="66" Height="10" Margin="26 0"
-                         />
+            Background="#2C2C2C" Height="5">
         </Grid>
-        <Frame Name="mainContentFrame">
-            
+        <Frame Name="mainContentFrame" 
+               Height="680" NavigationUIVisibility="Hidden">
+
         </Frame>
     </DockPanel>
 </Window>

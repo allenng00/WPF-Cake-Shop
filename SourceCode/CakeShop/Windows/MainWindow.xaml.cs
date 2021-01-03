@@ -1,4 +1,4 @@
-﻿using CakeShop.Pages;
+﻿using CakeShop.Views;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -73,14 +73,14 @@ namespace CakeShop.Windows
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Dispatcher.Invoke(() =>
-            {
-                var left = Button00.Padding.Left + 10;
-                Double width = Button00.Padding.Left + Label00.Width;
-                this.cursorStackPanel.Margin = new Thickness(left, 0, 0, 0);
-                this.cursorStackPanel.Width = width;
-                this.cursorStackPanel.UpdateLayout();
-            });
+            //Dispatcher.Invoke(() =>
+            //{
+            //    var left = Button00.Padding.Left + 10;
+            //    Double width = Button00.Padding.Left + Label00.Width;
+            //    this.cursorStackPanel.Margin = new Thickness(left, 0, 0, 0);
+            //    this.cursorStackPanel.Width = width;
+            //    this.cursorStackPanel.UpdateLayout();
+            //});
         }
 
         private void Button03_Click(object sender, RoutedEventArgs e)
