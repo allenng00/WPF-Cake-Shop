@@ -1,5 +1,4 @@
-﻿using CakeShop.View;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace CakeShop.Windows
@@ -14,6 +13,7 @@ namespace CakeShop.Windows
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         /// <summary>
@@ -62,23 +62,6 @@ namespace CakeShop.Windows
         private void closeButtonClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void AddNewOrder_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new AddNewOrder();
-
-        }
-
-        private void AddNewCake_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new AddNewCake();
-
-        }
-
-        private void HomeScreen_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         //private void addImgButton_Click(object sender, RoutedEventArgs e)

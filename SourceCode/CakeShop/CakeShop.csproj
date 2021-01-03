@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3152A8DE-DA20-410A-B182-809EF92EAE50}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>CakeShop</RootNamespace>
     <AssemblyName>CakeShop</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -40,9 +40,6 @@
   <PropertyGroup>
     <ApplicationIcon>Data\Images\cake.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -67,7 +64,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Runtime.Serialization" />
@@ -95,23 +91,39 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters.cs" />
+    <Compile Include="Data\CAKE.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CATEGORY.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\DAO.cs" />
-    <Compile Include="Data\OurCakeShopEntities.designer.cs">
+    <Compile Include="Data\ORDER.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ORDER_DETAIL.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OurCakeShopModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OurCakeShopEntities.dbml</DependentUpon>
+      <DependentUpon>OurCakeShopModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\AddNewCake.xaml.cs">
-      <DependentUpon>AddNewCake.xaml</DependentUpon>
+    <Compile Include="Data\OurCakeShopModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\AddNewOrder.xaml.cs">
-      <DependentUpon>AddNewOrder.xaml</DependentUpon>
+    <Compile Include="Data\OurCakeShopModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="View\CakeDetail.xaml.cs">
-      <DependentUpon>CakeDetail.xaml</DependentUpon>
+    <Compile Include="Data\RECEIVE.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\HomeScreen.xaml.cs">
-      <DependentUpon>HomeScreen.xaml</DependentUpon>
+    <Compile Include="Data\STATUS.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -141,13 +153,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\OurCakeShopEntities.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>OurCakeShopEntities.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Data\OurCakeShopEntities.dbml.layout">
-      <DependentUpon>OurCakeShopEntities.dbml</DependentUpon>
+    <EntityDeploy Include="Data\OurCakeShopModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OurCakeShopModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\OurCakeShopModel.edmx.diagram">
+      <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -159,26 +170,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CustomDatePicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddNewCake.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddNewOrder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CakeDetail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\HomeScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,14 +183,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Folder Include="Pages\" />
+    <Folder Include="VierModels\" />
+  </ItemGroup>
+  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Images\cake.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\OurCakeShopModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
+      <LastGenOutput>OurCakeShopModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\OurCakeShopModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
+      <LastGenOutput>OurCakeShopModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
