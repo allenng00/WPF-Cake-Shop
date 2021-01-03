@@ -22,7 +22,8 @@ namespace CakeShop.Data
     
         public long ID { get; set; }
         public string Status { get; set; }
-        public Nullable<long> TotalBill { get; set; }
+        public long TotalBill { get; set; }
+        public System.DateTime DateCompleted { get; set; }
         public string BuyingMethod { get; set; }
         public string CustomerName { get; set; }
         public string CustomerPhone { get; set; }

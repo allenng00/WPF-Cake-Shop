@@ -3,59 +3,105 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CakeShop.Windows"
         xmlns:global="clr-namespace:CakeShop"
         mc:Ignorable="d"
         WindowStyle="none"  AllowsTransparency="true"
         Background="Transparent"
-         Height="800" Width="600" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Height="800" Width="1000" 
+        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <global:ByteArrayToImageConveter x:Key="ByteArrToImageConverter"/>
     </Window.Resources>
     <Border CornerRadius="60" BorderBrush="AliceBlue" BorderThickness="2" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-        <!--<Border.Background>
-            <ImageBrush ImageSource="../Data/Images/SplashScreen.jpg"/>
-        </Border.Background>-->
-        <Canvas>
-            <Border RenderTransformOrigin="39.495,4.391" Canvas.Left="44" Height="149" Width="515" Canvas.Top="60">
-
-                <TextBlock x:Name="nameTrip" 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="350"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid 
+                Grid.Row="0"
+                Margin="30, 20, 30, 5">
+                <StackPanel
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="cakeNameTextBlock" 
                            TextAlignment="Center" FontSize="40" Foreground="LightYellow" FontWeight="Bold" FontFamily="Verdana" 
-                           TextWrapping="Wrap" 
-                           VerticalAlignment="Center" HorizontalAlignment="Center" 
-                           Margin="49,31,47,35"  
-                           Text="{Binding Name}"/>
-            </Border>
+                           TextWrapping="Wrap"
+                           Text="{Binding Path=MainCake.Name}"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="55*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <StackPanel Margin="10">
+                        <Image x:Name="cakeAvatarImage" 
+                               Source="{Binding Path=MainCake.AvatarImage, Converter={StaticResource ByteArrToImageConverter}}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <StackPanel Margin="10"
+                                VerticalAlignment="Center">
+                        <Label Margin="20, 10"
+                               HorizontalAlignment="Center">
+                            <Label.Content>
+                                <TextBlock 
+                                    Text="Giới thiệu ngắn"
+                                    Foreground="Wheat" FontSize="24" FontFamily="Verdana">
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
+                        <TextBlock Name="cakeIntroTextBlock"
+                                   FontSize="18" Foreground="LightYellow" TextWrapping="Wrap" TextAlignment="Justify" FontStyle="Italic" FontWeight="Bold" 
+                                   Padding="2"
+                                   HorizontalAlignment="Center">
+                            <Run Text="&#x09;"/>
+                            <Run Text="{Binding Path=MainCake.Introduction}"/>
+                        </TextBlock>
 
-            <CheckBox Name="neverShowAgainCheckBox" Width="38" Height="40" 
-                      IsChecked="False" 
-                      Canvas.Left="315" Canvas.Top="608" 
-                      RenderTransformOrigin="0.65,1.137" >
-                <CheckBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform X="27.306" Y="78.516"/>
-                    </TransformGroup>
-                </CheckBox.RenderTransform>
-            </CheckBox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2"
+                   Margin="30, 5, 30, 20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
 
+                        <ProgressBar x:Name="timeProgressBar" 
+                                 Minimum="0" Maximum="{Binding MaxTime}" Value="0" 
+                                 Height="15" Width="300"/>
+                        <Grid
+                            Width="120">
+                            <Button Name="skipButton" Content="Bỏ qua"
+                                    Width="100" Height="25" Margin="2,0" 
+                                    Click="skipButton_Click" 
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    materialDesign:ButtonProgressAssist.Value="-1"
+                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"/>
+                        </Grid>
 
-            <Label Content="CakeShop"   Foreground="Yellow" FontWeight="ExtraBlack" Canvas.Left="24" Canvas.Top="681" FontSize="60" Width="299"/>
-            <Label Content="Không hiện hộp thoại này khi khởi động" Canvas.Left="338" Canvas.Top="716" FontSize="12" Foreground="Yellow"/>
-
-
-            <Image x:Name="tripCoverImage" Source="{Binding CoverImage, Converter={StaticResource ByteArrToImageConverter}}"  RenderTransformOrigin="0.5,0.5" Width="455" Height="360" Canvas.Left="79" Canvas.Top="248" />
-            <!--<TextBlock Name="infoTrip"  Width="438"  Padding="2" FontSize="18" Foreground="LightYellow" Canvas.Left="79" Canvas.Top="576" TextWrapping="Wrap" TextAlignment="Justify" FontStyle="Italic" FontWeight="Bold" Height="100">
-            
-            <Run Text="&#x09;"/>           
-            <Run Text="{Binding Path=Description}"/>
-            </TextBlock>-->
-
-            <ProgressBar x:Name="progress" Width="200"  Minimum="0" Maximum="15" Value="0" Height="15" Canvas.Left="205" Canvas.Top="769" />
-
-            <Button Name="skipButton" Width="100" Height="25" Content="Bỏ qua" IsDefault="True" Click="skipButton_Click" Canvas.Left="434" Canvas.Top="762" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="-1.117,0.938"/>
-        </Canvas>
+                    </StackPanel>
+                    <CheckBox x:Name="neverShowAgainCheckBox"
+                              HorizontalAlignment="Center"
+                              IsChecked="False"
+                              Style="{StaticResource MaterialDesignCheckBox}">
+                        <!--<CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                        </CheckBox.LayoutTransform>-->
+                        
+                    </CheckBox>
+                    <TextBlock
+                            FontFamily="Verdana" FontSize="20"
+                            Text="Không hiện hộp thoại này khi khởi động">
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Border>
 </Window>

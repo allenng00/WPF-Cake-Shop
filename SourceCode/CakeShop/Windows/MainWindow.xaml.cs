@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using CakeShop.Views;
+using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CakeShop.Windows
@@ -8,12 +10,12 @@ namespace CakeShop.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
 
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
         /// <summary>
@@ -55,13 +57,35 @@ namespace CakeShop.Windows
             }
         }
         /// <summary>
-        /// 
+        /// Hàm xử lí khi Close Button được nhấn
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void closeButtonClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// Hàm xử lí sau khi các phần tử của cửa khổ khởi động xong
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Dispatcher.Invoke(() =>
+            //{
+            //    var left = Button00.Padding.Left + 10;
+            //    Double width = Button00.Padding.Left + Label00.Width;
+            //    this.cursorStackPanel.Margin = new Thickness(left, 0, 0, 0);
+            //    this.cursorStackPanel.Width = width;
+            //    this.cursorStackPanel.UpdateLayout();
+            //});
+        }
+
+        private void Button03_Click(object sender, RoutedEventArgs e)
+        {
+            mainContentFrame.Content = new Statistics();
         }
 
         //private void addImgButton_Click(object sender, RoutedEventArgs e)

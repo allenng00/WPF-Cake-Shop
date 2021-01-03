@@ -14,7 +14,8 @@ namespace CakeShop
         public static CakeShopDAO AppDAO;
 
         public static Windows.MainWindow mainWindow;
-        //public static 
+        public static Views.AboutUs aboutWindow;
+        public static Views.Statistics statisticsWindow;
 
         /// <summary>
         /// Hàm xử lí các sự kiện khi áp được khởi động
@@ -37,18 +38,20 @@ namespace CakeShop
             else
             {
                 var cakes = AppDAO.CakeList();
+                //var cake2 = new CAKE
+
                 var _rng = new Random();
                 var cakeIndex = _rng.Next(cakes.Count);
                 var cake = cakes[cakeIndex];
                
-                var screen = new Windows.SplashScreen();
+                var screen = new Windows.SplashScreen(cake);
                 screen.Show();
             }
         }
 
         public static void AddConnectionStringSettings(
-           System.Configuration.Configuration config,
-             System.Configuration.ConnectionStringSettings conStringSettings)
+           Configuration config,
+             ConnectionStringSettings conStringSettings)
 
         {
             ConnectionStringsSection connectionStringsSection = config.ConnectionStrings;

@@ -28,9 +28,9 @@ namespace CakeShop.Data
         public Nullable<long> SellPrice { get; set; }
         public Nullable<long> InventoryNum { get; set; }
         public byte[] AvatarImage { get; set; }
+        public string Introduction { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> DateAdded { get; set; }
-        public string Introduction { get; set; }
     
         public virtual CATEGORY CATEGORY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
