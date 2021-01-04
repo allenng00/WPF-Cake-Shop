@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CakeShop.Views
 {
     /// <summary>
-    /// Interaction logic for Receive.xaml
+    /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class Receive : Page
+    public partial class Settings : Page
     {
-        public Receive()
+        public Settings()
         {
             InitializeComponent();
         }

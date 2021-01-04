@@ -126,10 +126,10 @@ namespace CakeShop.Data
         /// <summary>
         /// Hàm cập nhật cơ sở dữ liệu
         /// </summary>
-        public void UpdateDatabase()
-        {
-            Database.SaveChanges();
+        //public void UpdateDatabase()
+        //{
+        //    Database.SaveChanges();
 
-        }
+        //}
     }
 }

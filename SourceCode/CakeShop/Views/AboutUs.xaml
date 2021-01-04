@@ -1,14 +1,148 @@
 ﻿<Page x:Class="CakeShop.Views.AboutUs"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CakeShop.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AboutUs">
-
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:local="clr-namespace:CakeShop.Views"
+    xmlns:global="clr-namespace:CakeShop" mc:Ignorable="d" d:DesignHeight="680" d:DesignWidth="1200" Loaded="Page_Loaded">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="../Data/Images/AboutBackground.jpg"/>
+        </Grid.Background>
+        <Label Content="VỀ CHÚNG TÔI" HorizontalAlignment="Left" Height="40.5" Margin="45,34.5,0,0" VerticalAlignment="Top" Width="263" FontWeight="Bold" FontFamily="Rockwell" FontSize="24"/>
+        <ListView x:Name="MembersListView" Margin="45,80,241,294.5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FontSize="14" ItemsSource="{Binding Path=Members}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <materialDesign:Flipper Height="270" Width="210" Margin="10 5" Style="{DynamicResource MaterialDesignCardFlipper}" d:IsHidden="True">
+                        <materialDesign:Flipper.FrontContent>
+                            <Grid Height="270" Width="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="180" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Mode="PrimaryLight" Height="200" Width="200" VerticalAlignment="Stretch">
+                                    <Ellipse Style="{x:Null}" Width="128" Height="128">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding AvatarImage}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </materialDesign:ColorZone>
+                                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Path=Name}" FontSize="20"/>
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}" Margin="0 4 0 0" Content="Xem thêm"/>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Flipper.FrontContent>
+                        <materialDesign:Flipper.BackContent>
+                            <Grid Height="270" Width="210">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Mode="PrimaryMid" Padding="8">
+                                    <StackPanel Height="Auto"
+                                        Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Margin="8 0 0 0" FontSize="22" FontStyle="Italic"
+                                                   VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <Run Text="Member "/>
+                                            <Run Text="{Binding Path = Id}"/>
+                                        </TextBlock>
+                                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" 
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" 
+                                                VerticalAlignment="Center" HorizontalAlignment="Right">
+                                            <materialDesign:PackIcon Kind="ArrowCollapse" Width="25" Height="25"/>
+                                        </Button>
+                                    </StackPanel>
+                                </materialDesign:ColorZone>
+                                <Grid Grid.Row="1" Margin="0 6 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <materialDesign:Chip Grid.Row="0" IconBackground="Snow" Margin="0 5" ToolTip="Name">
+                                        <materialDesign:Chip.Icon>
+                                            <materialDesign:PackIcon Kind="Fingerprint" Foreground="LightCoral" Height="30" Width="30"/>
+                                        </materialDesign:Chip.Icon>
+                                        <TextBlock Margin="5 0" TextWrapping="Wrap" Text="{Binding Path=Name}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                    </materialDesign:Chip>
+
+                                    <materialDesign:Chip Grid.Row="1" IconBackground="Snow" Margin="0 5" ToolTip="Career">
+                                        <materialDesign:Chip.Icon>
+                                            <materialDesign:PackIcon Kind="LocationCity" Foreground="#7ED8F6" Height="30" Width="30"/>
+                                        </materialDesign:Chip.Icon>
+                                        <TextBlock Margin="5 0" TextWrapping="Wrap" Text="{Binding Path=Job}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                    </materialDesign:Chip>
+
+                                    <materialDesign:Chip Grid.Row="2" IconBackground="LightCyan" Margin="0 5" ToolTip="Position in Team">
+                                        <materialDesign:Chip.Icon>
+                                            <Ellipse Style="{x:Null}" Width="30" Height="30">
+                                                <Ellipse.Fill>
+                                                    <ImageBrush ImageSource="../Data/Images/CareerPromotion.png"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                        </materialDesign:Chip.Icon>
+                                        <TextBlock Margin="5 0" TextWrapping="Wrap" Text="{Binding Position}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                    </materialDesign:Chip>
+
+                                    <materialDesign:Chip Grid.Row="3" IconBackground="Snow" Margin="0 5" ToolTip="Email">
+                                        <materialDesign:Chip.Icon>
+                                            <materialDesign:PackIcon Kind="Gmail" Foreground="#FF0000" Height="30" Width="30"/>
+                                        </materialDesign:Chip.Icon>
+                                        <TextBlock Margin="5 0" TextWrapping="Wrap" Text="{Binding Gmail}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                    </materialDesign:Chip>
+
+                                    <materialDesign:Chip Grid.Row="4" IconBackground="{DynamicResource PrimaryHueDarkBrush}" IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0 5" ToolTip="Email">
+                                        <materialDesign:Chip.Icon>
+                                            <materialDesign:PackIcon Kind="Facebook" Height="25" Width="25"/>
+                                        </materialDesign:Chip.Icon>
+                                        <TextBlock Margin="5 0" TextWrapping="Wrap" Text="{Binding Facebook}" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                                    </materialDesign:Chip>
+                                </Grid>
+                            </Grid>
+                        </materialDesign:Flipper.BackContent>
+                    </materialDesign:Flipper>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Content="VỀ ỨNG DỤNG" HorizontalAlignment="Left" Height="40.5" Margin="45,432.5,0,0" VerticalAlignment="Top" Width="263" FontWeight="Bold" FontFamily="Rockwell" FontSize="24"/>
+        <TextBlock TextWrapping="Wrap"
+                   HorizontalAlignment="Left"   VerticalAlignment="Top"
+                   Width="471" Height="120" Margin="45,474,0,0">
+            <Run Text="WPF Application. Microsoft SQL Server. Github"></Run>
+        </TextBlock>
+        <materialDesign:Chip Content="Facebook"
+            IconBackground="{DynamicResource PrimaryHueDarkBrush}" 
+            IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="81.999,616.234,0,31.765" ToolTip="Our Facebook">
+            <materialDesign:Chip.Icon>
+                <materialDesign:PackIcon Kind="Facebook" Height="25" Width="25"/>
+            </materialDesign:Chip.Icon>
+        </materialDesign:Chip>
+        <materialDesign:Chip Content="Google" ToolTip="Our Google"
+            IconBackground="{DynamicResource PrimaryHueDarkForegroundBrush}" 
+            IconForeground="#EA4336" Margin="236.662,616.234,0,31.765">
+            <materialDesign:Chip.Icon>
+                <materialDesign:PackIcon Kind="Google" Height="25" Width="25"/>
+            </materialDesign:Chip.Icon>
+        </materialDesign:Chip>
+        <materialDesign:Chip Content="Github" ToolTip="Our Github"
+            IconBackground="{DynamicResource PrimaryHueDarkForegroundBrush}" 
+            IconForeground="#323031" Margin="385.995,616.234,0,31.765">
+            <materialDesign:Chip.Icon>
+                <materialDesign:PackIcon Kind="Github" Height="32" Width="32"/>
+            </materialDesign:Chip.Icon>
+        </materialDesign:Chip>
     </Grid>
+
+
 </Page>

@@ -1,6 +1,7 @@
 ﻿using CakeShop.Views;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace CakeShop.Windows
@@ -73,19 +74,68 @@ namespace CakeShop.Windows
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //Dispatcher.Invoke(() =>
-            //{
-            //    var left = Button00.Padding.Left + 10;
-            //    Double width = Button00.Padding.Left + Label00.Width;
-            //    this.cursorStackPanel.Margin = new Thickness(left, 0, 0, 0);
-            //    this.cursorStackPanel.Width = width;
-            //    this.cursorStackPanel.UpdateLayout();
-            //});
+            Button05.IsChecked = true;
+            mainContentFrame.Content =
+                            (App.aboutPage == null)
+                            ? new Views.AboutUs()
+                            : App.aboutPage;
         }
 
-        private void Button03_Click(object sender, RoutedEventArgs e)
+        private void TabMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            mainContentFrame.Content = new Statistics();
+            var index = int.Parse(((RadioButton)e.Source).Uid);
+
+            switch (index)
+            {
+                case 1:
+                    {
+                        mainContentFrame.Content =
+                            (App.ordersPage == null)
+                            ? new Views.Orders()
+                            : App.ordersPage;
+                        break;
+                    }
+                case 2:
+                    {
+                        mainContentFrame.Content =
+                            (App.receivesPage == null)
+                            ? new Views.Receives()
+                            : App.receivesPage;
+                        break;
+                    }
+                case 3:
+                    {
+                        mainContentFrame.Content =
+                            (App.statisticsPage == null)
+                            ? new Views.Statistics()
+                            : App.statisticsPage;
+                        break;
+                    }
+                case 4:
+                    {
+                        mainContentFrame.Content =
+                            (App.settingsPage == null)
+                            ? new Views.Settings()
+                            : App.settingsPage;
+                        break;
+                    }
+                case 5:
+                    {
+                        mainContentFrame.Content =
+                            (App.aboutPage == null)
+                            ? new Views.AboutUs()
+                            : App.aboutPage;
+                        break;
+                    }
+                default:
+                    {
+                        mainContentFrame.Content =
+                            (App.homePage == null)
+                            ? new Views.Home()
+                            : App.homePage;
+                        break;
+                    }
+            }
         }
 
         //private void addImgButton_Click(object sender, RoutedEventArgs e)
