@@ -12,7 +12,9 @@ namespace CakeShop.Windows
     public partial class MainWindow : Window
     {
 
-
+        /// <summary>
+        /// Hàm khởi tạo các phần tử trong cửa sổ
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace CakeShop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Hàm xử lí kéo thả cửa sổ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -32,7 +34,7 @@ namespace CakeShop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Hàm xử lí khi nhấn mini Button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -42,7 +44,7 @@ namespace CakeShop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Hàm xử lí khi nhấn maximise Button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -74,65 +76,80 @@ namespace CakeShop.Windows
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Button05.IsChecked = true;
-            mainContentFrame.Content =
-                            (App.aboutPage == null)
-                            ? new Views.AboutUs()
-                            : App.aboutPage;
+            Button03.IsChecked = true;
+            App.statisticsPage = new Views.Statistics();
+            mainContentFrame.Content = App.statisticsPage;
         }
 
+        /// <summary>
+        /// Hàm xử lí khi bấn vào các tab menu để chuyển đổi trang
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TabMenuButton_Click(object sender, RoutedEventArgs e)
         {
             var index = int.Parse(((RadioButton)e.Source).Uid);
 
             switch (index)
             {
-                case 1:
+                case 1: // Orders Page
                     {
-                        mainContentFrame.Content =
-                            (App.ordersPage == null)
-                            ? new Views.Orders()
-                            : App.ordersPage;
+                        if (App.ordersPage == null)
+                        {
+                            App.ordersPage = new Views.Orders();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.ordersPage;
                         break;
                     }
-                case 2:
+                case 2: // Receives Page
                     {
-                        mainContentFrame.Content =
-                            (App.receivesPage == null)
-                            ? new Views.Receives()
-                            : App.receivesPage;
+                        if (App.receivesPage == null)
+                        {
+                            App.receivesPage = new Views.Receives();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.receivesPage;
                         break;
                     }
-                case 3:
+                case 3: // Statistics Page
                     {
-                        mainContentFrame.Content =
-                            (App.statisticsPage == null)
-                            ? new Views.Statistics()
-                            : App.statisticsPage;
+                        if (App.statisticsPage == null)
+                        {
+                            App.statisticsPage = new Views.Statistics();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.statisticsPage;
                         break;
                     }
-                case 4:
+                case 4: // Settings Page
                     {
-                        mainContentFrame.Content =
-                            (App.settingsPage == null)
-                            ? new Views.Settings()
-                            : App.settingsPage;
+                        if (App.settingsPage == null)
+                        {
+                            App.settingsPage = new Views.Settings();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.settingsPage;
                         break;
                     }
-                case 5:
+                case 5: // About Page
                     {
-                        mainContentFrame.Content =
-                            (App.aboutPage == null)
-                            ? new Views.AboutUs()
-                            : App.aboutPage;
+                        if (App.aboutPage == null)
+                        {
+                            App.aboutPage = new Views.AboutUs();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.aboutPage;
                         break;
                     }
                 default:
                     {
-                        mainContentFrame.Content =
-                            (App.homePage == null)
-                            ? new Views.Home()
-                            : App.homePage;
+                        if (App.homePage == null)
+                        {
+                            App.homePage = new Views.Home();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.homePage;
                         break;
                     }
             }
@@ -176,7 +193,5 @@ namespace CakeShop.Windows
         //        }
         //    }
         //}
-
-
     }
 }

@@ -53,6 +53,7 @@ namespace CakeShop.Windows
         {
             // Tăng biến đếm thời gian
             MyTime++;
+            _mainVM.TimeLeft = (MaxTime - MyTime).ToString();
 
             // Hết thời gian
             if (MyTime == MaxTime)
@@ -61,17 +62,17 @@ namespace CakeShop.Windows
                 _timer.Stop();
 
                 Dispatcher.Invoke(() =>
- {
-     if (neverShowAgainCheckBox.IsChecked == true)
-     {
-         UpdateAppConfiguration("ShowSplashScreen", false);
-     }
-     else { }
+                {
+                    if (neverShowAgainCheckBox.IsChecked == true)
+                    {
+                        UpdateAppConfiguration("ShowSplashScreen", false);
+                    }
+                    else { }
 
-     App.mainWindow = new MainWindow();
-     App.mainWindow.Show();
-     this.Close();
- });
+                    App.mainWindow = new MainWindow();
+                    App.mainWindow.Show();
+                    this.Close();
+                });
             }
             else { }
 

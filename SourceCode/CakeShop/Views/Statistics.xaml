@@ -38,8 +38,11 @@
                 <materialDesign:Card
                     Margin="10">
                     <StackPanel>
-                        <lvc:CartesianChart Name="Chart01"
-                                        Height="350">
+                        <lvc:CartesianChart Name="Chart01a" 
+                                        Height="250">
+                        </lvc:CartesianChart>
+                        <lvc:CartesianChart Name="Chart01b"
+                                        Height="250">
                         </lvc:CartesianChart>
                     </StackPanel>
                 </materialDesign:Card>

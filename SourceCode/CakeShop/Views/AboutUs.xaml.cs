@@ -25,9 +25,7 @@ namespace CakeShop.Views
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             _mainVM = new ViewModels.AboutUsViewModel();
-
             DataContext = _mainVM;
-           
         }
     }
 }

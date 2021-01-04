@@ -20,7 +20,7 @@ namespace CakeShop.ViewModels
             var member1 = new Member
             {
                 Name = "Nguyễn Hoàng Khang",
-                AvatarImage="../Data/Images/0039.jpg",
+                AvatarImage = "../Data/Images/0039.jpg",
                 Job = "Student",
                 Position = "PM & Design",
                 Gmail = "nhk25022016",
@@ -29,7 +29,7 @@ namespace CakeShop.ViewModels
             var member2 = new Member
             {
                 Name = "Bùi Huỳnh Trung Tín",
-                AvatarImage="../Data/Images/0092.jpg",
+                AvatarImage = "../Data/Images/0092.jpg",
                 Job = "Student",
                 Position = "Tester",
                 Gmail = "bhtt190800",
@@ -38,7 +38,7 @@ namespace CakeShop.ViewModels
             var member3 = new Member
             {
                 Name = "Trương Đại Triều",
-                AvatarImage="../Data/Images/0096.jpg",
+                AvatarImage = "../Data/Images/0096.jpg",
                 Job = "Student",
                 Position = "Dev & Designer",
                 Gmail = "truongdaitrieu2109",
@@ -48,7 +48,6 @@ namespace CakeShop.ViewModels
             AddMember(member1);
             AddMember(member2);
             AddMember(member3);
-
         }
 
         /// <summary>

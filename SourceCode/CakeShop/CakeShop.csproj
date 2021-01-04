@@ -237,6 +237,7 @@
     <Resource Include="Data\Images\0092.jpg" />
     <Resource Include="Data\Images\0096.jpg" />
     <Resource Include="Data\Images\cake.ico" />
+    <Resource Include="Data\Images\SplashScreenBackground.jpg" />
     <Content Include="Data\OurCakeShopModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OurCakeShopModel.edmx</DependentUpon>

@@ -20,12 +20,17 @@ namespace CakeShop.Views
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            var series01 = new SeriesCollection();
+            PrePareRevenuaByMonthChart();
+        }
+
+        private void PrePareRevenuaByMonthChart()
+        {
+            var series = new SeriesCollection();
             var now = DateTime.Now.Month;
 
             for (int mon = 1; mon < 12; mon++)
             {
-                series01.Add(new ColumnSeries
+                series.Add(new ColumnSeries
                 {
                     Title = "Tháng " + mon.ToString(),
                     ToolTip = "Tháng " + mon.ToString(),
@@ -33,7 +38,23 @@ namespace CakeShop.Views
                 }); ;
             }
 
-            Chart01.Series = series01;
+            Chart02.Series = series;
+        }
+        private void PrePareRevenuaByCatChart() {
+            var series = new SeriesCollection();
+            var now = DateTime.Now.Month;
+
+            for (int mon = 1; mon < 12; mon++)
+            {
+                series.Add(new ColumnSeries
+                {
+                    Title = "Tháng " + mon.ToString(),
+                    ToolTip = "Tháng " + mon.ToString(),
+                    Values = new ChartValues<double> { Double.Parse(mon.ToString()) }
+                }); ;
+            }
+
+            Chart01a.Series = series;
         }
     }
 }
