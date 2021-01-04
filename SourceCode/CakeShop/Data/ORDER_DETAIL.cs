@@ -16,9 +16,9 @@ namespace CakeShop.Data
     {
         public long OrderID { get; set; }
         public long No_ { get; set; }
-        public Nullable<long> ProductID { get; set; }
-        public Nullable<long> ProductNum { get; set; }
-        public Nullable<long> Price { get; set; }
+        public long ProductID { get; set; }
+        public long ProductNum { get; set; }
+        public long Price { get; set; }
     
         public virtual CAKE CAKE { get; set; }
         public virtual ORDER ORDER { get; set; }

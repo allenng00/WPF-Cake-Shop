@@ -10,15 +10,16 @@
         WindowStyle="None"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
-        Height="800" 
-        Width="1200">
+        Height="800" Width="1200"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <global:ByteArrayToImageConveter x:Key="Converter"/>
+       
     </Window.Resources>
 
     <DockPanel>
         <Grid  x:Name="headerBarGrid" 
-               Height="50" Background="#2C2C2C"
+               Height="60" Background="#2C2C2C"
                VerticalAlignment="Top" DockPanel.Dock="Top" 
                MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
 
@@ -53,18 +54,55 @@
 
         </Grid>
         <Grid Name="menuTabGrid"
-              Height="40" Background="#FF90CAF9"
-            DockPanel.Dock="Top" VerticalAlignment="Top">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="40" Margin=" 0">
-
-                <Button Content="Trang chính" Style="{StaticResource MaterialDesignFlatMidBgButton }" Height="40" Foreground="Black" Click="HomeScreen_Click"/>
-                <Button Content="Tạo Cake" Style="{StaticResource MaterialDesignFlatLightBgButton }" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="AddNewCake_Click"/>
-                <Button Content="Tạo đơn hàng" Style="{StaticResource MaterialDesignFlatLightBgButton }" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="AddNewOrder_Click"/>
-                <Button Content="Thống kê" Style="{StaticResource MaterialDesignFlatLightBgButton }" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>
+              Height="50" Background="#2D2D2D"
+            DockPanel.Dock="Top" VerticalAlignment="Top"
+              >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
+                <RadioButton Uid="0" x:Name="Button00"
+                             IsChecked="True"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                   Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Height="50">
+                    <Label Name="Label00" 
+                           
+                        Content="Cakes"  Foreground="Wheat" FontSize="22" 
+                           ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                </RadioButton>
+                <RadioButton Uid="1" x:Name="Button01"
+                       Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Height="50">
+                    <Label 
+                        Content="Orders"  Foreground="Wheat" FontSize="22"/>
+                </RadioButton>
+                <RadioButton  Uid="2" x:Name="Button02"
+                         Style="{StaticResource MaterialDesignTabRadioButton}"
+                         Height="50">
+                    <Label Content="Receives" Foreground="Wheat" FontSize="22"/>
+                </RadioButton>
+                <RadioButton  Uid="3" x:Name="Button03"
+                    Style="{StaticResource MaterialDesignTabRadioButton}"
+                         Click="Button03_Click"
+                         Height="50">
+                    <Label Content="Statistics" Foreground="Wheat" FontSize="22"/>
+                </RadioButton>
+                <RadioButton  Uid="4" x:Name="Button04"
+                     Style="{StaticResource MaterialDesignTabRadioButton}"
+         Height="50">
+                    <Label Content="Settings" Foreground="Wheat" FontSize="22"/>
+                </RadioButton>
+                <RadioButton  Uid="5" x:Name="Button05"
+                         Style="{StaticResource MaterialDesignTabRadioButton}"
+        Height="50">
+                    <Label Content="About " Foreground="Wheat" FontSize="22"/>
+                </RadioButton>
             </StackPanel>
-
         </Grid>
-        <Frame Height="630" Width="1150" Name="Main" NavigationUIVisibility="Hidden" Margin="0,0,0,-5"/>
+        <Grid
+            DockPanel.Dock="Top" VerticalAlignment="Top"
+            Background="#2C2C2C" Height="5">
+        </Grid>
+        <Frame Name="mainContentFrame" 
+               Height="680" NavigationUIVisibility="Hidden">
 
+        </Frame>
     </DockPanel>
 </Window>

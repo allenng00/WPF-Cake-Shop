@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3152A8DE-DA20-410A-B182-809EF92EAE50}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>CakeShop</RootNamespace>
     <AssemblyName>CakeShop</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -40,9 +40,6 @@
   <PropertyGroup>
     <ApplicationIcon>Data\Images\cake.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -67,7 +64,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Runtime.Serialization" />
@@ -129,17 +125,37 @@
     <Compile Include="Data\STATUS.cs">
       <DependentUpon>OurCakeShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\AddNewCake.xaml.cs">
-      <DependentUpon>AddNewCake.xaml</DependentUpon>
+    <Compile Include="Data\OurCakeShopModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\AddNewOrder.xaml.cs">
-      <DependentUpon>AddNewOrder.xaml</DependentUpon>
+    <Compile Include="Data\OurCakeShopModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="View\CakeDetail.xaml.cs">
-      <DependentUpon>CakeDetail.xaml</DependentUpon>
+    <Compile Include="Data\RECEIVE.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\HomeScreen.xaml.cs">
-      <DependentUpon>HomeScreen.xaml</DependentUpon>
+    <Compile Include="Data\STATUS.cs">
+      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SplashScreenViewModel.cs" />
+    <Compile Include="Views\AboutUs.xaml.cs">
+      <DependentUpon>AboutUs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders.xaml.cs">
+      <DependentUpon>Orders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Receive.xaml.cs">
+      <DependentUpon>Receive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Statistics.xaml.cs">
+      <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -186,23 +202,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CustomDatePicker.xaml">
+    <Page Include="Views\AboutUs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddNewCake.xaml">
+    <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddNewOrder.xaml">
+    <Page Include="Views\Orders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CakeDetail.xaml">
+    <Page Include="Views\Receive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HomeScreen.xaml">
+    <Page Include="Views\Statistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,7 +237,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>

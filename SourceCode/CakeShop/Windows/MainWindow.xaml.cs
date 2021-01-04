@@ -1,4 +1,5 @@
-﻿using CakeShop.View;
+﻿using CakeShop.Views;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,11 +10,12 @@ namespace CakeShop.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
 
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace CakeShop.Windows
             }
         }
         /// <summary>
-        /// 
+        /// Hàm xử lí khi Close Button được nhấn
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -64,21 +66,26 @@ namespace CakeShop.Windows
             Application.Current.Shutdown();
         }
 
-        private void AddNewOrder_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Hàm xử lí sau khi các phần tử của cửa khổ khởi động xong
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Main.Content = new AddNewOrder();
-
+            //Dispatcher.Invoke(() =>
+            //{
+            //    var left = Button00.Padding.Left + 10;
+            //    Double width = Button00.Padding.Left + Label00.Width;
+            //    this.cursorStackPanel.Margin = new Thickness(left, 0, 0, 0);
+            //    this.cursorStackPanel.Width = width;
+            //    this.cursorStackPanel.UpdateLayout();
+            //});
         }
 
-        private void AddNewCake_Click(object sender, RoutedEventArgs e)
+        private void Button03_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new AddNewCake();
-
-        }
-
-        private void HomeScreen_Click(object sender, RoutedEventArgs e)
-        {
-
+            mainContentFrame.Content = new Statistics();
         }
 
         //private void addImgButton_Click(object sender, RoutedEventArgs e)

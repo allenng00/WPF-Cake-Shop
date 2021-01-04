@@ -34,9 +34,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" MaxLength="10" />
-          <Property Name="TotalBill" Type="bigint" />
-          <Property Name="BuyingMethod" Type="nvarchar" MaxLength="10" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TotalBill" Type="bigint" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime" Nullable="false" />
+          <Property Name="BuyingMethod" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CustomerName" Type="nvarchar(max)" />
           <Property Name="CustomerPhone" Type="nchar" MaxLength="10" />
           <Property Name="CustomerAddress" Type="nvarchar(max)" />
@@ -48,9 +49,9 @@
           </Key>
           <Property Name="OrderID" Type="bigint" Nullable="false" />
           <Property Name="No." Type="bigint" Nullable="false" />
-          <Property Name="ProductID" Type="bigint" />
-          <Property Name="ProductNum" Type="bigint" />
-          <Property Name="Price" Type="bigint" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="ProductNum" Type="bigint" Nullable="false" />
+          <Property Name="Price" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="RECEIVE">
           <Key>
@@ -84,7 +85,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER_DETAIL_CAKE">
-          <End Role="CAKE" Type="Self.CAKE" Multiplicity="0..1" />
+          <End Role="CAKE" Type="Self.CAKE" Multiplicity="1" />
           <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CAKE">
@@ -108,7 +109,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER_STATUS">
-          <End Role="STATUS" Type="Self.STATUS" Multiplicity="0..1" />
+          <End Role="STATUS" Type="Self.STATUS" Multiplicity="1" />
           <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATUS">
@@ -120,7 +121,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER_STATUS1">
-          <End Role="STATUS" Type="Self.STATUS" Multiplicity="0..1" />
+          <End Role="STATUS" Type="Self.STATUS" Multiplicity="1" />
           <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATUS">
@@ -213,9 +214,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="TotalBill" Type="Int64" />
-          <Property Name="BuyingMethod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalBill" Type="Int64" Nullable="false" />
+          <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BuyingMethod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="CustomerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -230,9 +232,9 @@
           </Key>
           <Property Name="OrderID" Type="Int64" Nullable="false" />
           <Property Name="No_" Type="Int64" Nullable="false" />
-          <Property Name="ProductID" Type="Int64" />
-          <Property Name="ProductNum" Type="Int64" />
-          <Property Name="Price" Type="Int64" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="ProductNum" Type="Int64" Nullable="false" />
+          <Property Name="Price" Type="Int64" Nullable="false" />
           <NavigationProperty Name="CAKE" Relationship="Self.FK_ORDER_DETAIL_CAKE" FromRole="ORDER_DETAIL" ToRole="CAKE" />
           <NavigationProperty Name="ORDER" Relationship="Self.FK_ORDER_DETAIL_ORDER" FromRole="ORDER_DETAIL" ToRole="ORDER" />
         </EntityType>
@@ -271,7 +273,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER_DETAIL_CAKE">
-          <End Role="CAKE" Type="Self.CAKE" Multiplicity="0..1" />
+          <End Role="CAKE" Type="Self.CAKE" Multiplicity="1" />
           <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CAKE">
@@ -307,7 +309,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER_STATUS">
-          <End Role="STATUS" Type="Self.STATUS" Multiplicity="0..1" />
+          <End Role="STATUS" Type="Self.STATUS" Multiplicity="1" />
           <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATUS">
@@ -319,7 +321,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER_STATUS1">
-          <End Role="STATUS" Type="Self.STATUS" Multiplicity="0..1" />
+          <End Role="STATUS" Type="Self.STATUS" Multiplicity="1" />
           <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATUS">
@@ -400,6 +402,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
                 <ScalarProperty Name="BuyingMethod" ColumnName="BuyingMethod" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />

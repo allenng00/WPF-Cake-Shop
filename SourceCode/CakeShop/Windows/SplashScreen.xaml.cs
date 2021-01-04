@@ -1,6 +1,9 @@
 ﻿using System.Configuration;
 using System.Windows;
 using System.Windows.Input;
+using CakeShop.Data;
+using System.Windows.Threading;
+
 
 namespace CakeShop.Windows
 {
@@ -9,83 +12,81 @@ namespace CakeShop.Windows
     /// </summary>
     public partial class SplashScreen : Window
     {
-
-        private const int MaxTime = 15; // Thời gian hiển thị tối đa hiển thị 
+        #region Constant
+        private const int MaxTime = 15; // Thời gian hiển thị tối đa hiển thị  
+        #endregion
 
         private int MyTime = 0; // Biến đếm thời gian hiển thị của màn hình
         private System.Timers.Timer _timer; // Biến timer để đếm thời gian chạy của chương trình
-        //private Trip _mainTrip;
+        private ViewModels.SplashScreenViewModel _mainVM; // main view model cho window
 
         /// <summary>
         /// Hàm khởi tạo màn hình Splash Screen
         /// </summary>
-        public SplashScreen()
+        public SplashScreen(CAKE cake)
         {
             InitializeComponent();
+            _mainVM = new ViewModels.SplashScreenViewModel(cake, MaxTime.ToString());
+            DataContext = _mainVM;
         }
 
         /// <summary>
-        /// Hàm khởi tạo màn hình Splash Screen
+        /// Hàm khi màn hình khởi tạo xong.
         /// </summary>
-        /// 
-        //public SplashScreen(Trip mainTrip)
-        //{
-        //    InitializeComponent();
-        //    DataContext = mainTrip;
-        //}
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MyTime = 0;
+            _timer = new System.Timers.Timer();
+            _timer.Elapsed += Timer_Elapsed;
+            _timer.Interval = 1000;
+            _timer.Start();
+        }
 
-        ///// <summary>
-        ///// Hàm khi màn hình khởi tạo xong.
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void Window_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    MyTime = 0;
+        /// <summary>
+        /// Hàm xử lí bộ đếm thời gian sau mỗi chu kỳ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Tăng biến đếm thời gian
+            MyTime++;
 
-        //    // _rng = new Random();
+            // Hết thời gian
+            if (MyTime == MaxTime)
+            {
+                // Dừng bộ đếm
+                _timer.Stop();
 
-        //    _timer = new System.Timers.Timer();
-        //    _timer.Elapsed += Timer_Elapsed;
-        //    _timer.Interval = 1000;
-        //    _timer.Start();
-        //}
+                Dispatcher.Invoke(() =>
+ {
+     if (neverShowAgainCheckBox.IsChecked == true)
+     {
+         UpdateAppConfiguration("ShowSplashScreen", false);
+     }
+     else { }
 
-        ///// <summary>
-        ///// Hàm xử lí bộ đếm thời gian sau mỗi chu kỳ
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        //{
-        //    MyTime++;
+     App.mainWindow = new MainWindow();
+     App.mainWindow.Show();
+     this.Close();
+ });
+            }
+            else { }
 
-        //    if (MyTime == MaxTime)
-        //    {
-        //        _timer.Stop();
+            // Cập nhật tiến trình processbar 
+            Dispatcher.Invoke(() =>
+            {
+                timeProgressBar.Value = MyTime;
+            });
+        }
 
-        //        if (neverShowAgainCheckBox.IsChecked == true)
-        //        {
-        //            UpdateAppConfiguration("ShowSplashScreen", false);
-        //        }
-        //        else { }
-
-        //        Dispatcher.Invoke(() =>
-        //        {
-        //            App.mainWindow = new MainWindow();
-        //            App.mainWindow.Show();
-        //            this.Close();
-        //        });
-        //    }
-        //    else { }
-
-        //    Dispatcher.Invoke(() =>
-        //    {
-        //        progress.Value = MyTime;
-        //    });
-        //}
-
-
+        /// <summary>
+        /// Hàm cập nhật thẻ appsettings trong app.config
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
         private void UpdateAppConfiguration(string name, object value)
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -127,9 +128,6 @@ namespace CakeShop.Windows
             win.DragMove();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }
