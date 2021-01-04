@@ -58,7 +58,7 @@
             DockPanel.Dock="Top" VerticalAlignment="Top"
               >
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
-                <RadioButton Uid="0" x:Name="Button00"
+                <RadioButton Uid="0" x:Name="Button00" Click="Cakes_Click"
                              IsChecked="True"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                    Style="{StaticResource MaterialDesignTabRadioButton}"
                         Height="50">
@@ -67,29 +67,34 @@
                         Content="Cakes"  Foreground="Wheat" FontSize="22" 
                            ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </RadioButton>
-                <RadioButton Uid="1" x:Name="Button01"
+                <RadioButton Uid="1" x:Name="Button01" Click="NewCake_Click"
                        Style="{StaticResource MaterialDesignTabRadioButton}"
                         Height="50">
                     <Label 
-                        Content="Orders"  Foreground="Wheat" FontSize="22"/>
+                        Content="New Cake"  Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="2" x:Name="Button02"
+                <RadioButton  Uid="2" x:Name="Button02" Click="Orders_Click"
+                         Style="{StaticResource MaterialDesignTabRadioButton}"
+                         Height="50">
+                    <Label Content="Order" Foreground="Wheat" FontSize="22"/>
+                </RadioButton>
+                <RadioButton  Uid="3" x:Name="Button03"
                          Style="{StaticResource MaterialDesignTabRadioButton}"
                          Height="50">
                     <Label Content="Receives" Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="3" x:Name="Button03"
+                <RadioButton  Uid="4" x:Name="Button04"
                     Style="{StaticResource MaterialDesignTabRadioButton}"
                          Click="Button03_Click"
                          Height="50">
                     <Label Content="Statistics" Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="4" x:Name="Button04"
+                <RadioButton  Uid="5" x:Name="Button05"
                      Style="{StaticResource MaterialDesignTabRadioButton}"
          Height="50">
                     <Label Content="Settings" Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="5" x:Name="Button05"
+                <RadioButton  Uid="6" x:Name="Button06"
                          Style="{StaticResource MaterialDesignTabRadioButton}"
         Height="50">
                     <Label Content="About " Foreground="Wheat" FontSize="22"/>

@@ -1,4 +1,5 @@
-﻿using CakeShop.Views;
+﻿using CakeShop.View;
+using CakeShop.Views;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -86,6 +87,23 @@ namespace CakeShop.Windows
         private void Button03_Click(object sender, RoutedEventArgs e)
         {
             mainContentFrame.Content = new Statistics();
+        }
+
+      
+
+        private void Cakes_Click(object sender, RoutedEventArgs e)
+        {
+            mainContentFrame.Content = new NewCake();
+        }
+
+        private void Orders_Click(object sender, RoutedEventArgs e)
+        {
+            mainContentFrame.Content = new Order();
+        }
+
+        private void NewCake_Click(object sender, RoutedEventArgs e)
+        {
+            mainContentFrame.Content = new NewCake();
         }
 
         //private void addImgButton_Click(object sender, RoutedEventArgs e)
