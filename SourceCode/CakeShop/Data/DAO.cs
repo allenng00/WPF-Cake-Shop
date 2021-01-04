@@ -171,10 +171,7 @@ namespace CakeShop.Data
         public void UpdateDatabase()
         {
             Database.SaveChanges();
-<<<<<<< HEAD
-=======
 
->>>>>>> main
         }
     }
 }

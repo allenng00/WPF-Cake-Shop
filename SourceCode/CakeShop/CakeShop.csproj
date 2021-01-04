@@ -109,11 +109,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OurCakeShopModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\OurCakeShopModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\OurCakeShopModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -147,6 +142,9 @@
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewCake.xaml.cs">
+      <DependentUpon>NewCake.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders.xaml.cs">
       <DependentUpon>Orders.xaml</DependentUpon>
@@ -207,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewCake.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
