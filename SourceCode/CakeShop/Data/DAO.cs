@@ -6,7 +6,7 @@ namespace CakeShop.Data
 {
     public class CakeShopDAO
     {
-        private OurCakeShopEntitiesDataContext Database;
+        private OurCakeShopEntities Database;
 
         /// <summary>
         /// Hàm lấy dánh sách tất cả bánh của cửa hàng có bán
@@ -30,6 +30,37 @@ namespace CakeShop.Data
         {
             var categories = Database.CATEGORies.ToList();
             return categories;
+        }
+
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả hình thức thanh toán
+        /// </summary>
+        /// <param name="catName">Tên loại (Category Name)</param>
+        /// <returns></returns>
+        public List<STATUS> StatusList()
+        {
+            var sTATUs = Database.STATUS.ToList();
+                return sTATUs;
+            
+        }
+
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả bánh của cửa hàng có bán
+        /// </summary>
+        /// <param name="CatID">ID  (CatID)</param>
+        /// <returns></returns>
+        public List<CAKE> CakeList(long CatID)
+        {
+            var categories = Database.CATEGORies;
+
+            var query = from c in categories
+                        where c.ID == CatID
+                        select c;
+
+            var cat = query.ToList()[0];
+            var cakes = cat.CAKEs.ToList();
+
+            return cakes;
         }
 
         /// <summary>
@@ -105,12 +136,12 @@ namespace CakeShop.Data
         /// </summary>
         public CakeShopDAO()
         {
-            Database = new OurCakeShopEntitiesDataContext();
+            Database = new OurCakeShopEntities();
         }
 
         public void UpdateDatabase()
         {
-            Database.SubmitChanges();
+            Database.SaveChanges();
         }
     }
 }

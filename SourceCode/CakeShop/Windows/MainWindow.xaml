@@ -10,8 +10,8 @@
         WindowStyle="None"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
-        Height="720" 
-        Width="1100">
+        Height="800" 
+        Width="1200">
     <Window.Resources>
         <global:ByteArrayToImageConveter x:Key="Converter"/>
     </Window.Resources>
@@ -64,7 +64,7 @@
             </StackPanel>
 
         </Grid>
-        <Frame Height="630" Width="1050" Name="Main" NavigationUIVisibility="Hidden" Margin="0,0,0,-5"/>
+        <Frame Height="630" Width="1150" Name="Main" NavigationUIVisibility="Hidden" Margin="0,0,0,-5"/>
 
     </DockPanel>
 </Window>

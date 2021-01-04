@@ -82,7 +82,7 @@ namespace CakeShop.View
 
         private void StoreCakeData()
         {
-            OurCakeShopEntitiesDataContext database = new OurCakeShopEntitiesDataContext();
+            OurCakeShopEntities database = new OurCakeShopEntities();
             int index = (int)chosenCategory.SelectedIndex;
             CAKE cake = new CAKE
             {
@@ -97,8 +97,8 @@ namespace CakeShop.View
                 CatID = categories[index].ID,
                 DateAdded = DateTime.UtcNow
             };
-            database.CAKEs.InsertOnSubmit(cake);
-            database.SubmitChanges();
+            database.CAKEs.Add(cake);
+            database.SaveChanges();
         }
 
         private void AddAvatarImage_Click(object sender, RoutedEventArgs e)
