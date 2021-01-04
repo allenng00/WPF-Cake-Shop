@@ -36,7 +36,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <ListView Name="CakeListView" Margin="0,5,0,5" Height="328"
+                        <ListView Name="CakeListView" Margin="0,5,0,5" Height="434"
                                   Style="{StaticResource MaterialDesignListView}"
                                   VerticalContentAlignment="Top"  
                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -78,11 +78,11 @@
                             materialDesign:HintAssist.Hint="SĐT khách hàng"  
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                         <TextBox FontSize="20" Name="customerAddress"  Margin="10,15,10,0"
-                            materialDesign:HintAssist.Hint="Địa chỉ khách hàng"  Height="150"
+                            materialDesign:HintAssist.Hint="Địa chỉ giao hàng (nếu có)"  Height="150"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  TextWrapping="Wrap"></TextBox>
                         <ComboBox Name="StatusComboBox" Margin="10,15,10,0"
-                                materialDesign:HintAssist.Hint="Hình thức thanh toán" 
+                                materialDesign:HintAssist.Hint="Hình thức mua hàng" 
                                   VerticalContentAlignment="Bottom" FontSize="20"
                                 Style="{StaticResource MaterialDesignComboBox}" 
                                 Height="60"  >
@@ -96,6 +96,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        
                     </StackPanel>
 
                 </materialDesign:Card>

@@ -11,9 +11,7 @@ namespace CakeShop.Data
         /// <summary>
         /// Hàm lấy dánh sách tất cả bánh của cửa hàng có bán
         /// </summary>
-        /// <param name="catName">Tên loại (Category Name)</param>
-        /// <param name="inventoryNum">Số lượng tồn (Iventory Number)</param>
-        /// <param name="dataAdded">Ngày thêm (Date Added)</param>
+        /// <param name=""></param>
         /// <returns></returns>
         public List<CAKE> CakeList()
         {
@@ -35,17 +33,30 @@ namespace CakeShop.Data
         /// <summary>
         /// Hàm lấy dánh sách tất cả hình thức thanh toán
         /// </summary>
-        /// <param name="catName">Tên loại (Category Name)</param>
+        /// <param name=""></param>
         /// <returns></returns>
         public List<STATUS> StatusList()
         {
             var sTATUs = Database.STATUS.ToList();
-                return sTATUs;
+            return sTATUs;
             
         }
 
+
         /// <summary>
-        /// Hàm lấy dánh sách tất cả bánh của cửa hàng có bán
+        /// Hàm lấy dánh sách tất cả hình thức thanh toán
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public long OrderCount()
+        {
+            long count =(long) Database.ORDERs.Count();
+            return count;
+        }
+
+
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả bánh của cửa hàng theo Category Id
         /// </summary>
         /// <param name="CatID">ID  (CatID)</param>
         /// <returns></returns>
@@ -64,7 +75,7 @@ namespace CakeShop.Data
         }
 
         /// <summary>
-        /// Hàm lấy dánh sách tất cả bánh của cửa hàng có bán
+        /// Hàm lấy dánh sách tất cả bánh của cửa hàng theo Category name
         /// </summary>
         /// <param name="catName">Tên loại (Category Name)</param>
         /// <returns></returns>
