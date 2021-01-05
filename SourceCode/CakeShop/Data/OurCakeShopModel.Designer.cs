@@ -1,4 +1,3 @@
-﻿// T4 code generation is enabled for model 'C:\Users\ACER\Desktop\Project 3 - Cake Shop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\Data\OurCakeShopModel.edmx'. 
 ﻿// T4 code generation is enabled for model 'E:\Desktop\WPF.PROJECT03.CAKESHOP\SourceCode\CakeShop\Data\OurCakeShopModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model

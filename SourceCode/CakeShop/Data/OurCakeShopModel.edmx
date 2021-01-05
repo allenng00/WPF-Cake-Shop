@@ -38,7 +38,7 @@
           <Property Name="TotalBill" Type="bigint" Nullable="false" />
           <Property Name="DateCompleted" Type="datetime" Nullable="false" />
           <Property Name="BuyingMethod" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CustomerPhone" Type="nchar" MaxLength="10" />
           <Property Name="CustomerAddress" Type="nvarchar(max)" />
         </EntityType>
@@ -58,11 +58,12 @@
             <PropertyRef Name="ID" />
             <PropertyRef Name="No." />
           </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="No." Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="No." Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CakeID" Type="bigint" />
           <Property Name="CakeNum" Type="bigint" />
           <Property Name="Price" Type="bigint" />
+          <Property Name="TotalBill" Type="bigint" />
           <Property Name="DateAdded" Type="datetime" />
         </EntityType>
         <EntityType Name="STATUS">
@@ -218,7 +219,7 @@
           <Property Name="TotalBill" Type="Int64" Nullable="false" />
           <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="BuyingMethod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="CustomerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ORDER_DETAIL" Relationship="Self.FK_ORDER_DETAIL_ORDER" FromRole="ORDER" ToRole="ORDER_DETAIL" />
@@ -243,11 +244,12 @@
             <PropertyRef Name="ID" />
             <PropertyRef Name="No_" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="No_" Type="Int64" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="No_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CakeID" Type="Int64" />
           <Property Name="CakeNum" Type="Int64" />
           <Property Name="Price" Type="Int64" />
+          <Property Name="TotalBill" Type="Int64" />
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CAKE" Relationship="Self.FK_RECEIVE_CAKE" FromRole="RECEIVE" ToRole="CAKE" />
         </EntityType>
@@ -429,6 +431,7 @@
                 <ScalarProperty Name="CakeID" ColumnName="CakeID" />
                 <ScalarProperty Name="CakeNum" ColumnName="CakeNum" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
               </MappingFragment>
             </EntityTypeMapping>

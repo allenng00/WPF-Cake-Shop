@@ -2,6 +2,7 @@
 using CakeShop.Views;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace CakeShop.Windows
@@ -12,7 +13,9 @@ namespace CakeShop.Windows
     public partial class MainWindow : Window
     {
 
-
+        /// <summary>
+        /// Hàm khởi tạo các phần tử trong cửa sổ
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -20,7 +23,7 @@ namespace CakeShop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Hàm xử lí kéo thả cửa sổ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -32,7 +35,7 @@ namespace CakeShop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Hàm xử lí khi nhấn mini Button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -42,7 +45,7 @@ namespace CakeShop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Hàm xử lí khi nhấn maximise Button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -74,31 +77,90 @@ namespace CakeShop.Windows
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //Dispatcher.Invoke(() =>
-            //{
-            //    var left = Button00.Padding.Left + 10;
-            //    Double width = Button00.Padding.Left + Label00.Width;
-            //    this.cursorStackPanel.Margin = new Thickness(left, 0, 0, 0);
-            //    this.cursorStackPanel.Width = width;
-            //    this.cursorStackPanel.UpdateLayout();
-            //});
+            Button01.IsChecked = true;
+            App.ordersPage = new Views.Orders();
+            mainContentFrame.Content = App.ordersPage;
         }
 
-        private void Button03_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Hàm xử lí khi bấn vào các tab menu để chuyển đổi trang
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TabMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            mainContentFrame.Content = new Statistics();
+            var index = int.Parse(((RadioButton)e.Source).Uid);
+
+            switch (index)
+            {
+                case 1: // Orders Page
+                    {
+                        if (App.ordersPage == null)
+                        {
+                            App.ordersPage = new Views.Orders();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.ordersPage;
+                        break;
+                    }
+                case 2: // Receives Page
+                    {
+                        if (App.receivesPage == null)
+                        {
+                            App.receivesPage = new Views.Receives();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.receivesPage;
+                        break;
+                    }
+                case 3: // Statistics Page
+                    {
+                        if (App.statisticsPage == null)
+                        {
+                            App.statisticsPage = new Views.Statistics();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.statisticsPage;
+                        break;
+                    }
+                case 4: // Settings Page
+                    {
+                        if (App.settingsPage == null)
+                        {
+                            App.settingsPage = new Views.Settings();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.settingsPage;
+                        break;
+                    }
+                case 5: // About Page
+                    {
+                        if (App.aboutPage == null)
+                        {
+                            App.aboutPage = new Views.AboutUs();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.aboutPage;
+                        break;
+                    }
+                default:
+                    {
+                        if (App.homePage == null)
+                        {
+                            App.homePage = new Views.Home();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.homePage;
+                        break;
+                    }
+            }
         }
 
-      
+
 
         private void Cakes_Click(object sender, RoutedEventArgs e)
         {
             mainContentFrame.Content = new NewCake();
-        }
-
-        private void Orders_Click(object sender, RoutedEventArgs e)
-        {
-            mainContentFrame.Content = new Order();
         }
 
         private void NewCake_Click(object sender, RoutedEventArgs e)
@@ -144,7 +206,5 @@ namespace CakeShop.Windows
         //        }
         //    }
         //}
-
-
     }
 }

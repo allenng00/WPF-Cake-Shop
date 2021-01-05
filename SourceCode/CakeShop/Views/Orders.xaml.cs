@@ -1,24 +1,11 @@
-﻿using System;
+﻿using CakeShop.Data;
+using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Linq;
-using System.Data;
-using CakeShop.Data;
-using Microsoft.Win32;
 
-namespace CakeShop.View
+namespace CakeShop.Views
 {
     /// <summary>
     /// Interaction logic for AddNewOrder.xaml
@@ -38,9 +25,18 @@ namespace CakeShop.View
 
     #endregion
 
-    public partial class Order: Page
+    public partial class Orders : Page
     {
-        public Order()
+        CakeShopDAO dao;
+        List<CATEGORY> CATEGORies;
+        List<CAKE> CAKEs;
+        List<STATUS> STATUs;
+        List<CakeInCart> cakeInCarts;
+        AddNewOrderViewModel _mainvm;
+        long No_;//Số thứ tự bánh trong giỏ hàng hiện tại;
+        long TotalBill;// Tổng giá trị giỏ hàng
+
+        public Orders()
         {
             InitializeComponent();
 
