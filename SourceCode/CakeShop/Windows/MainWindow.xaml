@@ -14,7 +14,7 @@
         Loaded="Window_Loaded">
     <Window.Resources>
         <global:ByteArrayToImageConveter x:Key="Converter"/>
-       
+
     </Window.Resources>
 
     <DockPanel>
@@ -58,45 +58,62 @@
             DockPanel.Dock="Top" VerticalAlignment="Top"
               >
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
-                <RadioButton Uid="0" x:Name="Button00" Click="Cakes_Click"
-                             IsChecked="True"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                <RadioButton Uid="0" x:Name="Button00" GroupName="TabMenuButton"
+                             IsChecked="False"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                        Height="50">
+                        Height="50"
+                             Click="TabMenuButton_Click">
+                    <RadioButton.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
+                    </RadioButton.BorderBrush>
                     <Label Name="Label00" 
-                           
-                        Content="Cakes"  Foreground="Wheat" FontSize="22" 
+                           Content="Cakes"  Foreground="Wheat" FontSize="22" 
                            ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </RadioButton>
-                <RadioButton Uid="1" x:Name="Button01" Click="NewCake_Click"
-                       Style="{StaticResource MaterialDesignTabRadioButton}"
-                        Height="50">
+                <RadioButton Uid="1" x:Name="Button01" GroupName="TabMenuButton"
+                             Style="{StaticResource MaterialDesignTabRadioButton}"
+                             Height="50"
+                             Click="TabMenuButton_Click">
+                    <RadioButton.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
+                    </RadioButton.BorderBrush>
                     <Label 
                         Content="New Cake"  Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="2" x:Name="Button02" Click="Orders_Click"
-                         Style="{StaticResource MaterialDesignTabRadioButton}"
-                         Height="50">
-                    <Label Content="Order" Foreground="Wheat" FontSize="22"/>
-                </RadioButton>
-                <RadioButton  Uid="3" x:Name="Button03"
-                         Style="{StaticResource MaterialDesignTabRadioButton}"
-                         Height="50">
+                <RadioButton  Uid="2" x:Name="Button02" GroupName="TabMenuButton"
+                              Style="{StaticResource MaterialDesignTabRadioButton}"
+                              Height="50"
+                              Click="TabMenuButton_Click">
+                    <RadioButton.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
+                    </RadioButton.BorderBrush>
                     <Label Content="Receives" Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="4" x:Name="Button04"
-                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                         Click="Button03_Click"
+                <RadioButton  Uid="3" x:Name="Button03" GroupName="TabMenuButton"
+                              Style="{StaticResource MaterialDesignTabRadioButton}"
+                              Click="TabMenuButton_Click"
                          Height="50">
+                    <RadioButton.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
+                    </RadioButton.BorderBrush>
                     <Label Content="Statistics" Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="5" x:Name="Button05"
-                     Style="{StaticResource MaterialDesignTabRadioButton}"
-         Height="50">
+                <RadioButton  Uid="4" x:Name="Button04" GroupName="TabMenuButton"
+                              Style="{StaticResource MaterialDesignTabRadioButton}"
+                              Height="50"
+                              Click="TabMenuButton_Click">
+                    <RadioButton.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
+                    </RadioButton.BorderBrush>
                     <Label Content="Settings" Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
-                <RadioButton  Uid="6" x:Name="Button06"
-                         Style="{StaticResource MaterialDesignTabRadioButton}"
-        Height="50">
+                <RadioButton  Uid="5" x:Name="Button05" GroupName="TabMenuButton"
+                              Style="{StaticResource MaterialDesignTabRadioButton}"
+                              Height="50"
+                              Click="TabMenuButton_Click">
+                    <RadioButton.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
+                    </RadioButton.BorderBrush>
                     <Label Content="About " Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
             </StackPanel>
@@ -109,5 +126,6 @@
                Height="680" NavigationUIVisibility="Hidden">
 
         </Frame>
+        <Label Height="685" VerticalAlignment="Top"/>
     </DockPanel>
 </Window>

@@ -11,11 +11,16 @@ namespace CakeShop
     /// </summary>
     public partial class App : Application
     {
-        public static CakeShopDAO AppDAO;
+        public static int currentTabIndex = 0; 
+        public static CakeShopDAO appDAO;
 
         public static Windows.MainWindow mainWindow;
-        public static Views.AboutUs aboutWindow;
-        public static Views.Statistics statisticsWindow;
+        public static Views.Home homePage;
+        public static Views.Orders ordersPage;
+        public static Views.Receives receivesPage;
+        public static Views.Statistics statisticsPage;
+        public static Views.Settings settingsPage;
+        public static Views.AboutUs aboutPage;
 
         /// <summary>
         /// Hàm xử lí các sự kiện khi áp được khởi động
@@ -24,7 +29,7 @@ namespace CakeShop
         /// <param name="e"></param>
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            AppDAO = new CakeShopDAO();
+            appDAO = new CakeShopDAO();
             var value = ConfigurationManager.AppSettings["ShowSplashScreen"];
             var showSplash = bool.Parse(value);
 
@@ -37,7 +42,7 @@ namespace CakeShop
             // Hiển thị SplashScreen
             else
             {
-                var cakes = AppDAO.CakeList();
+                var cakes = appDAO.CakeList();
                 //var cake2 = new CAKE
 
                 var _rng = new Random();

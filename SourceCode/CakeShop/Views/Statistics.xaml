@@ -4,11 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CakeShop.Views"
+      xmlns:global="clr-namespace:CakeShop"
       mc:Ignorable="d" 
       d:DesignHeight="680" d:DesignWidth="1200"
       Loaded="Page_Loaded">
-  
+    <Page.Resources>
+        
+    </Page.Resources>
     <Grid x:Name="mainGrid"
         Background="LightCyan">
         <Grid.RowDefinitions>
@@ -23,10 +27,43 @@
                        Content="THỐNG KÊ DOANH THU"/>
 
             </StackPanel>
-                
+
         </Grid>
         <Grid Grid.Row="1">
-            <lvc:CartesianChart Name="Chart01"></lvc:CartesianChart>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <materialDesign:Card
+                    Margin="10">
+                    <StackPanel>
+                        <lvc:CartesianChart Name="Chart01a" LegendLocation="Bottom" 
+                                        Height="250">
+                        </lvc:CartesianChart>
+                        <lvc:CartesianChart Name="Chart01b"
+                                        Height="250">
+                        </lvc:CartesianChart>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+            <Grid Grid.Column="1">
+                <materialDesign:Card
+                    Margin="10">
+                    <StackPanel>
+                        <lvc:CartesianChart Name="ChartRevenuabyMonth" LegendLocation="Right" ToolTip="{Binding Path=Tooltips02}"
+                                        Height="350">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Tháng" Labels="{Binding Path=Labels02}"/>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Doanh thu (USD)"/>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </StackPanel>
+                </materialDesign:Card>
+                
+            </Grid>
         </Grid>
     </Grid>
 </Page>

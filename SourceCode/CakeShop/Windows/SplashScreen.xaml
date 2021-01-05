@@ -9,13 +9,16 @@
         mc:Ignorable="d"
         WindowStyle="none"  AllowsTransparency="true"
         Background="Transparent"
-        Height="800" Width="1000" 
+        Height="650" Width="900"
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <global:ByteArrayToImageConveter x:Key="ByteArrToImageConverter"/>
     </Window.Resources>
     <Border CornerRadius="60" BorderBrush="AliceBlue" BorderThickness="2" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="../Data/Images/SplashScreenBackground.jpg"/>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
                 <RowDefinition Height="350"/>
@@ -27,9 +30,21 @@
                 <StackPanel
                     HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock x:Name="cakeNameTextBlock" 
-                           TextAlignment="Center" FontSize="40" Foreground="LightYellow" FontWeight="Bold" FontFamily="Verdana" 
+                           TextAlignment="Center" FontSize="40" FontWeight="Bold" FontFamily="Verdana" 
                            TextWrapping="Wrap"
-                           Text="{Binding Path=MainCake.Name}"/>
+                           Text="{Binding Path=MainCake.Name}">
+                        <TextBlock.Foreground>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="0.498"/>
+                                <GradientStop Color="White" Offset="1"/>
+                                <GradientStop Color="#FFF0F02B" Offset="0.238"/>
+                                <GradientStop Color="#FFFDFDEF" Offset="1"/>
+                                <GradientStop Color="#FF3F3F3F" Offset="0.937"/>
+                                <GradientStop Color="#FF3C3C3C" Offset="1"/>
+                                <GradientStop Color="#FF3C3C3C" Offset="0.946"/>
+                            </RadialGradientBrush>
+                        </TextBlock.Foreground>
+                    </TextBlock>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
@@ -38,7 +53,7 @@
                     <ColumnDefinition Width="55*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <StackPanel Margin="10">
+                    <StackPanel Margin="54,10,10,10">
                         <Image x:Name="cakeAvatarImage" 
                                Source="{Binding Path=MainCake.AvatarImage, Converter={StaticResource ByteArrToImageConverter}}"/>
                     </StackPanel>
@@ -51,14 +66,14 @@
                             <Label.Content>
                                 <TextBlock 
                                     Text="Giới thiệu ngắn"
-                                    Foreground="Wheat" FontSize="24" FontFamily="Verdana">
+                                    Foreground="#FF010204" FontSize="24" FontFamily="Verdana" FontWeight="Bold">
                                 </TextBlock>
                             </Label.Content>
                         </Label>
                         <TextBlock Name="cakeIntroTextBlock"
-                                   FontSize="18" Foreground="LightYellow" TextWrapping="Wrap" TextAlignment="Justify" FontStyle="Italic" FontWeight="Bold" 
+                                   FontSize="18" Foreground="LightYellow" TextWrapping="Wrap" TextAlignment="Justify" FontStyle="Italic" 
                                    Padding="2"
-                                   HorizontalAlignment="Center">
+                                   HorizontalAlignment="Center" FontWeight="Bold">
                             <Run Text="&#x09;"/>
                             <Run Text="{Binding Path=MainCake.Introduction}"/>
                         </TextBlock>
@@ -68,13 +83,13 @@
             </Grid>
             <Grid Grid.Row="2"
                    Margin="30, 5, 30, 20">
-                <StackPanel>
+                <StackPanel VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center">
-
-                        <ProgressBar x:Name="timeProgressBar" 
+                                HorizontalAlignment="Center"
+                                Margin="10">
+                        <ProgressBar x:Name="timeProgressBar" IsIndeterminate="True"
                                  Minimum="0" Maximum="{Binding MaxTime}" Value="0" 
-                                 Height="15" Width="300"/>
+                                 Height="15" Width="300" Margin="15 0"/>
                         <Grid
                             Width="120">
                             <Button Name="skipButton" Content="Bỏ qua"
@@ -87,19 +102,25 @@
                         </Grid>
 
                     </StackPanel>
-                    <CheckBox x:Name="neverShowAgainCheckBox"
-                              HorizontalAlignment="Center"
+                    <TextBlock  Margin="289.308,0,385.808,0" FontSize="14" FontStyle="Italic" FontFamily="Times New Roman"><Run Text="Tư động tắt sau "/><Run Text=" "/><Run Text="{Binding TimeLeft}"/><Run Text=" "/><Run Text=" giây"/></TextBlock>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="10">
+                        <CheckBox x:Name="neverShowAgainCheckBox"
+                              VerticalAlignment="Center"
                               IsChecked="False"
-                              Style="{StaticResource MaterialDesignCheckBox}">
-                        <!--<CheckBox.LayoutTransform>
-                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
-                        </CheckBox.LayoutTransform>-->
-                        
-                    </CheckBox>
-                    <TextBlock
+                              Style="{StaticResource MaterialDesignCheckBox}"
+                                  Height="22.222" Margin="10 0" Foreground="#FFFFFF02">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+
+                        </CheckBox>
+                        <TextBlock Width="Auto" VerticalAlignment="Center"
                             FontFamily="Verdana" FontSize="20"
-                            Text="Không hiện hộp thoại này khi khởi động">
-                    </TextBlock>
+                            Text="Không hiện hộp thoại này khi khởi động" FontWeight="Bold" Foreground="Black"/>
+                    </StackPanel>
+
                 </StackPanel>
             </Grid>
         </Grid>
