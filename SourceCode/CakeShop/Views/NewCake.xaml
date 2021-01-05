@@ -15,10 +15,18 @@
             <Label Content="Tạo Cake mới" FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial" Width="1197"></Label>
 
         </StackPanel>
-        <Button Click="SaveCake_Click" Width="250" DockPanel.Dock="Bottom"
+        <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,10" HorizontalAlignment="Center" Orientation="Horizontal" >
+            <Button Click="Refresh_Click" Width="250" 
+                Foreground="Black" Content="Làm mới"  FontSize="30" 
+                Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                Height="50" Margin="0,0,50,0"></Button>
+            <Button Click="SaveCake_Click" Width="250" 
                 Foreground="Black" Content="Lưu thông tin"  FontSize="30" 
                 Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                Height="50" Margin="0,0,0,10" ></Button>
+                Height="50"></Button>
+            
+        </StackPanel>
+        
         <materialDesign:Card  DockPanel.Dock="Left" Margin="15,0,0,0" Height="550" VerticalAlignment="top" Width="283">
 
             <StackPanel  Margin="5" HorizontalAlignment="Center" >
@@ -74,7 +82,7 @@
                             <TextBox Height="60" Width="320" TextWrapping="Wrap" 
                          Margin="55,0,0,0"
                          FontSize="25" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Name="inventoryNumber"  materialDesign:HintAssist.Hint="Số lượng bánh">
+                         Name="inventoryNumber"  materialDesign:HintAssist.Hint="Số lượng bánh nhập vào kho">
                             </TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="10,0,10,10" HorizontalAlignment="Center">

@@ -80,6 +80,12 @@ namespace CakeShop.View
             }
         }
 
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshDataInput();
+            Prepare();
+        }
+
         private void StoreCakeData()
         {
             OurCakeShopEntities database = new OurCakeShopEntities();

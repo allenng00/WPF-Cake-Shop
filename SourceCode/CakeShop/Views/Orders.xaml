@@ -12,126 +12,58 @@
         <local:ByteArrayToImageConveter x:Key="Converter"></local:ByteArrayToImageConveter>
     </Page.Resources>
     <DockPanel>
-        <StackPanel Margin="0,10,0,0" DockPanel.Dock="Top" Orientation="Horizontal">
-            <Label Content="Tạo Order mới" FontSize="40" Width="900" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial"></Label>
-            <Button Click="SaveOrder_Click" Width="100" Foreground="Black" Content="Lưu"  FontSize="30" Style="{StaticResource MaterialDesignFlatMidBgButton}" Height="50" Margin="0,0,30,0" ></Button>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Height="60">
+            <Label Content="Hóa đơn" FontSize="40" FontFamily="Arial" Style="{StaticResource MaterialDesignLabel}" ></Label>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom">
-            <DockPanel Height="620">
-                <materialDesign:Card Margin="0,10,5,60" Width="300" DockPanel.Dock="Right">
-                    <StackPanel Orientation="Vertical" >
-                        <TextBlock Text="Danh sách bánh" FontSize="25" FontWeight="Normal" HorizontalAlignment="Center"></TextBlock>
-                        <ComboBox Name="CategoryComboBox" Margin="5"
-                                materialDesign:HintAssist.Hint="Chọn loại bánh" 
-                                  VerticalContentAlignment="Bottom" FontSize="20"
-                                Style="{StaticResource MaterialDesignComboBox}" 
-                                Height="60"   Width="280" SelectionChanged="CategoryComboBox_SelectionChanged">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding ID}"  ></TextBlock>
-                                        <TextBlock Text=" - "  ></TextBlock>
-                                        <TextBlock Text="{Binding Name}" ></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <ListView Name="CakeListView" Margin="0,5,0,5" Height="434"
-                                  Style="{StaticResource MaterialDesignListView}"
-                                  VerticalContentAlignment="Top"  
-                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                  ScrollViewer.CanContentScroll="False"
-                                  SelectionChanged="CakeListView_SelectionChanged">
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel></WrapPanel>
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Width="290" VerticalAlignment="Center">
-                                        <Ellipse Width="50" Height="50">
-                                            <Ellipse.Fill>
-                                                <ImageBrush ImageSource="{Binding AvatarImage, Converter={StaticResource Converter}}"></ImageBrush>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                        <TextBlock FontSize="20" Text="{Binding ID}"  ></TextBlock>
-                                        <TextBlock FontSize="20" Text=" - "  ></TextBlock>
-                                        <TextBlock FontSize="20" Width="200" Text="{Binding Name}" TextWrapping="Wrap" ></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        <StackPanel>
+        <StackPanel DockPanel.Dock="Left">
+            <materialDesign:Card Height="600" Margin="10">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Danh sách hóa đơn" FontSize="30" FontFamily="Arial" Margin="10" HorizontalAlignment="Center"></TextBlock>
+                    <DataGrid Name="OrdersDataGrid"  Width="500" Height="520" Margin="10" 
+                Style="{StaticResource MaterialDesignDataGrid}"
+                IsReadOnly="true" AutoGenerateColumns="false"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <DataGrid.Columns>
+                            <materialDesign:DataGridTextColumn Header="Ngày tạo"  
+                            Binding="{Binding Path=CreatedDate}" FontSize="10" Width="150"/>
 
-                        </StackPanel>
+                            <DataGridTemplateColumn Header="Tên KH" Width="160"  >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Name}"  TextWrapping="Wrap" FontSize="10"></TextBlock>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <materialDesign:DataGridTextColumn Header="Tổng tiền"
+                                          Binding="{Binding Path=TotalCost}" FontSize="10" Width="100"/>
+                            <DataGridTemplateColumn Header="Tình trạng">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=State}" Width="100" TextWrapping="Wrap" FontSize="10"></TextBlock>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                
+            </materialDesign:Card>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right">
+            <materialDesign:Card Margin="15,10,10,10" Height="600">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Chi tiết hóa đơn" FontSize="30" FontFamily="Arial" Margin="10" HorizontalAlignment="Center"></TextBlock>
+                    <StackPanel Height="200">
+                        <TextBlock FontSize="20" materialDesign:HintAssist.Hint="Tên khách hàng"></TextBlock>
+                        <TextBlock materialDesign:HintAssist.Hint="SĐT"></TextBlock>
+                        <TextBlock materialDesign:HintAssist.Hint="Đia chỉ"></TextBlock>
+                        <TextBlock materialDesign:HintAssist.Hint="Hình thức đặt hàng"></TextBlock>
+                        <TextBlock materialDesign:HintAssist.Hint="Ngày đặt hàng"></TextBlock>
+
                     </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card DockPanel.Dock="Left" Width="300" Margin="5,10,0,60">
-                    <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                        <TextBlock Text="Thông tin khách hàng" FontSize="25" FontWeight="Normal" HorizontalAlignment="Center"></TextBlock>
-                        <TextBox FontSize="20" Name="customerName" Margin="10,20,10,0"
-                            materialDesign:HintAssist.Hint="Tên khách hàng"  
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-                        <TextBox FontSize="20" Name="customerPhoneNumber" Margin="10,15,10,0"
-                            materialDesign:HintAssist.Hint="SĐT khách hàng"  
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-                        <TextBox FontSize="20" Name="customerAddress"  Margin="10,15,10,0"
-                            materialDesign:HintAssist.Hint="Địa chỉ giao hàng (nếu có)"  Height="150"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 TextWrapping="Wrap"></TextBox>
-                        <ComboBox Name="StatusComboBox" Margin="10,15,10,0"
-                                materialDesign:HintAssist.Hint="Hình thức mua hàng" 
-                                  VerticalContentAlignment="Bottom" FontSize="20"
-                                Style="{StaticResource MaterialDesignComboBox}" 
-                                Height="60"  >
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding ID}"  ></TextBlock>
-                                        <TextBlock Text=" - "  ></TextBlock>
-                                        <TextBlock Text="{Binding Name}" ></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        
-                    </StackPanel>
-
-                </materialDesign:Card>
-                <materialDesign:Card Margin="15,10,15,60">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Hóa đơn" FontSize="25" FontWeight="Normal" HorizontalAlignment="Center"></TextBlock>
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal" Margin="10,20,0,10">
-                                <TextBox x:Name="cakeName" Width="250" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                         materialDesign:HintAssist.Hint="Tên bánh" IsReadOnly="True"></TextBox>
-
-                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                                        Width="25" Height="25" Margin="30,20,0,0" Click="DownQuantity_Click">
-                                    <Button.Content>
-                                        <materialDesign:PackIcon Kind="Minus" FontSize="25"></materialDesign:PackIcon>
-                                    </Button.Content>
-                                </Button>
-                                <TextBox x:Name="cakeQuantity" Width="150" FontSize="20"  Margin="5,0,5,0"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         materialDesign:HintAssist.Hint="Số lượng"></TextBox>
-                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                                        Width="25" Height="25" Margin="0,20,0,0" Click="UpQuantity_Click">
-                                    <Button.Content>
-                                        <materialDesign:PackIcon Kind="Plus" FontSize="25"></materialDesign:PackIcon>
-                                    </Button.Content>
-                                </Button>
-                            </StackPanel>
-                            <Button Content="Thêm" FontSize="20" Width="100" HorizontalAlignment="Left"
-                                    Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="AddCurrentCake_Click"
-                                    Margin="30,0,50,10" VerticalContentAlignment="Center"></Button>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="15,0,10,0">
-                            <TextBlock Text="Tổng tiền: " FontSize="20" Foreground="red" ></TextBlock>
-                            <TextBlock Name="CartCost" FontSize="20" Width="100" Foreground="red"  ></TextBlock>
-                        </StackPanel>
+                    <StackPanel>
 
                         <DataGrid Name="CartDataGrid" Margin="10"
                                   Style="{StaticResource MaterialDesignDataGrid}"
@@ -162,8 +94,8 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
-                </materialDesign:Card>
-            </DockPanel>
+                </StackPanel>
+            </materialDesign:Card>
         </StackPanel>
     </DockPanel>
 </Page>
