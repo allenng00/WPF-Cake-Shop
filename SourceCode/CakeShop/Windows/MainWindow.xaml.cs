@@ -77,9 +77,9 @@ namespace CakeShop.Windows
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Button03.IsChecked = true;
-            App.statisticsPage = new Views.Statistics();
-            mainContentFrame.Content = App.statisticsPage;
+            Button01.IsChecked = true;
+            App.ordersPage = new Views.Orders();
+            mainContentFrame.Content = App.ordersPage;
         }
 
         /// <summary>
@@ -156,16 +156,11 @@ namespace CakeShop.Windows
             }
         }
 
-      
+
 
         private void Cakes_Click(object sender, RoutedEventArgs e)
         {
             mainContentFrame.Content = new NewCake();
-        }
-
-        private void Orders_Click(object sender, RoutedEventArgs e)
-        {
-            mainContentFrame.Content = new Order();
         }
 
         private void NewCake_Click(object sender, RoutedEventArgs e)

@@ -109,17 +109,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OurCakeShopModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\OurCakeShopModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\RECEIVE.cs">
-      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\STATUS.cs">
-      <DependentUpon>OurCakeShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\OurCakeShopModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,6 +247,9 @@
     <Resource Include="Data\Images\0096.jpg" />
     <Resource Include="Data\Images\cake.ico" />
     <Resource Include="Data\Images\SplashScreenBackground.jpg" />
+    <Resource Include="Data\Images\AboutBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Data\OurCakeShopModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
@@ -268,7 +260,6 @@
       <DependentUpon>OurCakeShopModel.edmx</DependentUpon>
       <LastGenOutput>OurCakeShopModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Data\Images\AboutBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

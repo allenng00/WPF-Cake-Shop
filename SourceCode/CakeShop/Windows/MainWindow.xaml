@@ -78,7 +78,7 @@
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>
                     <Label 
-                        Content="New Cake"  Foreground="Wheat" FontSize="22"/>
+                        Content="Orders"  Foreground="Wheat" FontSize="22"/>
                 </RadioButton>
                 <RadioButton  Uid="2" x:Name="Button02" GroupName="TabMenuButton"
                               Style="{StaticResource MaterialDesignTabRadioButton}"
@@ -126,6 +126,5 @@
                Height="680" NavigationUIVisibility="Hidden">
 
         </Frame>
-        <Label Height="685" VerticalAlignment="Top"/>
-    </DockPanel>
+            </DockPanel>
 </Window>

@@ -19,6 +19,7 @@ namespace CakeShop.Data
         public Nullable<long> CakeID { get; set; }
         public Nullable<long> CakeNum { get; set; }
         public Nullable<long> Price { get; set; }
+        public Nullable<long> TotalBill { get; set; }
         public Nullable<System.DateTime> DateAdded { get; set; }
     
         public virtual CAKE CAKE { get; set; }
