@@ -126,5 +126,6 @@
                Height="680" NavigationUIVisibility="Hidden">
 
         </Frame>
+        <Label Height="685" VerticalAlignment="Top"/>
     </DockPanel>
 </Window>

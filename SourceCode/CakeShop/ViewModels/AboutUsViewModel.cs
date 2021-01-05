@@ -22,7 +22,7 @@ namespace CakeShop.ViewModels
                 Name = "Nguyễn Hoàng Khang",
                 AvatarImage = "../Data/Images/0039.jpg",
                 Job = "Student",
-                Position = "PM & Design",
+                Position = "PM & Designer",
                 Gmail = "nhk25022016",
                 Facebook = "nhkitusk18"
             };

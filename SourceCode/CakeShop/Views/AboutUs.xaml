@@ -30,7 +30,7 @@
                                 <materialDesign:ColorZone Mode="PrimaryLight" Height="200" Width="200" VerticalAlignment="Stretch">
                                     <Ellipse Style="{x:Null}" Width="128" Height="128">
                                         <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{Binding AvatarImage}"/>
+                                            <ImageBrush ImageSource="{Binding Path=AvatarImage}"/>
                                         </Ellipse.Fill>
                                     </Ellipse>
                                 </materialDesign:ColorZone>
