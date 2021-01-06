@@ -18,7 +18,6 @@ namespace CakeShop.Data
         public STATUS()
         {
             this.ORDERs = new HashSet<ORDER>();
-            this.ORDERs1 = new HashSet<ORDER>();
         }
     
         public string ID { get; set; }
@@ -26,7 +25,5 @@ namespace CakeShop.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER> ORDERs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDER> ORDERs1 { get; set; }
     }
 }

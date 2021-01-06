@@ -1,5 +1,4 @@
-﻿using CakeShop.View;
-using CakeShop.Views;
+﻿using CakeShop.Views;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -100,7 +99,7 @@ namespace CakeShop.Windows
                             App.ordersPage = new Views.Orders();
                         }
                         else { }
-                        mainContentFrame.Content = App.ordersPage;
+                        mainContentFrame.Content = new Orders();
                         break;
                     }
                 case 2: // Receives Page
@@ -143,6 +142,26 @@ namespace CakeShop.Windows
                         mainContentFrame.Content = App.aboutPage;
                         break;
                     }
+                case 6: // About Page
+                    {
+                        if (App.newCake == null)
+                        {
+                            App.newCake = new Views.NewCake();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.newCake;
+                        break;
+                    }
+                case 7: // About Page
+                    {
+                        if (App.newOrder == null)
+                        {
+                            App.newOrder = new Views.NewOrder();
+                        }
+                        else { }
+                        mainContentFrame.Content = App.newOrder;
+                        break;
+                    }
                 default:
                     {
                         if (App.homePage == null)
@@ -159,11 +178,6 @@ namespace CakeShop.Windows
 
 
         private void Cakes_Click(object sender, RoutedEventArgs e)
-        {
-            mainContentFrame.Content = new NewCake();
-        }
-
-        private void NewCake_Click(object sender, RoutedEventArgs e)
         {
             mainContentFrame.Content = new NewCake();
         }

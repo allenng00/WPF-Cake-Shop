@@ -21,7 +21,8 @@ namespace CakeShop
         public static Views.Statistics statisticsPage;
         public static Views.Settings settingsPage;
         public static Views.AboutUs aboutPage;
-
+        public static Views.NewCake newCake;
+        public static Views.NewOrder newOrder;
         /// <summary>
         /// Hàm xử lí các sự kiện khi áp được khởi động
         /// </summary>

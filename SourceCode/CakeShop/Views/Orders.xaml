@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
       xmlns:local="clr-namespace:CakeShop"
       mc:Ignorable="d" 
       d:DesignHeight="680" d:DesignWidth="1150"
@@ -12,81 +13,101 @@
         <local:ByteArrayToImageConveter x:Key="Converter"></local:ByteArrayToImageConveter>
     </Page.Resources>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Height="60">
-            <Label Content="Hóa đơn" FontSize="40" FontFamily="Arial" Style="{StaticResource MaterialDesignLabel}" ></Label>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"  Height="60" Margin="0" Width="1130">
+            <Label Content="Theo dõi đơn hàng" FontSize="40" FontFamily="Arial" Margin="450,0,0,0"></Label>
+            
         </StackPanel>
         <StackPanel DockPanel.Dock="Left">
             <materialDesign:Card Height="600" Margin="10">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Danh sách hóa đơn" FontSize="30" FontFamily="Arial" Margin="10" HorizontalAlignment="Center"></TextBlock>
-                    <DataGrid Name="OrdersDataGrid"  Width="500" Height="520" Margin="10" 
-                Style="{StaticResource MaterialDesignDataGrid}"
-                IsReadOnly="true" AutoGenerateColumns="false"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <TextBlock Text="Danh sách dơn hàng" FontSize="30" FontFamily="Arial" Margin="10" HorizontalAlignment="Center"></TextBlock>
+                    <DataGrid Name="OrdersDataGrid"  Width="500" Height="398" Margin="10" 
+                        Style="{StaticResource MaterialDesignDataGrid}"
+                        IsReadOnly="true" AutoGenerateColumns="false"
+                        SelectionChanged="OrdersDataGrid_SelectionChanged"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">  
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn Header="Ngày tạo"  
-                            Binding="{Binding Path=CreatedDate}" FontSize="10" Width="150"/>
+                            Binding="{Binding Path=DateCompleted}" FontSize="12" Width="155"/>
 
-                            <DataGridTemplateColumn Header="Tên KH" Width="160"  >
+                            <DataGridTemplateColumn Header="Tên KH" Width="150"  >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Name}"  TextWrapping="Wrap" FontSize="10"></TextBlock>
+                                        <TextBlock Text="{Binding Path=CustomerName}"  
+                                                   TextWrapping="Wrap" FontSize="12"></TextBlock>
 
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <materialDesign:DataGridTextColumn Header="Tổng tiền"
-                                          Binding="{Binding Path=TotalCost}" FontSize="10" Width="100"/>
+                                          Binding="{Binding Path=TotalBill}" FontSize="12" Width="90"/>
                             <DataGridTemplateColumn Header="Tình trạng">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=State}" Width="100" TextWrapping="Wrap" FontSize="10"></TextBlock>
+                                        <TextBlock Text="{Binding Path=StatusName}" Width="110" TextWrapping="Wrap" 
+                                                   FontSize="12"></TextBlock>
 
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Content="Tạo đơn hàng" Foreground="Black" 
+                    FontSize="25" Height="40" 
+                    FontFamily="Arial" Width="200"
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                    Click="CreateOrder_Click"></Button>
                 </StackPanel>
-                
+
             </materialDesign:Card>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right">
             <materialDesign:Card Margin="15,10,10,10" Height="600">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Chi tiết hóa đơn" FontSize="30" FontFamily="Arial" Margin="10" HorizontalAlignment="Center"></TextBlock>
-                    <StackPanel Height="200">
-                        <TextBlock FontSize="20" materialDesign:HintAssist.Hint="Tên khách hàng"></TextBlock>
-                        <TextBlock materialDesign:HintAssist.Hint="SĐT"></TextBlock>
-                        <TextBlock materialDesign:HintAssist.Hint="Đia chỉ"></TextBlock>
-                        <TextBlock materialDesign:HintAssist.Hint="Hình thức đặt hàng"></TextBlock>
-                        <TextBlock materialDesign:HintAssist.Hint="Ngày đặt hàng"></TextBlock>
-
+                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                    <TextBlock Text="Chi tiết đơn hàng" FontSize="30" FontFamily="Arial" Margin="10" HorizontalAlignment="Center"></TextBlock>
+                    <StackPanel Height="170" Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="customerName" TextWrapping="Wrap"  FontSize="20" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Tên khách hàng"></TextBox>
+                            <TextBox x:Name="customerPhoneNumber" TextWrapping="Wrap"  Width="250"  Margin="30,0,0,0" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="SĐT"></TextBox>
+                        </StackPanel>
+                        <TextBox x:Name="customerAddress" Width="530" FontSize="20"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Đia chỉ"
+                                 HorizontalAlignment="Left"
+                                 TextWrapping="Wrap" ></TextBox>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="buyingMethod" TextWrapping="Wrap" Width="250" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Hình thức đặt hàng"></TextBox>
+                            <TextBox x:Name="createdDate" TextWrapping="Wrap"  Width="250"  Margin="30,0,0,0" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Ngày đặt hàng"></TextBox>
+                        </StackPanel>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                            <TextBox Text="Tổng bill: "  FontSize="20" Foreground="Red" ></TextBox>
+                            <TextBox x:Name="TotalBill" FontSize="20" Foreground="Red"  ></TextBox>
+                        </StackPanel>
                     <StackPanel>
 
-                        <DataGrid Name="CartDataGrid" Margin="10"
+                        <DataGrid Name="CartDataGrid" Margin="5,0,15,0"
                                   Style="{StaticResource MaterialDesignDataGrid}"
                                   IsReadOnly="true" AutoGenerateColumns="false"
                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                  Height="300">
+                                  Height="282">
 
                             <DataGrid.Columns>
-                                <materialDesign:DataGridTextColumn Header="STT"  Binding="{Binding Path=No}" FontSize="10" Width="60"/>
+                                <materialDesign:DataGridTextColumn Header="STT"  Binding="{Binding Path=No}" FontSize="12" Width="60"/>
 
                                 <DataGridTemplateColumn Header="Tên" Width="220"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Path=Name}"  TextWrapping="Wrap" FontSize="10"></TextBlock>
+                                            <TextBlock Text="{Binding Path=Name}"  TextWrapping="Wrap" FontSize="12"></TextBlock>
 
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding Path=Quantity}" FontSize="10" Width="100"/>
+                                <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding Path=Quantity}" FontSize="12" Width="100"/>
                                 <DataGridTemplateColumn Header="Tổng tiền">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Path=TotalCost}" Width="100" TextWrapping="Wrap" FontSize="10"></TextBlock>
+                                            <TextBlock Text="{Binding Path=TotalCost}" Width="100" TextWrapping="Wrap" FontSize="12"></TextBlock>
 
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -94,6 +115,10 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
+                    <Button  Name="IsDone" Content="Đã hoàn thành" FontSize="25" FontFamily="Arial" Foreground="Black"
+                             Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                             Margin="10" Width="200" Height="45" 
+                             Click="IsDone_Click"></Button>
                 </StackPanel>
             </materialDesign:Card>
         </StackPanel>

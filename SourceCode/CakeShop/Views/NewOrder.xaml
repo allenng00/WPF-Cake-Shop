@@ -1,4 +1,4 @@
-﻿<Page x:Class="CakeShop.View.NewOrder"
+﻿<Page x:Class="CakeShop.Views.NewOrder"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -21,7 +21,7 @@
                 Style="{StaticResource MaterialDesignFlatMidBgButton}"
                 Height="50" Margin="0,0,50,0"></Button>
             <Button Click="SaveOrder_Click" Width="250" 
-                Foreground="Black" Content="Lưu thông tin"  FontSize="30" 
+                Foreground="Black" Content="Đặt hàng"  FontSize="30" 
                 Style="{StaticResource MaterialDesignFlatMidBgButton}"
                 Height="50"></Button>
 
@@ -84,18 +84,18 @@
                         <TextBox FontSize="20" Name="customerName" Margin="10,20,10,0"
                             materialDesign:HintAssist.Hint="Tên khách hàng"  
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-                        <TextBox FontSize="20" Name="customerPhoneNumber" Margin="10,15,10,0"
+                        <TextBox FontSize="20" Name="customerPhoneNumber" Margin="10,10,10,0"
                             materialDesign:HintAssist.Hint="SĐT khách hàng"  
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-                        <TextBox FontSize="20" Name="customerAddress"  Margin="10,15,10,0"
-                            materialDesign:HintAssist.Hint="Địa chỉ giao hàng (nếu có)"  Height="150"
+                        <TextBox FontSize="20" Name="customerAddress"  Margin="10,10,10,0"
+                            materialDesign:HintAssist.Hint="Địa chỉ giao hàng (nếu có)"  Height="121"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  TextWrapping="Wrap"></TextBox>
-                        <ComboBox Name="StatusComboBox" Margin="10,15,10,0"
+                        <ComboBox Name="StatusComboBox" Margin="10,10,10,0"
                                 materialDesign:HintAssist.Hint="Hình thức mua hàng" 
                                   VerticalContentAlignment="Bottom" FontSize="20"
                                 Style="{StaticResource MaterialDesignComboBox}" 
-                                Height="60"  >
+                                Height="60" SelectionChanged="StatusComboBox_SelectionChanged"  >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -106,7 +106,20 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-
+                        <StackPanel Name="moneyCalculationFrame" Margin="10,0,0,0" HorizontalAlignment="Left"  Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="ReceivedMoney" FontSize="20" 
+                                         Width="145" materialDesign:HintAssist.Hint="Tiền khách trả " Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                         SelectionChanged="ReceivedMoney_SelectionChanged"></TextBox>
+                                <TextBox x:Name="ShippingFee" FontSize="20" 
+                                         Margin="5,0,0,0" Width="130" 
+                                         materialDesign:HintAssist.Hint="Phí Ship" 
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         SelectionChanged="ShippingFee_SelectionChanged"></TextBox>
+                            </StackPanel>
+                            <TextBox x:Name="RefundMoney" Foreground="red" FontSize="20"  Width="280"  materialDesign:HintAssist.Hint="Tiền hoàn lại" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                            
+                        </StackPanel>
                     </StackPanel>
 
                 </materialDesign:Card>
@@ -134,13 +147,18 @@
                                     </Button.Content>
                                 </Button>
                             </StackPanel>
-                            <Button Content="Thêm" FontSize="20" Width="100" HorizontalAlignment="Left"
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Thêm" FontSize="20" Width="100" HorizontalAlignment="Left"
                                     Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="AddCurrentCake_Click"
                                     Margin="30,0,50,10" VerticalContentAlignment="Center"></Button>
+                                <TextBlock Text="Tồn kho: " Margin="60,0,0,0" FontSize="20" Foreground="Blue" ></TextBlock>
+                                <TextBlock x:Name="inventoryNumber" FontSize="20" Foreground="Blue" ></TextBlock>
+                            </StackPanel>
+                            
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="15,0,10,0">
                             <TextBlock Text="Tổng tiền: " FontSize="20" Foreground="red" ></TextBlock>
-                            <TextBlock Name="CartCost" FontSize="20" Width="100" Foreground="red"  ></TextBlock>
+                            <TextBlock Name="CartCost" FontSize="20" Width="200" Foreground="red"  ></TextBlock>
                         </StackPanel>
 
                         <DataGrid Name="CartDataGrid" Margin="10"

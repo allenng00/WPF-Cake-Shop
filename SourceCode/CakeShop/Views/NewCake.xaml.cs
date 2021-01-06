@@ -18,7 +18,7 @@ using System.Data;
 using CakeShop.Data;
 using Microsoft.Win32;
 
-namespace CakeShop.View
+namespace CakeShop.Views
 {
     /// <summary>
     /// Interaction logic for AddNewCake.xaml

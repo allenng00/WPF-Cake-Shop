@@ -7,70 +7,15 @@ namespace CakeShop.Data
     public class CakeShopDAO
     {
         private OurCakeShopEntities Database;
+
         /// <summary>
         /// Hàm khởi tạo kết nối cơ sở dữ liệu
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        
         public CakeShopDAO()
         {
             Database = new OurCakeShopEntities();
-        }
-
-        /// <summary>
-        /// Hàm lấy dánh sách tất cả Category
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        public List<CATEGORY> CategoryList()
-        {
-            var categories = Database.CATEGORies.ToList();
-            return categories;
-        }
-
-        /// <summary>
-        /// Hàm lấy dánh sách tất cả hình thức thanh toán
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        public List<STATUS> StatusList()
-        {
-            var sTATUs = Database.STATUS.ToList();
-            return sTATUs;
-            
-        }
-
-
-        /// <summary>
-        /// Hàm lấy dánh sách tất cả hình thức thanh toán
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        public long OrderCount()
-        {
-            long count =(long) Database.ORDERs.Count();
-            return count;
-        }
-
-
-        /// <summary>
-        /// Hàm lấy dánh sách tất cả bánh của cửa hàng theo Category Id
-        /// </summary>
-        /// <param name="CatID">ID  (CatID)</param>
-        /// <returns></returns>
-        public List<CAKE> CakeList(long CatID)
-        {
-            var categories = Database.CATEGORies;
-
-            var query = from c in categories
-                        where c.ID == CatID
-                        select c;
-
-            var cat = query.ToList()[0];
-            var cakes = cat.CAKEs.ToList();
-
-            return cakes;
         }
 
         /// <summary>
@@ -91,18 +36,20 @@ namespace CakeShop.Data
         /// <param name="inventoryNum">Số lượng tồn (Iventory Number)</param>
         /// <returns></returns>
         public List<CAKE> CakeList(
-            string[] catNames = null,
+            string []catNames=null,
+            int arrangeMode = -1,
             long inventoryNum = -1,
-            DateTime dateAdded = default(DateTime),
-            int arrangeMode = -1)
+            DateTime dateAdded = default(DateTime)
+            )
         {
-            List<CAKE> result;
+            List<CAKE> result = new List<CAKE>();
             var cakes = Database.CAKEs;
             IEnumerable<CAKE> tmp;
 
             // Lọc theo loại
             if (catNames != null)
             {
+
                 var catList = catNames.AsEnumerable()
                     .Join(Database.CATEGORies,
                     c1 => c1,
@@ -139,6 +86,7 @@ namespace CakeShop.Data
 
             var ordered = tmp;
             // Không sắp xếp
+            
             if (arrangeMode == -1)
             { }
             // Theo Alphabet tăng
@@ -161,8 +109,30 @@ namespace CakeShop.Data
             {
                 ordered = tmp.OrderByDescending(t => t.SellPrice);
             }
-
-            result = ordered.ToList();
+            else if (arrangeMode==4)
+            {
+                ordered = tmp.OrderBy(t => t.InventoryNum);
+            }
+            else if (arrangeMode==5)
+            {
+                ordered = tmp.OrderByDescending(t => t.InventoryNum);
+            }
+            IEnumerable<CAKE> list = ordered;
+            foreach (var cur in list)
+            {
+                result.Add(new CAKE
+                {
+                    ID = cur.ID,
+                    Name = cur.Name,
+                    Introduction = cur.Introduction,
+                    Description = cur.Description,
+                    InventoryNum = cur.InventoryNum,
+                    BasePrice = cur.BasePrice,
+                    SellPrice = cur.SellPrice,
+                    DateAdded = cur.DateAdded,
+                    AvatarImage = cur.AvatarImage,
+                }) ;
+            }
             return result;
         }
 
@@ -177,19 +147,216 @@ namespace CakeShop.Data
             cakes.Add(tempCake);
             Database.SaveChanges();
         }
+
+        /// <summary>
+        /// Hàm lấy tên bánh theo Id 
+        /// </summary>
+        /// <param name="ID">ID  (CatID)</param>
+        /// <returns></returns>
+        public string CakeName(long ID)
+        {
+            var cake = Database.CAKEs;
+
+            var query = from c in cake
+                        where c.ID == ID
+                        select c.Name;
+
+            var name = query.ToList()[0].ToString();
+
+
+            return name;
+        }
+
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả bánh của cửa hàng theo Category Id
+        /// </summary>
+        /// <param name="CatID">ID  (CatID)</param>
+        /// <returns></returns>
+        public List<CAKE> CakeList(long CatID)
+        {
+            var categories = Database.CATEGORies;
+
+            var query = from c in categories
+                        where c.ID == CatID
+                        select c;
+
+            var cat = query.ToList()[0];
+            var cakes = cat.CAKEs.ToList();
+
+            return cakes;
+        }
+
+        /// <summary>
+        /// Hàm cập nhật lượng bánh tồn kho 
+        /// </summary>
+        /// <param name="CatID">ID  (CatID)</param>
+        /// <returns></returns>
+        public bool UpdateInvetoryCake(long CakeId, long NewInventoryNumber)
+        {
+            bool check = true;
+            try
+            {
+                var cake = (from c in Database.CAKEs
+                             where c.ID == CakeId
+                             select c).SingleOrDefault();
+                cake.InventoryNum = NewInventoryNumber;
+                Database.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                check = false;
+            }
+            return check;
+        }
+
+        /// <summary>
+        /// Hàm lấy số lượng bánh theo loại category
+        /// </summary>
+        /// <param name="CatID">ID  (CatID)</param>
+        /// <returns></returns>
+
+        public long CountCakesByCategory(long CatID)
+        {
+            var query = (from c in Database.CAKEs
+                        where c.CatID == CatID
+                        select c.ID);
+            var count = query.ToList().Count();
+            return count;
+        }
+        /// <summary>
+        /// Hàm lấy tổng số lương bánh
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public long CountAllCakes()
+        {
+            var query = (from c in Database.CAKEs
+                         select c.ID);
+            var count = query.ToList().Count();
+            return count;
+        }
         #endregion Cake
 
         #region Order
-        public List<ORDER> OrderList(
-            )
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả Order
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public List<ORDER> OrderList()
         {
-            List<ORDER> result = Database.ORDERs.ToList();
+            var oRDERs = Database.ORDERs;
+            var query = oRDERs.OrderByDescending(x => x.DateCompleted);
+            var result = query.ToList();
             return result;
         }
+
+        /// <summary>
+        /// Hàm lấy danh sách tất cả
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public bool UpdateOrderStatus(long OrderID, string Status)
+        {
+            bool check = true;
+            try
+            {
+                var order = (from o in Database.ORDERs
+                             where o.ID == OrderID
+                             select o).SingleOrDefault();
+                order.Status = Status;
+                Database.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                check = false;
+            }
+            return check;
+        }
+
+        /// <summary>
+        /// Hàm lấy số lượng order hiện tại
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public long OrderCount()
+        {
+            long count = (long)Database.ORDERs.Count();
+            Console.WriteLine(count);
+            return count;
+        }
         #endregion Order
+
+        #region Category
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả Category
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public List<CATEGORY> CategoryList()
+        {
+            var categories = Database.CATEGORies.ToList();
+            return categories;
+        }
+        #endregion
+
         #region Receive
         #endregion Receive
 
+        #region Order_Detail
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả bánh của đơn hàng theo OrderId
+        /// </summary>
+        /// <param name="OrderId">ID  (OrderId)</param>
+        /// <returns></returns>
+        public List<ORDER_DETAIL> OrderDetailList(long OrderId)
+        {
+            var order_details = Database.ORDER_DETAIL;
+
+            var query = from o in order_details
+                        where o.OrderID == OrderId
+                        select o;
+            var list = query.ToList();
+
+            return list;
+        }
+
+
+        #endregion
+
+        #region Status
+        /// <summary>
+        /// Hàm lấy dánh sách tất cả hình thức thanh toán
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public List<STATUS> StatusList()
+        {
+            var sTATUs = Database.STATUS.ToList();
+            return sTATUs;
+
+        }
+
+        public string GetSTATUSsName(string ID)
+        {
+            var status = Database.STATUS;
+            var query = from s in status
+                        where s.ID == ID
+                        select s.Name;
+            string name = query.ToList()[0].ToString();
+            return name;
+        }
+
+        public STATUS GetStatusByID(string ID)
+        {
+            var status = Database.STATUS;
+            var query = from s in status
+                    where s.ID == ID
+                    select s;
+            STATUS result = query.ToList()[0];
+            return result;
+        }
+        #endregion
 
         #region Statistics
         /// <summary>

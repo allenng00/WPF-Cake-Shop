@@ -18,7 +18,7 @@ using System.Data;
 using CakeShop.Data;
 using Microsoft.Win32;
 
-namespace CakeShop.View
+namespace CakeShop.Views
 {
     /// <summary>
     /// Interaction logic for AddNewOrder.xaml
@@ -34,6 +34,7 @@ namespace CakeShop.View
         public long TotalCost { get; set; }
         public long No { get; set; }
         public long CakeID { get; set; }
+        public long InventoryNumber;
     }
     #endregion
 
@@ -52,6 +53,7 @@ namespace CakeShop.View
         {
             return dao.CategoryList();
         }
+
         public List<CAKE> GetCAKEs()
         {
             return dao.CakeList();
@@ -64,12 +66,21 @@ namespace CakeShop.View
 
         public List<STATUS> GetSTATUs()
         {
-            return dao.StatusList();
+            List<STATUS> result = new List<STATUS>();
+            result.Add(dao.GetStatusByID("OBM01"));//mua hàng trực tiếp
+            result.Add(dao.GetStatusByID("OBM02"));//mua hàng online
+            return result;
         }
 
         public long GetORDERsCount()
         {
             return dao.OrderCount();
+        }
+
+        public bool UpdateInvetoryCake(long CakeID, long InventoryNumber)
+        {
+            bool check = dao.UpdateInvetoryCake(CakeID, InventoryNumber);
+            return check;
         }
     }
     #endregion
@@ -126,6 +137,7 @@ namespace CakeShop.View
             CartDataGrid.ItemsSource = cakeInCarts;
             CartCost.Text = "0" + " VNĐ";
             CreatedDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            moneyCalculationFrame.Visibility = Visibility.Hidden;
 
             //Set selected index
             CategoryComboBox.SelectedIndex = 0;
@@ -141,7 +153,6 @@ namespace CakeShop.View
                     StoreDataInput();
                     RefreshDataInput();
                     Prepare();
-                    MessageBox.Show("Tạo đơn hàng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -156,23 +167,80 @@ namespace CakeShop.View
             Prepare();
         }
 
+        private void AddCurrentCake_Click(object sender, RoutedEventArgs e)
+        {
+            int index = CakeListView.SelectedIndex;
+
+            if (index != -1)
+            {
+                CAKE curCake = CAKEs[index];
+
+                try
+                {
+                    long quantity = long.Parse(cakeQuantity.Text);
+                    //Check dữ liệu
+                    if (quantity < 1)
+                        throw new Exception("1");
+                    if (CAKEs[index].InventoryNum - quantity < 0)
+                        throw new Exception("2");
+
+                    //Khởi tạo curCakeInCart
+                    CakeInCart curCakeInCart = new CakeInCart
+                    {
+                        CakeID = curCake.ID,
+                        Name = curCake.Name,
+                        Quantity = quantity,
+                        TotalCost = (long)(curCake.SellPrice * quantity),
+                        No = ++No_,
+                        InventoryNumber =(long)( CAKEs[index].InventoryNum - quantity),
+                    };
+
+                    //Update CartDataGrid
+                    cakeInCarts.Add(curCakeInCart);
+                    CartDataGrid.ItemsSource = null;
+                    CartDataGrid.ItemsSource = cakeInCarts;
+
+                    //Update InvetoryNumber
+                    inventoryNumber.Text = (curCakeInCart.InventoryNumber == 0) ? "Hết hàng" : curCakeInCart.InventoryNumber.ToString();
+                    CAKEs[index].InventoryNum -= quantity;
+                    
+                    //Update TotalCost
+                    UpdateTotalCost();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message == "1"){
+                        MessageBox.Show("Số lượng bánh phải lớn hơn 0", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else if (ex.Message=="2"){
+                        MessageBox.Show("Số lượng phải nhỏ hơn hoặc bằng lượng tồn kho", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else{
+                        MessageBox.Show("Số lượng bánh phải là chuỗi số", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+        }
+
         private void StoreDataInput()
         {
             bool check = CheckDataInputError();
             if (check == true)
             {
+                OurCakeShopEntities database = new OurCakeShopEntities();
 
                 try
                 {
-                    OurCakeShopEntities database = new OurCakeShopEntities();
                     long orderId = _mainvm.GetORDERsCount();
-
+                    string str= DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss");
+                    DateTime time = DateTime.Parse(str);
                     //insert order
+                    Console.WriteLine(orderId);
                     ORDER curOrder = new ORDER
                     {
                         ID = orderId + 1,
-                        Status = STATUs[StatusComboBox.SelectedIndex].ID,
-                        DateCompleted = DateTime.UtcNow,
+                        Status = "OS11",
+                        DateCompleted = time,
                         TotalBill = this.TotalBill,
                         BuyingMethod = STATUs[StatusComboBox.SelectedIndex].ID,
                         CustomerName = customerName.Text,
@@ -181,8 +249,9 @@ namespace CakeShop.View
 
                     };
                     database.ORDERs.Add(curOrder);
+                    Console.WriteLine(curOrder.ID);
                     database.SaveChanges();
-                    Console.WriteLine(1);
+                    Console.WriteLine(orderId + 1);
                     foreach (var detail in cakeInCarts)
                     {
                         ORDER_DETAIL cur = new ORDER_DETAIL
@@ -194,11 +263,10 @@ namespace CakeShop.View
                             Price = detail.TotalCost,
                         };
                         database.ORDER_DETAIL.Add(cur);
-                        database.SaveChanges();
-                        Console.WriteLine(3);
+                        _mainvm.UpdateInvetoryCake(detail.CakeID, detail.InventoryNumber);
                     }
                     database.SaveChanges();
-                    Console.WriteLine(2);
+                    MessageBox.Show("Tạo đơn hàng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -221,7 +289,7 @@ namespace CakeShop.View
             cakeQuantity.Text = "";
             CartCost.Text = "0 VNĐ";
             CartDataGrid.ItemsSource = null;
-
+            inventoryNumber.Text = null;
 
             //Refresh cakeList frame
             CategoryComboBox.ItemsSource = null;
@@ -246,11 +314,6 @@ namespace CakeShop.View
                 result = false;
                 MessageBox.Show("Bạn chưa nhập tên khách hàng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else if (customerPhoneNumber.Text == "")
-            {
-                result = false;
-                MessageBox.Show("Bạn chưa nhập sô điện thoại khách hàng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
             else if (StatusComboBox.SelectedIndex == -1)
             {
                 result = false;
@@ -258,37 +321,6 @@ namespace CakeShop.View
             }
 
             return result;
-        }
-
-        private void AddCurrentCake_Click(object sender, RoutedEventArgs e)
-        {
-            int index = CakeListView.SelectedIndex;
-            if (index != -1)
-            {
-                CAKE curCake = CAKEs[index];
-                try
-                {
-                    long quantity = long.Parse(cakeQuantity.Text);
-                    if (quantity < 1)
-                        throw new Exception("1");
-                    CakeInCart curCakeInCart = new CakeInCart
-                    {
-                        CakeID = curCake.ID,
-                        Name = curCake.Name,
-                        Quantity = quantity,
-                        TotalCost = (long)(curCake.SellPrice * quantity),
-                        No = ++No_,
-                    };
-                    cakeInCarts.Add(curCakeInCart);
-                    CartDataGrid.ItemsSource = null;
-                    CartDataGrid.ItemsSource = cakeInCarts;
-                    UpdateTotalCost();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Bạn nhập số lượng bánh sai", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
         }
 
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -317,6 +349,8 @@ namespace CakeShop.View
                 cakeName.Text = CAKEs[index].Name;
                 int num = 1;
                 cakeQuantity.Text = num.ToString();
+                inventoryNumber.Text = CAKEs[index].InventoryNum.ToString();
+
             }
         }
 
@@ -341,6 +375,34 @@ namespace CakeShop.View
                 quantity++;
             }
             cakeQuantity.Text = quantity.ToString();
+        }
+
+        private void ReceivedMoney_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            CalculateMoney();
+        }
+
+        private void ShippingFee_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            CalculateMoney();
+        }
+
+        private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (StatusComboBox.SelectedIndex != -1)
+            {
+                STATUS cur = StatusComboBox.SelectedItem as STATUS;
+                if (cur.ID == "OBM01")//mua hàng trực tiếp
+                {
+                    moneyCalculationFrame.Visibility = Visibility.Visible;
+                    ShippingFee.Visibility = Visibility.Collapsed;
+                }
+                if (cur.ID == "OBM02")//mua hàng online
+                {
+                    moneyCalculationFrame.Visibility = Visibility.Visible;
+                    ShippingFee.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void DownQuantity_Click(object sender, RoutedEventArgs e)
@@ -377,8 +439,35 @@ namespace CakeShop.View
                     else
                         return;
                 }
+                CalculateMoney();
                 CartCost.Text = TotalBill.ToString() + " VNĐ";
             }
         }
+
+        public void CalculateMoney()
+        {
+            long receivedMoney = 0;
+            long shippingFee = 0;
+            try
+            {
+                if (ReceivedMoney.Text != "")
+                    receivedMoney = long.Parse(ReceivedMoney.Text);
+                if (ShippingFee.Text != "")
+                    shippingFee = long.Parse(ShippingFee.Text);
+                if (receivedMoney < 0 || shippingFee < 0)
+                    throw new Exception("1");
+                long refundMoney = receivedMoney + shippingFee - TotalBill;
+                RefundMoney.Text = refundMoney.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Số tiền bạn nhập vào không hợp lệ \n Là chuỗi số và lớn hơn 0", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                RefundMoney.Text = "";
+                ShippingFee.Text = "";
+                RefundMoney.Text = "";
+            }
+        }
+
+        
     }
 }

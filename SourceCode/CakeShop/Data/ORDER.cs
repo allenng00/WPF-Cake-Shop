@@ -23,15 +23,14 @@ namespace CakeShop.Data
         public long ID { get; set; }
         public string Status { get; set; }
         public long TotalBill { get; set; }
-        public System.DateTime DateCompleted { get; set; }
         public string BuyingMethod { get; set; }
         public string CustomerName { get; set; }
         public string CustomerPhone { get; set; }
         public string CustomerAddress { get; set; }
+        public DateTime DateCompleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER_DETAIL> ORDER_DETAIL { get; set; }
         public virtual STATUS STATUS1 { get; set; }
-        public virtual STATUS STATUS2 { get; set; }
     }
 }

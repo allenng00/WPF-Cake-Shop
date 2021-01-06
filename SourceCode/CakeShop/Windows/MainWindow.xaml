@@ -123,7 +123,7 @@
             Background="#2C2C2C" Height="5">
         </Grid>
         <Frame Name="mainContentFrame" 
-               Height="680" NavigationUIVisibility="Hidden">
+               Height="680" Width="1200" NavigationUIVisibility="Hidden">
 
         </Frame>
             </DockPanel>
