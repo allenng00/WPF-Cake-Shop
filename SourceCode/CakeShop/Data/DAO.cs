@@ -137,6 +137,36 @@ namespace CakeShop.Data
         }
 
         /// <summary>
+        /// Update Cake theo ID
+        /// </summary>
+        /// <param name="CakeID">ID (CakeID</param>
+        /// <param name="Cake">Cake (Cake)</param>
+        public bool UpdateCake(CAKE updateCake, long CakeID)
+        {
+            bool check = true;
+            var cur = (from c in Database.CAKEs
+                        where c.ID == CakeID
+                        select c).SingleOrDefault();
+            try
+            {
+                cur.AvatarImage = updateCake.AvatarImage.ToArray();
+                cur.Name = updateCake.Name;
+                cur.BasePrice = updateCake.BasePrice;
+                cur.SellPrice = updateCake.SellPrice;
+                cur.Introduction = updateCake.Introduction;
+                cur.DateAdded = updateCake.DateAdded;
+                cur.CatID = updateCake.CatID;
+            }
+            catch(Exception ex)
+            {
+                check = false;
+            }
+            Database.SaveChanges();
+            return check;
+        }
+
+
+        /// <summary>
         /// Hàm thêm một loại bánh mới vào cơ sở dữ liệu
         /// </summary>
         /// <param name="tempCake"></param>
@@ -184,6 +214,24 @@ namespace CakeShop.Data
             var cakes = cat.CAKEs.ToList();
 
             return cakes;
+        }
+
+
+        /// <summary>
+        /// Hàm lấy cake theo ID
+        /// </summary>
+        /// <param name="CakeID">ID  (CakeID)</param>
+        /// <returns></returns>
+        public CAKE GetCAKEs(long CakeID)
+        {
+            var cakes = Database.CAKEs;
+
+            var query = (from c in cakes
+                         where c.ID == CakeID
+                         select c).SingleOrDefault();
+
+            CAKE result = (CAKE)query;
+            return result;
         }
 
         /// <summary>
@@ -282,7 +330,6 @@ namespace CakeShop.Data
         public long OrderCount()
         {
             long count = (long)Database.ORDERs.Count();
-            Console.WriteLine(count);
             return count;
         }
         #endregion Order
@@ -297,6 +344,15 @@ namespace CakeShop.Data
         {
             var categories = Database.CATEGORies.ToList();
             return categories;
+        }
+
+        public string CategoryNameByID(long CatID)
+        {
+            var query = (from c in Database.CATEGORies
+                         where c.ID == CatID
+                         select c).SingleOrDefault();
+            string name = query.Name;
+            return name;
         }
         #endregion
 
