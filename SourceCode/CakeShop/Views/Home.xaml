@@ -76,9 +76,10 @@
         </StackPanel>
         <StackPanel DockPanel.Dock="Right">
             <ListView x:Name="CakeListView" 
-                      SelectionChanged="CakeListView_SelectionChanged"
                 Width="900" Height="580" Margin="10,10,10,10"
                       Style="{StaticResource MaterialDesignListView}"
+                      MouseUp="CakeListView_MouseUp"
+                        PreviewMouseDoubleClick="CakeListView_PreviewMouseDoubleClick"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListView.ItemsPanel>
@@ -96,25 +97,34 @@
                             </Rectangle>
                             <StackPanel Orientation="Horizontal" Width="270" >
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Name}" Width="180" Margin="0" FontSize="20"
+                                    <TextBlock  Text="{Binding ID}" Visibility="Collapsed"></TextBlock>
+                                    <TextBlock Text="{Binding Name}" Width="260" Margin="0" FontSize="23"
                                    FontWeight="Black" Foreground="DarkBlue" TextWrapping="Wrap"></TextBlock>
-                                    <StackPanel Orientation="Horizontal" Margin="0" Width="180"  >
-                                        <TextBlock Text="{Binding SellPrice}" FontSize="20" FontWeight="Medium"
+                                    <StackPanel Orientation="Horizontal" Margin="0" Width="260"  >
+                                        <TextBlock Text="{Binding SellPrice}" FontSize="25" FontWeight="Medium"
                                        Foreground="Black" TextWrapping="Wrap"></TextBlock>
                                         <TextBlock Text=" VNĐ" FontSize="20" FontWeight="Medium"
                                        Foreground="Black" TextWrapping="Wrap"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <Button Padding="0,0,5,0" Margin="5,10,0,0" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatAccentButton}"  Background="DarkRed" >
+                                <!--<Button Padding="0,0,5,0" Margin="5,10,0,0" Height="37" Width="37"  
+                                        VerticalAlignment="Top" 
+                                        Style="{StaticResource MaterialDesignFloatingActionDarkButton}"  
+                                        Background="DarkRed" 
+                                        PreviewMouseDoubleClick="EditCake_PreviewMouseDoubleClick">
                                     <Button.Content>
-                                        <materialDesign:PackIcon Kind="Edit" Height="30" Width="30" Foreground="White" Padding="0" Margin="0"></materialDesign:PackIcon>
+                                        <materialDesign:PackIcon Kind="Edit" Height="28" Width="28" Foreground="White" Padding="0" Margin="0"></materialDesign:PackIcon>
                                     </Button.Content>
                                 </Button>
-                                <Button Padding="5,0,5,0" Margin="5,10,0,0" VerticalAlignment="Top"  Style="{StaticResource MaterialDesignFlatAccentButton}"  Background="DarkRed" >
+                                <Button Padding="5,0,5,0" Margin="5,10,0,0" Height="37" Width="37" 
+                                        VerticalAlignment="Top"  
+                                        Style="{StaticResource MaterialDesignFloatingActionDarkButton}"  
+                                        Background="DarkRed" 
+                                        PreviewMouseDoubleClick="ViewCake_PreviewMouseDoubleClick_1">
                                     <Button.Content>
-                                        <materialDesign:PackIcon Kind="Eye" Height="30" Width="30" Foreground="White" Padding="0" Margin="0"></materialDesign:PackIcon>
+                                        <materialDesign:PackIcon Kind="Eye" Height="28" Width="28" Foreground="White" Padding="0" Margin="0"></materialDesign:PackIcon>
                                     </Button.Content>
-                                </Button>
+                                </Button>-->
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

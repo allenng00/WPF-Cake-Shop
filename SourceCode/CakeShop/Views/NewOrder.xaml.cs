@@ -156,7 +156,7 @@ namespace CakeShop.Views
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    MessageBox.Show("Lưu đơn hàng bị lỗi", "Thông báo", MessageBoxButton.OK);
                 }
             }
         }
@@ -235,7 +235,6 @@ namespace CakeShop.Views
                     string str= DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss");
                     DateTime time = DateTime.Parse(str);
                     //insert order
-                    Console.WriteLine(orderId);
                     ORDER curOrder = new ORDER
                     {
                         ID = orderId + 1,
@@ -249,9 +248,7 @@ namespace CakeShop.Views
 
                     };
                     database.ORDERs.Add(curOrder);
-                    Console.WriteLine(curOrder.ID);
                     database.SaveChanges();
-                    Console.WriteLine(orderId + 1);
                     foreach (var detail in cakeInCarts)
                     {
                         ORDER_DETAIL cur = new ORDER_DETAIL
@@ -270,7 +267,6 @@ namespace CakeShop.Views
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
                     MessageBox.Show("Tạo đơn hàng không thành công\n Vui lòng thử lại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
@@ -361,7 +357,6 @@ namespace CakeShop.Views
             try
             {
                 quantity = long.Parse(cakeQuantity.Text.ToString());
-                Console.WriteLine(quantity);
                 if (quantity < 0)
                     throw new Exception("error");
             }
