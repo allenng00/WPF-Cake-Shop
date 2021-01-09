@@ -80,7 +80,57 @@ namespace CakeShop.Views
             }
             return result;
         }
-        
+        public List<CAKE> GetCakeList(string[] CatName=null, int ArrangeMode=-1)
+        {
+            List<CAKE> CAKEs = new List<CAKE>();
+            switch (ArrangeMode)
+            {
+                //Sắp xếp theo ký tự Alphabet tăng dần
+                case 1:
+                    {
+                        CAKEs = dao.CakeList(CatName, 0);
+                        break;
+                    }
+                //Sắp xếp theo ký tự Alphabet giảm dần
+                case 2:
+                    {
+                        CAKEs = dao.CakeList(CatName, 1);
+                        break;
+                    }
+                //Sắp xếp theo giá tăng dần
+                case 3:
+                    {
+                        CAKEs = dao.CakeList(CatName, 2);
+                        break;
+                    }
+                //Sắp xếp theo giá giảm dần
+                case 4:
+                    {
+                        CAKEs = dao.CakeList(CatName, 3);
+                        break;
+                    }
+                // Sắp xếp theo lượng tồn tăng dần
+                case 5:
+                    {
+                        CAKEs = dao.CakeList(CatName, 4);
+                        break;
+                    }
+                // Sắp xếp theo lường tồn giảm dần
+                case 6:
+                    {
+                        CAKEs = dao.CakeList(CatName, 5);
+                        break;
+                    }
+                //Lấy tất cả
+                default:
+                    {
+                        CAKEs = dao.CakeList(CatName);
+                        break;
+                    }
+            }
+
+            return CAKEs;
+        }
     }
     #endregion
     public partial class Home : Page
@@ -128,11 +178,6 @@ namespace CakeShop.Views
             }
         }
 
-        private void CakeListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void SortCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = SortComboBox.SelectedIndex;
@@ -144,51 +189,8 @@ namespace CakeShop.Views
                     string name = CATEGORies[CategoryListView.SelectedIndex].Name;
                     string[] CatName = new string[] { name };
 
-                    switch (index)
-                    {
-                        //Sắp xếp theo ký tự Alphabet tăng dần
-                        case 1:
-                            {
-                                CAKEs = _mainvm.dao.CakeList(CatName, 0);
-                                break;
-                            }
-                        //Sắp xếp theo ký tự Alphabet giảm dần
-                        case 2:
-                            {
-                                CAKEs = _mainvm.dao.CakeList(CatName, 1);
-                                break;
-                            }
-                        //Sắp xếp theo giá tăng dần
-                        case 3:
-                            {
-                                CAKEs = _mainvm.dao.CakeList(CatName, 2);
-                                break;
-                            }
-                        //Sắp xếp theo giá giảm dần
-                        case 4:
-                            {
-                                CAKEs = _mainvm.dao.CakeList(CatName, 3);
-                                break;
-                            }
-                        // Sắp xếp theo lượng tồn tăng dần
-                        case 5:
-                            {
-                                CAKEs = _mainvm.dao.CakeList(CatName, 4);
-                                break;
-                            }
-                        // Sắp xếp theo lường tồn giảm dần
-                        case 6:
-                            {
-                                CAKEs = _mainvm.dao.CakeList(CatName, 5);
-                                break;
-                            }
-                        //Lấy tất cả
-                        default:
-                            {
-                                CAKEs = _mainvm.dao.CakeList(CatName);
-                                break;
-                            }
-                    }
+                    CAKEs = _mainvm.GetCakeList(CatName, index);
+
                     if (CAKEs.Count != 0)
                     {
                         //Update CakeListView
@@ -207,6 +209,38 @@ namespace CakeShop.Views
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+
+        public int CakeIndex { get; set; }
+        public long CakeID { get; set; }
+        
+        private void CakeListView_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+
+        private void CakeListView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = CakeListView.SelectedIndex;
+                if (index != -1)
+                {
+                    CakeIndex = index;
+                    CakeID = CAKEs[CakeIndex].ID;
+                    if (CakeID != -1)
+                    {
+                        App.mainWindow.mainContentFrame.Content = new CakeDetail(this.CakeID);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                // MessageBox.Show("Lỗi hiển thị", "Thông báo", MessageBoxButton.OK);
+            }
         }
     }
 }
