@@ -15,7 +15,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Left"  Width="290" Background="WhiteSmoke">
             <TextBlock Text="Các loại bánh" FontSize="35" Margin="15,25,0,15" HorizontalAlignment="Left"  Foreground="DarkRed" FontWeight="Black"/>
-            <ListView x:Name="CategoryListView" 
+            <ListView x:Name="CategoryListView"  ItemsSource="{Binding Path=CategoryList}"
                       Style="{StaticResource MaterialDesignListView}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled" 
@@ -31,9 +31,9 @@
                         <StackPanel Orientation="Horizontal" Margin="20,5,0,5" Width="270">
                             <materialDesign:PackIcon Kind="GreaterThan" Width="25" Height="30" Foreground="DarkRed" VerticalAlignment="Center"></materialDesign:PackIcon>
 
-                            <TextBlock Text="{Binding Name}" FontSize="25" FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="{Binding Path=Name}" FontSize="25" FontWeight="Bold"></TextBlock>
                             <TextBlock Text=" [" FontSize="25" FontWeight="Bold" Foreground="DarkRed"></TextBlock>
-                            <TextBlock Text="{Binding Quantity}" FontSize="25" FontWeight="Bold" Foreground="DarkRed"></TextBlock>
+                            <TextBlock Text="{Binding Path=Quantity}" FontSize="25" FontWeight="Bold" Foreground="DarkRed"></TextBlock>
                             <TextBlock Text="]" FontSize="25" FontWeight="Bold" Foreground="DarkRed"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
@@ -75,11 +75,10 @@
             </StackPanel>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right">
-            <ListView x:Name="CakeListView" 
+            <ListView x:Name="CakeListView" ItemsSource="{Binding Path=CakeList}"
                 Width="900" Height="580" Margin="10,10,10,10"
                       Style="{StaticResource MaterialDesignListView}"
-                      MouseUp="CakeListView_MouseUp"
-                        PreviewMouseDoubleClick="CakeListView_PreviewMouseDoubleClick"
+                      PreviewMouseDoubleClick="CakeListView_PreviewMouseDoubleClick"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListView.ItemsPanel>
@@ -89,21 +88,21 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical" Width="270" Height="290" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" Width="280" Height="290" HorizontalAlignment="Center">
                             <Rectangle  Width="260" Height="180" Margin="5,0,5,5" HorizontalAlignment="Center" RadiusX="20" RadiusY="20">
                                 <Rectangle.Fill>
-                                    <ImageBrush ImageSource="{Binding AvatarImage, Converter={StaticResource Converter}}"></ImageBrush>
+                                    <ImageBrush ImageSource="{Binding Path=AvatarImage, Converter={StaticResource Converter}}"></ImageBrush>
                                 </Rectangle.Fill>
                             </Rectangle>
                             <StackPanel Orientation="Horizontal" Width="270" >
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock  Text="{Binding ID}" Visibility="Collapsed"></TextBlock>
-                                    <TextBlock Text="{Binding Name}" Width="260" Margin="0" FontSize="23"
+                                    <TextBlock Text="{Binding Path=ID}" Visibility="Collapsed"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Name}" Width="260" Margin="0" FontSize="21"
                                    FontWeight="Black" Foreground="DarkBlue" TextWrapping="Wrap"></TextBlock>
                                     <StackPanel Orientation="Horizontal" Margin="0" Width="260"  >
-                                        <TextBlock Text="{Binding SellPrice}" FontSize="25" FontWeight="Medium"
+                                        <TextBlock Text="{Binding Path=SellPrice}" FontSize="25" FontWeight="Medium"
                                        Foreground="Black" TextWrapping="Wrap"></TextBlock>
-                                        <TextBlock Text=" VNĐ" FontSize="20" FontWeight="Medium"
+                                        <TextBlock Text=" USD" FontSize="20" FontWeight="Medium"
                                        Foreground="Black" TextWrapping="Wrap"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>

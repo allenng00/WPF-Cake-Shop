@@ -36,29 +36,29 @@ namespace CakeShop.Data
         /// <param name="inventoryNum">Số lượng tồn (Iventory Number)</param>
         /// <returns></returns>
         public List<CAKE> CakeList(
-            string []catNames=null,
+            long[] catIDs = null,
             int arrangeMode = -1,
             long inventoryNum = -1,
-            DateTime dateAdded = default(DateTime)
+            DateTime dateAdded = default(DateTime),
+            string searchText = ""
             )
         {
             List<CAKE> result = new List<CAKE>();
             var cakes = Database.CAKEs;
-            IEnumerable<CAKE> tmp;
+            IQueryable<CAKE> tmp;
 
             // Lọc theo loại
-            if (catNames != null)
+            if (catIDs != null)
             {
-
-                var catList = catNames.AsEnumerable()
+                var catList = catIDs.AsQueryable()
                     .Join(Database.CATEGORies,
                     c1 => c1,
-                    c2 => c2.Name,
+                    c2 => c2.ID,
                     (c1, c2) => new { ID = c2.ID, Name = c2.Name });
-
+               
                 var cakebycat = cakes
                     .Join(catList,
-                    cake => cake.ID,
+                    cake => cake.CatID,
                     cat => cat.ID,
                     (cake, cat) => cake);
 
@@ -86,7 +86,7 @@ namespace CakeShop.Data
 
             var ordered = tmp;
             // Không sắp xếp
-            
+
             if (arrangeMode == -1)
             { }
             // Theo Alphabet tăng
@@ -109,29 +109,22 @@ namespace CakeShop.Data
             {
                 ordered = tmp.OrderByDescending(t => t.SellPrice);
             }
-            else if (arrangeMode==4)
+            else if (arrangeMode == 4)
             {
                 ordered = tmp.OrderBy(t => t.InventoryNum);
             }
-            else if (arrangeMode==5)
+            else if (arrangeMode == 5)
             {
                 ordered = tmp.OrderByDescending(t => t.InventoryNum);
             }
-            IEnumerable<CAKE> list = ordered;
-            foreach (var cur in list)
+
+            if (tmp != null)
             {
-                result.Add(new CAKE
-                {
-                    ID = cur.ID,
-                    Name = cur.Name,
-                    Introduction = cur.Introduction,
-                    Description = cur.Description,
-                    InventoryNum = cur.InventoryNum,
-                    BasePrice = cur.BasePrice,
-                    SellPrice = cur.SellPrice,
-                    DateAdded = cur.DateAdded,
-                    AvatarImage = cur.AvatarImage,
-                }) ;
+                result = ordered.Cast<CAKE>().ToList();
+            }
+            else
+            {
+                result = cakes.ToList();
             }
             return result;
         }
@@ -145,8 +138,8 @@ namespace CakeShop.Data
         {
             bool check = true;
             var cur = (from c in Database.CAKEs
-                        where c.ID == CakeID
-                        select c).SingleOrDefault();
+                       where c.ID == CakeID
+                       select c).SingleOrDefault();
             try
             {
                 cur.AvatarImage = updateCake.AvatarImage.ToArray();
@@ -157,7 +150,7 @@ namespace CakeShop.Data
                 cur.DateAdded = updateCake.DateAdded;
                 cur.CatID = updateCake.CatID;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 check = false;
             }
@@ -245,12 +238,12 @@ namespace CakeShop.Data
             try
             {
                 var cake = (from c in Database.CAKEs
-                             where c.ID == CakeId
-                             select c).SingleOrDefault();
+                            where c.ID == CakeId
+                            select c).SingleOrDefault();
                 cake.InventoryNum = NewInventoryNumber;
                 Database.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 check = false;
             }
@@ -266,9 +259,10 @@ namespace CakeShop.Data
         public long CountCakesByCategory(long CatID)
         {
             var query = (from c in Database.CAKEs
-                        where c.CatID == CatID
-                        select c.ID);
+                         where c.CatID == CatID
+                         select c.ID);
             var count = query.ToList().Count();
+
             return count;
         }
         /// <summary>
@@ -407,8 +401,8 @@ namespace CakeShop.Data
         {
             var status = Database.STATUS;
             var query = from s in status
-                    where s.ID == ID
-                    select s;
+                        where s.ID == ID
+                        select s;
             STATUS result = query.ToList()[0];
             return result;
         }
