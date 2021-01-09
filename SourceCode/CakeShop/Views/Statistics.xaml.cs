@@ -2,6 +2,7 @@
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace CakeShop.Views
@@ -35,6 +36,7 @@ namespace CakeShop.Views
             }
             DataContext = this;
             PrePareRevenuaByMonthChart();
+            
         }
 
         private void PrePareRevenuaByMonthChart()

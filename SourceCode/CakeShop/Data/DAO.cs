@@ -381,6 +381,6 @@ namespace CakeShop.Data
         }
         #endregion Statistics
 
-        
+
     }
 }
