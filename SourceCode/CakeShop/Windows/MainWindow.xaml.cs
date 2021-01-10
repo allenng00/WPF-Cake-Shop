@@ -169,7 +169,8 @@ namespace CakeShop.Windows
                             App.homePage = new Views.Home();
                         }
                         else { }
-                        mainContentFrame.Content = new Home();
+                        App.homePage = new Views.Home();
+                        mainContentFrame.Content = App.homePage;
                         break;
                     }
             }
