@@ -71,7 +71,12 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="Tìm kiếm: " Foreground="DarkBlue" FontSize="35" Margin="10,15,0,0" FontWeight="Medium" VerticalAlignment="Center"></TextBlock>
-                <TextBox Style="{StaticResource MaterialDesignTextBox}" TextChanged="SearchTextBox_TextChanged" Width="290"  BorderBrush="Black" BorderThickness="2"></TextBox>
+                <Button Width="50" Height="50" Padding="0" Click="SearchBox_Click" BorderThickness="0" Background="Transparent" >
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="Search" Width="50" Height="50" Foreground="Black"></materialDesign:PackIcon>
+                    </Button.Content>
+                </Button>
+                <TextBox x:Name="SearchBox" Style="{StaticResource MaterialDesignTextBox}" FontSize="25" VerticalContentAlignment="Center" Width="250"  BorderBrush="Black" BorderThickness="2"></TextBox>
             </StackPanel>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right">

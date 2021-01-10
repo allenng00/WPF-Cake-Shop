@@ -128,6 +128,22 @@ namespace CakeShop.ViewModels
         }
 
         /// <summary>
+        /// Hàm lọc cake theo ID
+        /// </summary>
+        /// <param name="CatID"></param>
+        public void SearchCAKEsByName(string text)
+        {
+            if (text == ""||text==null)
+            {
+                CakeList = App.appDAO.CakeList();
+            }
+            else
+            {
+                CakeList = App.appDAO.SearchCakeByName(text);
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="CatName"></param>

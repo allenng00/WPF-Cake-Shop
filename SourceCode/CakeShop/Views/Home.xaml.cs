@@ -128,13 +128,27 @@ namespace CakeShop.Views
         }
 
         /// <summary>
-        /// 
+        /// Search Cake theo tên
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBox_Click(object sender, RoutedEventArgs e)
         {
+            string text = SearchBox.Text;
 
+            try
+            {
+                _mainVM.SearchCAKEsByName(text);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                MessageBox.Show("Lỗi!Không tìm được cake ", "Thông báo", MessageBoxButton.OK);
+            }
+
+            CakeListView.ItemsSource = null;
+            CakeListView.ItemsSource = _mainVM.CakeList;
         }
 
         /// <summary>

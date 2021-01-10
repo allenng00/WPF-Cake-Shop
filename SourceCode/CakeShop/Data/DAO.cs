@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace CakeShop.Data
@@ -276,6 +279,20 @@ namespace CakeShop.Data
                          select c.ID);
             var count = query.ToList().Count();
             return count;
+        }
+
+        /// <summary>
+        /// Tìm kiếm Cake theo tên
+        /// </summary>
+        /// <param name="text">name  cần tìm kiếm</param>
+        /// <returns></returns>
+        public List<CAKE> SearchCakeByName(string text)
+        {
+            List<CAKE> result = new List<CAKE>();
+          
+            var query = Database.CAKEs.Where(x => x.Name.Contains(text));
+            result = query.ToList();
+            return result;
         }
         #endregion Cake
 
