@@ -121,7 +121,13 @@ namespace CakeShop.Data
                 ordered = tmp.OrderByDescending(t => t.InventoryNum);
             }
 
-            if (tmp != null)
+            var searched = ordered.Where(x => x.Name.Contains(searchText));
+            
+            if (searched != null)
+            {
+                result = searched.Cast<CAKE>().ToList();
+            }
+            else if(tmp !=null)
             {
                 result = ordered.Cast<CAKE>().ToList();
             }
@@ -129,6 +135,20 @@ namespace CakeShop.Data
             {
                 result = cakes.ToList();
             }
+            return result;
+        }
+
+        /// <summary>
+        /// Tìm kiếm Cake theo tên
+        /// </summary>
+        /// <param name="text">name  cần tìm kiếm</param>
+        /// <returns></returns>
+        public List<CAKE> SearchCakeByName(string text)
+        {
+            List<CAKE> result = new List<CAKE>();
+
+            var query = Database.CAKEs.Where(x => x.Name.Contains(text));
+            result = query.ToList();
             return result;
         }
 
@@ -281,19 +301,6 @@ namespace CakeShop.Data
             return count;
         }
 
-        /// <summary>
-        /// Tìm kiếm Cake theo tên
-        /// </summary>
-        /// <param name="text">name  cần tìm kiếm</param>
-        /// <returns></returns>
-        public List<CAKE> SearchCakeByName(string text)
-        {
-            List<CAKE> result = new List<CAKE>();
-          
-            var query = Database.CAKEs.Where(x => x.Name.Contains(text));
-            result = query.ToList();
-            return result;
-        }
         #endregion Cake
 
         #region Order

@@ -138,8 +138,23 @@ namespace CakeShop.Views
 
             try
             {
-                _mainVM.SearchCAKEsByName(text);
+                var sortIndex = SortComboBox.SelectedIndex;
 
+                if (sortIndex != -1)
+                {
+                    var CategoryID = _mainVM.CategoryList[CategoryListView.SelectedIndex].CatID;
+
+                    if (CategoryID != 0)
+                    {
+                        var CatIDs = new long[] { CategoryID };
+                        _mainVM.GetCakeList(CatIDs, sortIndex,text);
+                    }
+                    else
+                    {
+                        _mainVM.GetCakeList(null, sortIndex, text);
+                    }
+                }
+                Console.WriteLine(_mainVM.CakeList.Count());
             }
             catch (Exception ex)
             {

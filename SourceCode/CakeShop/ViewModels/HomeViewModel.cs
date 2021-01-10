@@ -148,9 +148,9 @@ namespace CakeShop.ViewModels
         /// </summary>
         /// <param name="CatName"></param>
         /// <param name="ArrangeMode"></param>
-        public void GetCakeList(long[] CatIDs = null, int ArrangeMode = -1)
+        public void GetCakeList(long[] CatIDs = null, int ArrangeMode = -1,string text="")
         {
-            CakeList = App.appDAO.CakeList(CatIDs, ArrangeMode);
+            CakeList = App.appDAO.CakeList(CatIDs, ArrangeMode,-1, default(DateTime), text);
         }
     }
     #endregion
