@@ -13,9 +13,13 @@
     </Page.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Left" Width="600"  Height="680" >
-
+            <Button Width="100" Height="50" Click="ComeBack_Click" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatMidBgButton}"  Margin="0" Padding="0">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="KeyboardReturn"  Width="100" Height="50"></materialDesign:PackIcon>
+                </Button.Content>
+            </Button>
             <materialDesign:Card Width="530"
-                       Height="400" Margin="30,70,10,10">
+                       Height="400" Margin="30,20,10,10">
                 <Image x:Name="AvatarImage" Width="530" Height="400"  Stretch="UniformToFill"></Image>
             </materialDesign:Card>
             <Button  x:Name="AddImage" Visibility="Collapsed"
@@ -29,12 +33,21 @@
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="SaveInfo" Click="SaveInfo_Click" Visibility="Hidden" Content="Lưu" Height="40" FontFamily="Arial" FontSize="25" Margin="5" Foreground="Black" Width="120" Style="{StaticResource MaterialDesignFlatMidBgButton}" HorizontalAlignment="Right"></Button>
-                <Button Content="Cập nhật" Click="UpdateInfo_Click" FontFamily="Arial" Height="40" FontSize="25" Margin="5" Foreground="Black" Width="150" Style="{StaticResource MaterialDesignFlatMidBgButton}" HorizontalAlignment="Right"></Button>
+                <Button x:Name="SaveInfo" Click="SaveInfo_Click" Visibility="Visible" Padding="0" Height="50" Width="80" FontFamily="Arial" FontSize="25" Margin="5,5,10,0" Foreground="Black" Style="{StaticResource MaterialDesignFlatMidBgButton}" HorizontalAlignment="Right">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="ContentSaveEdit" Foreground="White" Width="50" Height="50"></materialDesign:PackIcon>
+                    </Button.Content>
+                </Button>
+                <Button  Click="UpdateInfo_Click" FontFamily="Arial" Height="50" FontSize="25" 
+                        Padding="0" Margin="5,5,15,0" Foreground="Black" Width="80" Style="{StaticResource MaterialDesignFlatMidBgButton}" HorizontalAlignment="Right">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="Update" Foreground="White" Width="50" Height="50"></materialDesign:PackIcon>
+                    </Button.Content>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Vertical" x:Name="CakeDetailFrame" Visibility="Visible">
                 <TextBlock Text="{Binding Name}" FontSize="40" Foreground="DarkRed" TextWrapping="Wrap" Width="550" HorizontalAlignment="Left" FontFamily="Arial" FontWeight="Bold" 
-                           Margin="30,25,0,0"></TextBlock>
+                           Margin="30,15,0,0"></TextBlock>
                 <TextBlock Text="{Binding Introduction}" FontSize="28" TextWrapping="wrap" Width="520" HorizontalAlignment="Left" FontStyle="Italic" Margin="40,20,0,0" FontFamily="Arial" ></TextBlock>
 
                 <StackPanel Orientation="Horizontal" Margin="30,0,0,0">

@@ -69,6 +69,7 @@ namespace CakeShop.Views
         public CAKE UpdatedCake { get; set; }
         public List<CATEGORY> CATEGORies { get; set; }
         public CakeDetailViewModel _mainvm { get; set; }
+        public int isUpdate { get; set; }
 
         public CakeDetail()
         {
@@ -82,10 +83,13 @@ namespace CakeShop.Views
         }
         private void Prepare()
         {
+            //Set dat for variable
             _mainvm = new CakeDetailViewModel();
             CurCake = _mainvm.GetCAKEs(CakeID);
             CATEGORies = _mainvm.GetCATEGORies();
+            isUpdate = 0;
 
+            //Show Cake Detail Frame, Hide Update Frame
             ShowCakeDetailFrame();
 
             //UpdateUI
@@ -113,21 +117,24 @@ namespace CakeShop.Views
                 UpdatedCake.DateAdded = DateTime.Parse(time);
                 UpdatedCake.InventoryNum = CurCake.InventoryNum;
                 UpdatedCake.CatID = CATEGORies[CategoryComboBox.SelectedIndex].ID;
+
+                //Store Update Cake into databse
+                _mainvm.UpdateCake(UpdatedCake, UpdatedCake.ID);
+
+                //Show Cake Data Frame
+                ShowCakeDetailFrame();
+
+                //Retreive cake from database
+                CurCake = _mainvm.GetCAKEs(CakeID);
+                //Update UI
+                CakeDetailFrame.DataContext = CurCake;
+                AvatarImage.Source = AlternativeByteArrayToImageConveter.Convert(CurCake.AvatarImage);
+                CategoryName.Text = _mainvm.GetCategoryNameByID(CurCake.CatID);
+                //Inform success
+                MessageBox.Show("Update dữ liệu thành công", "Thông báo", MessageBoxButton.OK);
+                //Mark Updated
+                isUpdate++;
             }
-
-            _mainvm.UpdateCake(UpdatedCake,UpdatedCake.ID);
-
-            //Refresh 
-
-
-            //Show Cake Data Frame
-            ShowCakeDetailFrame();
-            //Retreive cake from database
-            CurCake = _mainvm.GetCAKEs(CakeID);
-            //Update UI
-            CakeDetailFrame.DataContext = CurCake;
-            AvatarImage.Source = AlternativeByteArrayToImageConveter.Convert(CurCake.AvatarImage);
-            CategoryName.Text = _mainvm.GetCategoryNameByID(CurCake.CatID);
         }
 
 
@@ -240,5 +247,22 @@ namespace CakeShop.Views
             return check;
         }
 
+        /// <summary>
+        /// Quay lại giao diện Home Page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComeBack_Click(object sender, RoutedEventArgs e)
+        {
+            if(isUpdate==0)//Update didn't happen
+            {
+                App.mainWindow.mainContentFrame.Content = App.homePage;
+            }
+            else
+            {
+                App.homePage = new Home();
+                App.mainWindow.mainContentFrame.Content = App.homePage;
+            }
+        }
     }
 }
