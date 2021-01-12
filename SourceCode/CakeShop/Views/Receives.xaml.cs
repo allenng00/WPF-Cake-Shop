@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CakeShop.Views
 {
@@ -20,9 +8,36 @@ namespace CakeShop.Views
     /// </summary>
     public partial class Receives : Page
     {
+        private ViewModels.ReceiveViewModel _mainVM;
+
         public Receives()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _mainVM = new ViewModels.ReceiveViewModel();
+            DataContext = _mainVM;
+        }
+
+        /// <summary>
+        /// Hàm cập nhật Item Source cho Detail Receive ListView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void receiveDetailBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var index = long.Parse(((Button)e.Source).Uid);
+            var receive = _mainVM.ReceiveList.Find(r => r.ID == index);
+
+            _mainVM.CurrentReceiveID = index;
+            _mainVM.CurrentCakeList = receive.CakeList;
+        }
+
+        private void addReceiveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

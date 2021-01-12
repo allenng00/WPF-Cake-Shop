@@ -62,7 +62,7 @@
                              IsChecked="False"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                    Style="{StaticResource MaterialDesignTabRadioButton}"
                         Height="50"
-                             Click="TabMenuButton_Click">
+                             Click="TabMenuButton_Click" Cursor="Hand">
                     <RadioButton.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>
@@ -73,7 +73,7 @@
                 <RadioButton Uid="1" x:Name="Button01" GroupName="TabMenuButton"
                              Style="{StaticResource MaterialDesignTabRadioButton}"
                              Height="50"
-                             Click="TabMenuButton_Click">
+                             Click="TabMenuButton_Click" Cursor="Hand">
                     <RadioButton.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>
@@ -83,7 +83,7 @@
                 <RadioButton  Uid="2" x:Name="Button02" GroupName="TabMenuButton"
                               Style="{StaticResource MaterialDesignTabRadioButton}"
                               Height="50"
-                              Click="TabMenuButton_Click">
+                              Click="TabMenuButton_Click" Cursor="Hand">
                     <RadioButton.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>
@@ -92,7 +92,7 @@
                 <RadioButton  Uid="3" x:Name="Button03" GroupName="TabMenuButton"
                               Style="{StaticResource MaterialDesignTabRadioButton}"
                               Click="TabMenuButton_Click"
-                         Height="50">
+                         Height="50" Cursor="Hand">
                     <RadioButton.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>
@@ -101,7 +101,7 @@
                 <RadioButton  Uid="4" x:Name="Button04" GroupName="TabMenuButton"
                               Style="{StaticResource MaterialDesignTabRadioButton}"
                               Height="50"
-                              Click="TabMenuButton_Click">
+                              Click="TabMenuButton_Click" Cursor="Hand">
                     <RadioButton.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>
@@ -110,7 +110,7 @@
                 <RadioButton  Uid="5" x:Name="Button05" GroupName="TabMenuButton"
                               Style="{StaticResource MaterialDesignTabRadioButton}"
                               Height="50"
-                              Click="TabMenuButton_Click">
+                              Click="TabMenuButton_Click" Cursor="Hand">
                     <RadioButton.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>
@@ -126,5 +126,5 @@
                Height="680" Width="1200" NavigationUIVisibility="Hidden">
 
         </Frame>
-            </DockPanel>
+    </DockPanel>
 </Window>
