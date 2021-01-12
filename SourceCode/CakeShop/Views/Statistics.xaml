@@ -23,9 +23,8 @@
             <StackPanel 
                 HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label Name="tabHeaderLabel" 
-                       FontFamily="Yu Gothic UI Semibold" FontSize="40" FontWeight="Bold"
+                       FontFamily="Candara" FontSize="44" FontWeight="Bold"
                        Content="THỐNG KÊ DOANH THU"/>
-
             </StackPanel>
 
         </Grid>
@@ -38,12 +37,35 @@
                 <materialDesign:Card
                     Margin="10">
                     <StackPanel>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Label.Content>
+                                <TextBlock FontSize="20" FontWeight="DemiBold" TextAlignment="Justify"
+                                           TextWrapping="Wrap">
+                                <Run Text="BIỂU ĐỒ DOANH THU THEO TỪNG TUẦN VÀO THÁNG"/>
+                                <Run Text="{Binding Path=Month}"/>
+                                <Run Text="/"/>
+                                <Run Text="{Binding Path=Year}"/>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
                         <lvc:CartesianChart Name="Chart01a" LegendLocation="Bottom" 
-                                        Height="250">
+                                        Height="250" Width="350">
                         </lvc:CartesianChart>
+                        <!--<Label HorizontalAlignment="Center" VerticalAlignment="Top" d:IsHidden="True">
+                            <Label.Content>
+                                <TextBlock FontSize="20" FontWeight="DemiBold" TextAlignment="Justify"
+                                           TextWrapping="Wrap">
+                                <Run Text="BIỂU ĐỒ DOANH THU THEO TỪNG TUẦN VÀO THÁNG"/>
+                                <Run Text="{Binding Path=Month}"/>
+                                <Run Text="/"/>
+                                <Run Text="{Binding Path=Year}"/>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
                         <lvc:CartesianChart Name="Chart01b"
-                                        Height="250">
-                        </lvc:CartesianChart>
+                                        Height="250" Width="350" d:IsHidden="True">
+                        
+                        </lvc:CartesianChart>-->
                     </StackPanel>
                 </materialDesign:Card>
             </Grid>
@@ -51,8 +73,20 @@
                 <materialDesign:Card
                     Margin="10">
                     <StackPanel>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Label.Content>
+                                <TextBlock FontSize="20" FontWeight="DemiBold" TextAlignment="Justify"
+                                           TextWrapping="Wrap">
+                                <Run Text="BIỂU ĐỒ DOANH THU THEO TỪNG TUẦN VÀO THÁNG"/>
+                                <Run Text="{Binding Path=Month}"/>
+                                <Run Text="/"/>
+                                <Run Text="{Binding Path=Year}"/>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
+
                         <lvc:CartesianChart Name="ChartRevenuabyMonth" LegendLocation="Right" ToolTip="{Binding Path=Tooltips02}"
-                                        Height="350">
+                                        Height="350" Width="400">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Tháng" Labels="{Binding Path=Labels02}"/>
                             </lvc:CartesianChart.AxisX>

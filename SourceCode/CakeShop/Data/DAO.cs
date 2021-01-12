@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CakeShop.ViewModels;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,7 +57,7 @@ namespace CakeShop.Data
                     c1 => c1,
                     c2 => c2.ID,
                     (c1, c2) => new { ID = c2.ID, Name = c2.Name });
-               
+
                 var cakebycat = cakes
                     .Join(catList,
                     cake => cake.CatID,
@@ -351,6 +353,78 @@ namespace CakeShop.Data
         #endregion
 
         #region Receive
+        /// <summary>
+        /// Ham lay danh sach don nhap hang
+        /// </summary>
+        /// <returns></returns>
+        public List<ReceiveModel> ReceiveList()
+        {
+            var result = new List<ReceiveModel>();
+            var receives = Database.RECEIVEs
+                .Join(Database.CAKEs,
+                r => r.CakeID,
+                c => c.ID,
+                (r, c) => new { r.ID, r.DateAdded, r.CakeID, c.Name, c.AvatarImage, r.CakeNum, r.Price, r.TotalBill })
+                 .GroupBy(e => new { e.ID, e.DateAdded, e.TotalBill })
+                .Select(g =>
+                new
+                {
+                    ID = g.Select(r => r.ID).FirstOrDefault(),
+                    Date = g.Select(r => r.DateAdded).FirstOrDefault(),
+                    CountCake = g.Select(r => new { r.CakeID, r.Name, r.AvatarImage, r.CakeNum, r.Price })
+                        .GroupBy(r => r.CakeID)
+                        .Select(r => new
+                        {
+                            CakeID = r.Select(e => e.CakeID).FirstOrDefault(),
+                            Name = r.Select(e => e.Name).FirstOrDefault(),
+                            AvatarImage = r.Select(e => e.Name).FirstOrDefault(),
+                            Num = r.Sum(e => e.CakeNum),
+                            Price = r.Sum(e => e.Price)
+                        }).Count(),
+                    SumCake = g.Sum(s => s.CakeNum),
+                    Total = g.Select(r => r.TotalBill).FirstOrDefault(),
+                    CakeList = g.Select(r => new { r.CakeID, r.Name, r.AvatarImage, r.CakeNum, r.Price })
+                        .GroupBy(r => r.CakeID)
+                        .Select(r => new
+                        {
+                            CakeID = r.Select(e => e.CakeID).FirstOrDefault(),
+                            Name = r.Select(e => e.Name).FirstOrDefault(),
+                            AvatarImage = r.Select(e => e.AvatarImage).FirstOrDefault(),
+                            Num = r.Sum(e => e.CakeNum),
+                            Price = r.Sum(e => e.Price)
+                        }).ToList()
+                });
+
+            foreach (var r in receives.ToList())
+            {
+                var tempCakeList = new List<CakeModel_ReceiveModel>();
+
+                foreach (var cake in r.CakeList)
+                {
+                    tempCakeList.Add(new CakeModel_ReceiveModel()
+                    {
+                        ID = cake.CakeID,
+                        AvatarImage = cake.AvatarImage,
+                        Name = cake.Name,
+                        Num = cake.Num,
+                        Price = cake.Price
+                    });
+                }
+                var tempReceive = new ReceiveModel
+                {
+                    ID = r.ID,
+                    Date = r.Date,
+                    CountCake = r.CountCake,
+                    SumCake = r.SumCake,
+                    Total = r.Total,
+                    CakeList = tempCakeList
+                };
+
+                result.Add(tempReceive);
+            }
+
+            return result;
+        }
         #endregion Receive
 
         #region Order_Detail
@@ -409,11 +483,46 @@ namespace CakeShop.Data
         #endregion
 
         #region Statistics
+        public long TotalOrders(int week, int month, int year)
+        {
+            var result = 0;
+
+            var orders = Database.ORDERs
+                .Where(o => o.DateCompleted.Month == month
+                && o.DateCompleted.Year == year
+                && WeekOfMonth.WeekVerify(o.DateCompleted.Day) == week)
+                .GroupBy(o => o.ID)
+                .Select(o => new
+                {
+                    SUM = o.Sum(or => or.TotalBill)
+                });
+
+            return result;
+        }
+
+        public long TotalReceives(int week, int month, int year)
+        {
+            var result = 0;
+
+            var orders = Database.RECEIVEs
+                .Where(o => o.DateAdded.Month == month
+                && o.DateAdded.Year == year
+                && WeekOfMonth.WeekVerify(o.DateAdded.Day) == week)
+                .GroupBy(o => o.ID)
+                .Select(o => new
+                {
+                    SUM = o.Sum(or => or.TotalBill)
+                });
+
+            return result;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
+        /// 
         public void Statistics(DateTime start, DateTime end = default(DateTime))
         {
             var newEnd = (end == default(DateTime)) ? DateTime.Now : end;
