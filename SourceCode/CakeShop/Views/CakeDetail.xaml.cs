@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,7 +107,6 @@ namespace CakeShop.Views
             //Store data in database 
             if (check==true)
             {
-                string time = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss");
                 UpdatedCake.ID = CurCake.ID;
                 UpdatedCake.Name = CakeName.Text;
                 UpdatedCake.Introduction = Introduction.Text;
@@ -114,7 +114,7 @@ namespace CakeShop.Views
                 UpdatedCake.BasePrice = long.Parse(BasePrice.Text);
                 UpdatedCake.SellPrice = long.Parse(SellPrice.Text);
                 UpdatedCake.CatID = CurCake.CatID;
-                UpdatedCake.DateAdded = DateTime.Parse(time);
+                UpdatedCake.DateAdded = DateTime.Now;
                 UpdatedCake.InventoryNum = CurCake.InventoryNum;
                 UpdatedCake.CatID = CATEGORies[CategoryComboBox.SelectedIndex].ID;
 

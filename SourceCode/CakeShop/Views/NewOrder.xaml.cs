@@ -232,14 +232,12 @@ namespace CakeShop.Views
                 try
                 {
                     long orderId = _mainvm.GetORDERsCount();
-                    string str= DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss");
-                    DateTime time = DateTime.Parse(str);
                     //insert order
                     ORDER curOrder = new ORDER
                     {
                         ID = orderId + 1,
                         Status = "OS11",
-                        DateCompleted = time,
+                        DateCompleted = DateTime.Now,
                         TotalBill = this.TotalBill,
                         BuyingMethod = STATUs[StatusComboBox.SelectedIndex].ID,
                         CustomerName = customerName.Text,
@@ -463,6 +461,18 @@ namespace CakeShop.Views
             }
         }
 
-        
+        private void ComeBack_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                App.ordersPage = new Orders();
+                App.mainWindow.mainContentFrame.Content = App.ordersPage;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi hiển thị giao diện", "Thông báo", MessageBoxButton.OK);
+            }
+            
+        }
     }
 }

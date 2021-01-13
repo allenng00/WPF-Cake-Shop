@@ -192,5 +192,18 @@ namespace CakeShop.Views
                 MessageBox.Show("Lỗi hiển thị", "Thông báo", MessageBoxButton.OK);
             }
         }
+
+        private void NewCake_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                App.newCake = new NewCake();
+                App.mainWindow.mainContentFrame.Content = App.newCake;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi hiển thị giao diện", "Thông báo", MessageBoxButton.OK);
+            }
+        }
     }
 }

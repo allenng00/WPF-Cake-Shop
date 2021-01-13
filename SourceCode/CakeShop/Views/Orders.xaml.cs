@@ -200,7 +200,7 @@ namespace CakeShop.Views
                 customerPhoneNumber.Text = ORDERs[OrderIndex].CustomerPhone;
                 customerAddress.Text = ORDERs[OrderIndex].CustomerAddress;
                 buyingMethod.Text = _mainvm.GetStatusName(ORDERs[OrderIndex].BuyingMethod);
-                createdDate.Text = ORDERs[OrderIndex].DateCompleted.ToString();
+                createdDate.Text = ORDERs[OrderIndex].DateCompleted.ToString("dd/MM/yyyy HH:mm:ss");
                 TotalBill.Text = ORDERs[OrderIndex].TotalBill.ToString() + " VNĐ";
                 CartDataGrid.ItemsSource = null;
                 CartDataGrid.ItemsSource = CakeInCarts;

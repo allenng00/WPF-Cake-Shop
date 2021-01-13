@@ -101,7 +101,7 @@ namespace CakeShop.Views
                 Description = description.Text,
                 AvatarImage = curCake.AvatarImage,
                 CatID = categories[index].ID,
-                DateAdded = DateTime.Parse(DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss")),
+                DateAdded = DateTime.Now,
              };
             database.CAKEs.Add(cake);
             database.SaveChanges();
