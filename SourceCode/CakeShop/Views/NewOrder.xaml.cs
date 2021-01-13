@@ -95,6 +95,7 @@ namespace CakeShop.Views
         AddNewOrderViewModel _mainvm;
         long No_;//Số thứ tự bánh trong giỏ hàng hiện tại;
         long TotalBill;// Tổng giá trị giỏ hàng
+        int isOrderAdded;
 
         public NewOrder()
         {
@@ -119,7 +120,7 @@ namespace CakeShop.Views
             cakeInCarts = new List<CakeInCart>();
             No_ = 0;
             TotalBill = 0;
-
+            isOrderAdded = 0;
             //Set CATEGORies
             CATEGORies = _mainvm.GetCATEGORies();
             CATEGORies.Reverse();
@@ -153,6 +154,7 @@ namespace CakeShop.Views
                     StoreDataInput();
                     RefreshDataInput();
                     Prepare();
+                    isOrderAdded++;
                 }
                 catch (Exception ex)
                 {
@@ -465,8 +467,15 @@ namespace CakeShop.Views
         {
             try
             {
-                App.ordersPage = new Orders();
-                App.mainWindow.mainContentFrame.Content = App.ordersPage;
+                if (isOrderAdded == 0) // Không có order nào được tạo
+                {
+                    App.mainWindow.mainContentFrame.Content = App.ordersPage;
+                }
+                else
+                {
+                    App.ordersPage = new Orders();
+                    App.mainWindow.mainContentFrame.Content = App.ordersPage;
+                }
             }
             catch(Exception ex)
             {

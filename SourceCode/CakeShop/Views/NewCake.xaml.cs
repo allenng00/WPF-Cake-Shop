@@ -47,6 +47,8 @@ namespace CakeShop.Views
         CAKE curCake;
         AddNewCakeViewModel _mainvm;
         List<CATEGORY> categories;
+        int isCakeAdded;
+
         public NewCake()
         {
             InitializeComponent();
@@ -65,6 +67,7 @@ namespace CakeShop.Views
             _mainvm = new AddNewCakeViewModel();
             categories = _mainvm.GetCATEGORies();
             chosenCategory.ItemsSource = categories;
+            isCakeAdded = 0;
         }
 
 
@@ -73,10 +76,18 @@ namespace CakeShop.Views
             bool check = CheckInputError();
             if (check == true)
             {
-                StoreCakeData();
-                RefreshDataInput();
-                Prepare();
-                MessageBox.Show("Thêm Cake thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                try {
+                    StoreCakeData();
+                    RefreshDataInput();
+                    Prepare();
+                    isCakeAdded++;
+                    MessageBox.Show("Thêm Cake thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Lỗi thêm cake", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                
             }
         }
 
@@ -212,5 +223,24 @@ namespace CakeShop.Views
             curCake = new CAKE();
         }
 
+        private void ComeBack_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if(isCakeAdded==0)// Không cake nào được tạo
+                {
+                    App.mainWindow.mainContentFrame.Content = App.homePage;
+                }
+                else
+                {
+                    App.homePage = new Home();
+                    App.mainWindow.mainContentFrame.Content = App.homePage;
+                }
+            }
+            catch(Exception ex)
+            {
+                
+            }
+        }
     }
 }

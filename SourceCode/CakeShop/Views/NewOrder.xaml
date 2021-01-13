@@ -12,22 +12,29 @@
         <local:ByteArrayToImageConveter x:Key="Converter"></local:ByteArrayToImageConveter>
     </Page.Resources>
     <DockPanel>
-        <StackPanel Margin="0,0,0,0" DockPanel.Dock="Top" Orientation="Horizontal">
-            <Button Width="100" Height="50" Click="ComeBack_Click"
-                    ToolTip="Quay lại"
+        <StackPanel Margin="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+            <DockPanel Width="1126">
+                <Button Width="100" Height="50" Click="ComeBack_Click"
+                    ToolTip="Quay lại" DockPanel.Dock="Left"
                     HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatMidBgButton}"  
                     Margin="0" Padding="0">
-                <Button.Content>
-                    <materialDesign:PackIcon Kind="KeyboardReturn"  Width="100" Height="50"></materialDesign:PackIcon>
-                </Button.Content>
-            </Button>
-            <Label Content="Tạo Order mới" FontSize="40" Width="1144" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial"></Label>
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="KeyboardReturn"  Width="100" Height="50"></materialDesign:PackIcon>
+                    </Button.Content>
+                </Button>
+                <Button Click="Refresh_Click" Width="100" Height="50"
+                Foreground="Black"   FontSize="30" DockPanel.Dock="Right"
+                Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                Padding="0">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="Refresh" Width="50" Height="50"></materialDesign:PackIcon>
+                    </Button.Content>
+                </Button>
+                <Label Content="Tạo Order mới" FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial"></Label>
+            </DockPanel>
+           
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,5" HorizontalAlignment="Center" Orientation="Horizontal" >
-            <Button Click="Refresh_Click" Width="250" 
-                Foreground="Black" Content="Làm mới"  FontSize="30" 
-                Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                Height="50" Margin="0,0,50,0"></Button>
             <Button Click="SaveOrder_Click" Width="250" 
                 Foreground="Black" Content="Đặt hàng"  FontSize="30" 
                 Style="{StaticResource MaterialDesignFlatMidBgButton}"
