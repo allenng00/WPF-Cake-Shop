@@ -20,7 +20,7 @@
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                       SelectionChanged="CategoryListView_SelectionChanged"
-                      Width="290" Height="580" >
+                      Width="290" Height="496" >
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -39,7 +39,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
+            <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTip="Tạo bánh mới" Click="NewCake_Click">
+                <materialDesign:PackIcon Kind="Cupcake" Height="43" Width="46" />
+            </Button>
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Top" VerticalAlignment="Center" Orientation="Horizontal" Height="80">

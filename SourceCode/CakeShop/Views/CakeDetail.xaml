@@ -10,10 +10,14 @@
       Title="CakeDetail">
     <Page.Resources>
         <local:ByteArrayToImageConveter x:Key="Converter"></local:ByteArrayToImageConveter>
+        <local:DateTimeToSpecifiedStyleString x:Key="DateTimeConverter"></local:DateTimeToSpecifiedStyleString>
     </Page.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Left" Width="600"  Height="680" >
-            <Button Width="100" Height="50" Click="ComeBack_Click" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatMidBgButton}"  Margin="0" Padding="0">
+            <Button Width="100" Height="50" Click="ComeBack_Click"
+                    ToolTip="Quay lại"
+                    HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatMidBgButton}"  
+                    Margin="0" Padding="0">
                 <Button.Content>
                     <materialDesign:PackIcon Kind="KeyboardReturn"  Width="100" Height="50"></materialDesign:PackIcon>
                 </Button.Content>
@@ -24,7 +28,7 @@
             </materialDesign:Card>
             <Button  x:Name="AddImage" Visibility="Collapsed"
                     Height="90" Width="90" 
-                    Padding="0" Margin="10"
+                    Padding="0" Margin="10" ToolTip="Đổi ảnh"
                     Click="AddAvatarImage_Click">
                 <Button.Content>
                     <materialDesign:PackIcon Kind="ImageAdd"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90"/>
@@ -33,12 +37,12 @@
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="SaveInfo" Click="SaveInfo_Click" Visibility="Visible" Padding="0" Height="50" Width="80" FontFamily="Arial" FontSize="25" Margin="5,5,10,0" Foreground="Black" Style="{StaticResource MaterialDesignFlatMidBgButton}" HorizontalAlignment="Right">
+                <Button x:Name="SaveInfo" ToolTip="Lưu thay đổi" Click="SaveInfo_Click" Visibility="Visible" Padding="0" Height="50" Width="80" FontFamily="Arial" FontSize="25" Margin="5,5,10,0" Foreground="Black" Style="{StaticResource MaterialDesignFlatMidBgButton}" HorizontalAlignment="Right">
                     <Button.Content>
                         <materialDesign:PackIcon Kind="ContentSaveEdit" Foreground="White" Width="50" Height="50"></materialDesign:PackIcon>
                     </Button.Content>
                 </Button>
-                <Button  Click="UpdateInfo_Click" FontFamily="Arial" Height="50" FontSize="25" 
+                <Button  Click="UpdateInfo_Click" FontFamily="Arial" Height="50" FontSize="25" ToolTip="Cập nhật"
                         Padding="0" Margin="5,5,15,0" Foreground="Black" Width="80" Style="{StaticResource MaterialDesignFlatMidBgButton}" HorizontalAlignment="Right">
                     <Button.Content>
                         <materialDesign:PackIcon Kind="Update" Foreground="White" Width="50" Height="50"></materialDesign:PackIcon>
@@ -65,7 +69,7 @@
                 <StackPanel Orientation="Horizontal"  Margin="30,0,0,0">
                     <TextBlock Text="Ngày tạo: " FontWeight="Medium"  FontSize="30" Foreground="Blue" ></TextBlock>
 
-                    <TextBlock Text="{Binding DateAdded}" FontSize="30" ></TextBlock>
+                    <TextBlock Text="{Binding DateAdded, Converter={StaticResource DateTimeConverter}}" FontSize="30" ></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="30,0,0,0">
                     <TextBlock Text="Tồn kho: "  FontWeight="Medium" FontSize="30" Foreground="DarkOrange" ></TextBlock>
@@ -113,7 +117,7 @@
                 <StackPanel Orientation="Horizontal"  Margin="30,0,0,0">
                     <TextBlock Text="Ngày tạo: " FontWeight="Medium"  FontSize="30" Foreground="Blue" ></TextBlock>
 
-                    <TextBlock x:Name="DateAdded" Text="{Binding DateAdded}" FontSize="30" ></TextBlock>
+                    <TextBlock x:Name="DateAdded" Text="{Binding DateAdded, Converter={StaticResource DateTimeConverter}}" FontSize="30" ></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="30,0,0,0">
                     <TextBlock Text="Tồn kho: "  FontWeight="Medium" FontSize="30" Foreground="DarkOrange" ></TextBlock>

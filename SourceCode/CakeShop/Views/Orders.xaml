@@ -11,6 +11,7 @@
       Title="AddNewOrder" Loaded="Page_Loaded">
     <Page.Resources>
         <local:ByteArrayToImageConveter x:Key="Converter"></local:ByteArrayToImageConveter>
+        <local:DateTimeToSpecifiedStyleString x:Key="DateTimeConverter"></local:DateTimeToSpecifiedStyleString>
     </Page.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"  Height="60" Margin="0" Width="1130">
@@ -28,7 +29,7 @@
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn Header="Ngày tạo"  
-                            Binding="{Binding Path=DateCompleted}" FontSize="12" Width="155"/>
+                            Binding="{Binding Path=DateCompleted, Converter={StaticResource DateTimeConverter}}" FontSize="12" Width="155"/>
 
                             <DataGridTemplateColumn Header="Tên KH" Width="150"  >
                                 <DataGridTemplateColumn.CellTemplate>
@@ -52,11 +53,9 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Tạo đơn hàng" Foreground="Black" 
-                    FontSize="25" Height="40" 
-                    FontFamily="Arial" Width="200"
-                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                    Click="CreateOrder_Click"></Button>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTip="Tạo đơn hàng mới" Click="CreateOrder_Click">
+                        <materialDesign:PackIcon Kind="Cart" Height="43" Width="46"  />
+                    </Button>
                 </StackPanel>
 
             </materialDesign:Card>
