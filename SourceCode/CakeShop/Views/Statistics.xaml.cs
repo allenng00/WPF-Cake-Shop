@@ -2,7 +2,6 @@
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace CakeShop.Views
@@ -15,53 +14,54 @@ namespace CakeShop.Views
         public List<string> Labels02 { get; set; }
         public List<string> Tooltips02 { get; set; }
         public int Month { get; set; }
+        public int Year { get; set; }
         public Statistics()
         {
             InitializeComponent();
 
         }
 
-
-
+        /// <summary>
+        /// Hàm xử lí sau khi trang khởi tạo xong
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            Month = 12;
             Labels02 = new List<string>();
-            Tooltips02 = new List<string>();
-
-            for (var m = 1; m <= Month; m++)
-            {
-                Tooltips02.Add("Tháng" + m.ToString());
-                Labels02.Add(m.ToString());
-            }
-            DataContext = this;
             PrePareRevenuaByMonthChart();
-            
+
+            DataContext = this;
         }
 
         private void PrePareRevenuaByMonthChart()
         {
             var series = new SeriesCollection();
             //var now = DateTime.Now.Month;
-            
+
             var values = new ChartValues<double>();
             var rand = new Random();
 
-            // Chuẩn bị dữ liệu
-            for (int mon = 1; mon <= Month; mon++)
+            Month = 12;
+            Year = 2020;
+            List<long> profitList = new List<long>();
+            for (int i = 0; i < 4; i++)
             {
-                var num = rand.Next(50) - 20;
-                values.Add(Double.Parse(num.ToString()));
+                var total1 = App.appDAO.TotalOrders(i, Month, Year);
+                var total2 = App.appDAO.TotalReceives(i, Month, Year);
+
+                profitList.Add(total1 - total2);
+                values.Add(Double.Parse(profitList[i].ToString()));
+                Labels02.Add(i.ToString());
             }
 
             series.Add(new ColumnSeries
             {
-                Title = "Doanh thu theo tuần(12/2020)",
+                Title= $"Doanh thu theo tuần ({Month}/{Year})",
                 DataLabels = true,
-                LabelPoint = point => point.Y + "USD",
-                //ToolTip = "Tháng " + mon.ToString(),
+                LabelPoint = point => point.Y + " USD",
                 Values = values
-            }) ;
+            });
 
 
             ChartRevenuabyMonth.Series = series;

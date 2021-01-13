@@ -1,10 +1,7 @@
 ﻿using CakeShop.ViewModels;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace CakeShop.Data
@@ -124,12 +121,12 @@ namespace CakeShop.Data
             }
 
             var searched = ordered.Where(x => x.Name.Contains(searchText));
-            
+
             if (searched != null)
             {
                 result = searched.Cast<CAKE>().ToList();
             }
-            else if(tmp !=null)
+            else if (tmp != null)
             {
                 result = ordered.Cast<CAKE>().ToList();
             }
@@ -362,7 +359,7 @@ namespace CakeShop.Data
         /// <returns></returns>
         public List<CATEGORY> CategoryList()
         {
-            var categories = Database.CATEGORies.ToList();
+            var categories = Database.CATEGORies.OrderBy(c => c.ID).ToList();
             return categories;
         }
 
@@ -408,7 +405,7 @@ namespace CakeShop.Data
                     SumCake = g.Sum(s => s.CakeNum),
                     Total = g.Select(r => r.TotalBill).FirstOrDefault(),
                     CakeList = g.Select(r => new { r.CakeID, r.Name, r.AvatarImage, r.CakeNum, r.Price })
-                        .GroupBy(r => r.CakeID)
+                        .GroupBy(r => new { r.CakeID, r.Price })
                         .Select(r => new
                         {
                             CakeID = r.Select(e => e.CakeID).FirstOrDefault(),
@@ -416,7 +413,8 @@ namespace CakeShop.Data
                             AvatarImage = r.Select(e => e.AvatarImage).FirstOrDefault(),
                             Num = r.Sum(e => e.CakeNum),
                             Price = r.Sum(e => e.Price)
-                        }).ToList()
+                        }).
+                        OrderBy(r => r.CakeID).ToList()
                 });
 
             foreach (var r in receives.ToList())
@@ -446,6 +444,15 @@ namespace CakeShop.Data
 
                 result.Add(tempReceive);
             }
+
+            return result;
+        }
+
+        public long ReceiveCount()
+        {
+            long result = Database.RECEIVEs
+                .GroupBy(r => r.ID)
+                .Select(r => r.Key).Count();
 
             return result;
         }
@@ -509,35 +516,102 @@ namespace CakeShop.Data
         #region Statistics
         public long TotalOrders(int week, int month, int year)
         {
-            var result = 0;
-
+            long result = 0;
+            int start = 1;
+            int end = 7;
+            switch (week)
+            {
+                case 0: break;
+                case 1: start = 8; end = 14; break;
+                case 2: start = 15; end = 21; break;
+                case 3:
+                    start = 8; end = DateTime.DaysInMonth(year, month); break;
+            }
             var orders = Database.ORDERs
                 .Where(o => o.DateCompleted.Month == month
                 && o.DateCompleted.Year == year
-                && WeekOfMonth.WeekVerify(o.DateCompleted.Day) == week)
+                && o.DateCompleted.Day > start
+                && o.DateCompleted.Day < end
+                )
                 .GroupBy(o => o.ID)
                 .Select(o => new
                 {
                     SUM = o.Sum(or => or.TotalBill)
-                });
+                }).FirstOrDefault();
+
+            if (orders != null)
+            {
+                result = orders.SUM;
+            }
+            else
+            {
+
+            }
+
+            return result;
+        }
+
+        public long TotalOrders_CakeCat(int week, int month, int year)
+        {
+            long result = 0;
+            int start = 1;
+            int end = 7;
+            switch (week)
+            {
+                case 0: break;
+                case 1: start = 8; end = 14; break;
+                case 2: start = 15; end = 21; break;
+                case 3:
+                    start = 8; end = DateTime.DaysInMonth(year, month); break;
+            }
+            var orders = Database.ORDERs
+                .Where(o => o.DateCompleted.Month == month
+                && o.DateCompleted.Year == year
+                && o.DateCompleted.Day > start
+                && o.DateCompleted.Day < end
+                )
+                .Join(Database.ORDER_DETAIL, o => o.ID, od => od.OrderID, (o, od) => new { od });
+
+
+            var cakes = Database.CATEGORies
+                .Join(Database.CAKEs, 
+                cat => cat.ID, 
+                c => c.CatID, 
+                (cat, c) => new { cat.ID, CakeID=c.ID }).DefaultIfEmpty();
 
             return result;
         }
 
         public long TotalReceives(int week, int month, int year)
         {
-            var result = 0;
-
-            var orders = Database.RECEIVEs
+            long result = 0;
+            int start = 1;
+            int end = 7;
+            switch (week)
+            {
+                case 0: break;
+                case 1: start = 8; end = 14; break;
+                case 2: start = 15; end = 21; break;
+                case 3:
+                    start = 8; end = DateTime.DaysInMonth(year, month); break;
+            }
+            var receives = Database.RECEIVEs
                 .Where(o => o.DateAdded.Month == month
                 && o.DateAdded.Year == year
-                && WeekOfMonth.WeekVerify(o.DateAdded.Day) == week)
+                && o.DateAdded.Day > start
+                && o.DateAdded.Day < end
+                )
                 .GroupBy(o => o.ID)
                 .Select(o => new
                 {
                     SUM = o.Sum(or => or.TotalBill)
-                });
+                }).FirstOrDefault();
+            if (receives != null)
+            {
 
+                result = receives.SUM;
+            }
+            else { }
             return result;
         }
 

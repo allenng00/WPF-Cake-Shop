@@ -147,8 +147,8 @@
                 </materialDesign:Card>
             </Grid>
         </Grid>
-        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left">
-            <Button x:Name="addReceiveBtn" Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTip="Thêm đơn nhập hàng" Click="addReceiveBtn_Click">
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="addReceiveBtn" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="addReceiveBtn_Click" ToolTip="Thêm đơn nhập hàng">
                 <materialDesign:PackIcon Kind="Add" Height="43" Width="46" />
             </Button>
         </StackPanel>

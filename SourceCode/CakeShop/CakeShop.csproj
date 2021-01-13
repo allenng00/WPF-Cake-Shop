@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="ViewModels\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\NewReceiveViewModel.cs" />
     <Compile Include="ViewModels\ReceiveViewModel.cs" />
     <Compile Include="ViewModels\SplashScreenViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
@@ -149,6 +150,9 @@
     </Compile>
     <Compile Include="Views\NewOrder.xaml.cs">
       <DependentUpon>NewOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewReceive.xaml.cs">
+      <DependentUpon>NewReceive.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders.xaml.cs">
       <DependentUpon>Orders.xaml</DependentUpon>
@@ -224,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewReceive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

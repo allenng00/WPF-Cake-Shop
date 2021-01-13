@@ -37,7 +37,8 @@ namespace CakeShop.Views
 
         private void addReceiveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            
+            App.mainWindow.mainContentFrame.Content = new NewReceive(_mainVM.ReceiveList.Count);
         }
     }
 }
