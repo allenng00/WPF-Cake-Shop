@@ -14,8 +14,16 @@
     <Window.Resources>
         <global:ByteArrayToImageConveter x:Key="ByteArrToImageConverter"/>
     </Window.Resources>
-    <Border CornerRadius="60" BorderBrush="AliceBlue" BorderThickness="2" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-        <Grid>
+    <Border  BorderBrush="AliceBlue" BorderThickness="2" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Grid RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
             <Grid.Background>
                 <ImageBrush ImageSource="../Data/Images/SplashScreenBackground.jpg"/>
             </Grid.Background>
@@ -105,10 +113,10 @@
                     <TextBlock  Margin="289.308,0,385.808,0" FontSize="14" FontStyle="Italic" FontFamily="Times New Roman"><Run Text="Tư động tắt sau "/><Run Text=" "/><Run Text="{Binding TimeLeft}"/><Run Text=" "/><Run Text=" giây"/></TextBlock>
                     <DockPanel >
                         <StackPanel VerticalAlignment="Center">
-                            
-                        <TextBlock Text="CAKE SHOP" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="45" FontWeight="Bold" TextDecorations="{x:Null}" Foreground="#FF3B3C32">
-                            
-                        </TextBlock>
+
+                            <TextBlock Text="CAKE SHOP" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="45" FontWeight="Bold" TextDecorations="{x:Null}" Foreground="#FF3B3C32">
+
+                            </TextBlock>
                         </StackPanel>
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal"
                                 HorizontalAlignment="Right"
