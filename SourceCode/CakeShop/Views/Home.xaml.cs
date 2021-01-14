@@ -36,6 +36,7 @@ namespace CakeShop.Views
         {
             InitializeComponent();
             Prepare();
+            
         }
 
         /// <summary>
@@ -54,6 +55,7 @@ namespace CakeShop.Views
             CakeListView.SelectedIndex = -1;
             SortComboBox.SelectedIndex = -1;
             CategoryListView.SelectedIndex = 0;
+            SortComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -96,13 +98,16 @@ namespace CakeShop.Views
         private void SortCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var sortIndex = SortComboBox.SelectedIndex;
-
+          
             if (sortIndex != -1)
             {
                 try
                 {
-                    var CategoryID = _mainVM.CategoryList[CategoryListView.SelectedIndex].CatID;
-
+                    int CatIndex = CategoryListView.SelectedIndex;
+                    long CategoryID = 0;
+                    if (CatIndex>0)
+                        CategoryID = _mainVM.CategoryList[CatIndex].CatID;
+                    
                     if (CategoryID != 0)
                     {
                         var CatIDs = new long[] { CategoryID };
@@ -122,6 +127,7 @@ namespace CakeShop.Views
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     MessageBox.Show("Lỗi bộ lọc không hoạt động đúng cách", "Thông báo", MessageBoxButton.OK);
                 }
             }
