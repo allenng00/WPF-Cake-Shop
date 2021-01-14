@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CakeShop.ViewModels
 {
@@ -14,7 +10,7 @@ namespace CakeShop.ViewModels
         public StatisticsViewModel() { }
     }
 
-    class WeekOfMonth
+    public static class WeekOfMonth
     {
         private static List<int> DayEndWeek = new List<int> { 7, 14, 21 };
 

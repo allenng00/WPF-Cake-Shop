@@ -77,8 +77,8 @@ namespace CakeShop.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Button02.IsChecked = true;
-            App.receivesPage = new Views.Receives();
-            mainContentFrame.Content = App.receivesPage;
+            App.statisticsPage = new Views.Statistics();
+            mainContentFrame.Content = App.statisticsPage;
         }
 
         /// <summary>

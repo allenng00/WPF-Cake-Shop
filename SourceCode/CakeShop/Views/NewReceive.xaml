@@ -1,0 +1,129 @@
+﻿<Page x:Class="CakeShop.Views.NewReceive"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:local="clr-namespace:CakeShop.Views" mc:Ignorable="d" d:DesignHeight="680" d:DesignWidth="1200" Loaded="Page_Loaded">
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Margin="0 20" HorizontalAlignment="Center">
+
+                <TextBlock Text="THÊM ĐƠN NHẬP HÀNG" FontSize="30" FontWeight="Normal" HorizontalAlignment="Center"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="10,10,0,10">
+                    <TextBlock Text="Loại bánh:" FontSize="20" Margin="10 15" VerticalAlignment="Bottom"/>
+
+                    <ComboBox Name="CategoryComboBox" Margin="5" materialDesign:HintAssist.Hint="Chọn loại bánh" VerticalContentAlignment="Bottom" FontSize="20" Style="{StaticResource MaterialDesignComboBox}" Width="200" SelectionChanged="CategoryComboBox_SelectionChanged" ItemsSource="{Binding CategoryList}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="180"  TextWrapping="Wrap">
+                                        <Run Text="{Binding ID}" />
+                                        <Run Text=" - " />
+                                        <Run Text="{Binding Name}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <TextBlock Text="Tên bánh:" FontSize="20" VerticalAlignment="Bottom" Margin="10 15"/>
+
+                    <ComboBox Name="cakeCombobox" SelectionChanged="cakeCombobox_SelectionChanged"
+                        Margin="10"  Width="200" VerticalAlignment="Bottom" FontSize="20" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Tên bánh" 
+                              ItemsSource="{Binding CakeByCatList}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" Width="180" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="25" Height="25" Margin="10" VerticalAlignment="Bottom" Click="DownQuantity_Click">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="Minus" FontSize="25"></materialDesign:PackIcon>
+                        </Button.Content>
+                    </Button>
+                    <TextBox x:Name="cakeQuantity" Width="96" FontSize="20" Margin="5 15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="Số lượng"
+                             Text="{Binding Path=CurrentCake.Num}"/>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="25" Height="25" Margin="10" VerticalAlignment="Bottom" Click="UpQuantity_Click">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="Plus" FontSize="25"></materialDesign:PackIcon>
+                        </Button.Content>
+                    </Button>
+                    <TextBlock Text="Giá nhập:" FontSize="20" Margin="20 10 5 15" VerticalAlignment="Bottom"/>
+                    <TextBox x:Name="priceTextBlock" FontSize="20" Margin="10" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="USD"
+                             Text="{Binding Path=CurrentCake.Price, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Thêm" FontSize="22" Width="120" Height="40" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="AddCakes_Click" Margin="30,0,50,10" VerticalContentAlignment="Center"></Button>
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="50,0,10,0">
+                <TextBlock Text="Mã đơn: " FontSize="20" Foreground="red"></TextBlock>
+                <TextBlock Text="{Binding MainReceive.ID}" FontSize="20" Width="200" Foreground="red"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="50,0,10,0">
+                <TextBlock Text="Tổng tiền: " FontSize="20" Foreground="red"></TextBlock>
+                <TextBlock Name="totalBillTextBlock" Text="{Binding Path=MainReceive.Total}" FontSize="20" Width="200" Foreground="red"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="50,0,0,0" Orientation="Horizontal">
+                <TextBlock Text="Ngày tạo: " FontSize="20" Foreground="blue" VerticalAlignment="Center"></TextBlock>
+                <DatePicker Name="receiveDatePicker" Width="150" Margin="10" materialDesign:HintAssist.Hint="Pick a Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="20"
+                            SelectedDate="{Binding Path=MainReceive.Date, Mode=TwoWay}"
+                            />
+                <!--<TextBlock Name="CreatedDate" Width="300" Text="{Binding Path=MainReceive.Date}" FontSize="20" Foreground="blue"></TextBlock>-->
+
+            </StackPanel>
+
+            <TextBlock Margin="50 0" Text="Danh sách bánh: " FontSize="20" Foreground="blue"/>
+
+            <materialDesign:Card Margin="10 0 0 0" HorizontalAlignment="Center">
+                <ListView x:Name="receiveDetailListView" ItemsSource="{Binding Path=MainReceive.CakeList}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Tên bánh">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" TextAlignment="Right" TextWrapping="Wrap" Width="120" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Số lượng">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10 0 0 0 ">
+                                            <TextBlock Text="{Binding Num}" TextAlignment="Right" TextWrapping="Wrap" FontSize="14" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Giá nhập">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10 0 0 0 ">
+                                            <TextBlock Text="{Binding Price}" TextAlignment="Right" TextWrapping="Wrap" FontSize="14" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </materialDesign:Card>
+
+            <StackPanel Orientation="Horizontal" Margin="70 10" HorizontalAlignment="Right">
+                <Button x:Name="cancelReceiveButton" Click="cancelReceiveButton_Click" Content="HỦY" FontSize="22" Width="90" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Margin="25 0" />
+                <Button x:Name="addReceiveButton" Click="addReceiveButton_Click" Content="Thêm đơn nhập" FontSize="22" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Width="250" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
