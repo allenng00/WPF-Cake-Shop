@@ -42,7 +42,7 @@
                             </Label.Content>
                         </Label>
 
-                        <lvc:CartesianChart Name="ChartRevenuabyMonth" LegendLocation="Bottom" ToolTip="{Binding Path=Tooltips02}" Height="350" Margin="25.018,0">
+                        <lvc:CartesianChart Name="ChartRevenuabyMonth" LegendLocation="Bottom" ToolTip="{Binding Path=Tooltips02}" Height="469.3" Margin="50.018,0,35.018,0">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Tuần" Labels="{Binding Path=Labels02}"/>
                             </lvc:CartesianChart.AxisX>
@@ -67,7 +67,19 @@
                                 </TextBlock>
                             </Label.Content>
                         </Label>
-                        <lvc:CartesianChart Name="Chart01a" LegendLocation="Bottom" Height="250" Width="350">
+                        <lvc:CartesianChart Name="Chart01a" LegendLocation="Bottom" Height="459" Margin="49,0">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Tuần" Labels="{Binding Path=Labels02}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator StrokeThickness="5">
+                                            
+                                        </lvc:Separator>
+                                    </lvc:Axis.Separator> 
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Doanh thu (USD)"/>
+                            </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
                         <!--<Label HorizontalAlignment="Center" VerticalAlignment="Top" d:IsHidden="True">
                             <Label.Content>

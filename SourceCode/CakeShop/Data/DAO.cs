@@ -362,7 +362,11 @@ namespace CakeShop.Data
             var categories = Database.CATEGORies.OrderBy(c => c.ID).ToList();
             return categories;
         }
-
+        public long CategoryCount()
+        {
+            var count = Database.CATEGORies.Count();
+            return count;
+        }
         public string CategoryNameByID(long CatID)
         {
             var query = (from c in Database.CATEGORies
@@ -551,11 +555,13 @@ namespace CakeShop.Data
             return result;
         }
 
-        public long TotalOrders_CakeCat(int week, int month, int year)
+        public List<(long, string, long)> TotalOrders_CakeCat(int week, int month, int year)
         {
-            long result = 0;
+            var result = new List<(long, string, long)>();
+            long deFault = 0;
             int start = 1;
             int end = 7;
+
             switch (week)
             {
                 case 0: break;
@@ -564,20 +570,49 @@ namespace CakeShop.Data
                 case 3:
                     start = 8; end = DateTime.DaysInMonth(year, month); break;
             }
+
             var orders = Database.ORDERs
-                .Where(o => o.DateCompleted.Month == month
-                && o.DateCompleted.Year == year
-                && o.DateCompleted.Day > start
-                && o.DateCompleted.Day < end
-                )
-                .Join(Database.ORDER_DETAIL, o => o.ID, od => od.OrderID, (o, od) => new { od });
+                           .Where(o => o.DateCompleted.Month == month
+                           && o.DateCompleted.Year == year
+                           && o.DateCompleted.Day > start
+                           && o.DateCompleted.Day < end
+                           )
+                           .Join(Database.ORDER_DETAIL, o => o.ID, od => od.OrderID, (o, od) => new
+                           {
+                               od.OrderID,
+                               od.ProductID,
+                               od.ProductNum,
+                               od.Price
+                           });
+
+            var order_cake = Database.CAKEs
+                .Join(orders,
+                     c => c.ID,
+                     o => o.ProductID,
+                     (c, o) => new
+                     {
+                         o.OrderID,
+                         c.CatID,
+                         o.ProductID,
+                         Money = o.ProductNum * o.Price
+                     }).DefaultIfEmpty();
+
+            var temp = Database.CATEGORies
+                .GroupJoin(order_cake,
+                    cat => cat.ID,
+                    od_c => od_c.CatID,
+                    (cat, od_c) => new
+                    {
+                        cat.ID,
+                        CatName = cat.Name,
+                        Total = (od_c.ToList().Count != 0) ? od_c.Select(o => o.Money).Sum() : deFault
+                    }).DefaultIfEmpty();
 
 
-            var cakes = Database.CATEGORies
-                .Join(Database.CAKEs, 
-                cat => cat.ID, 
-                c => c.CatID, 
-                (cat, c) => new { cat.ID, CakeID=c.ID }).DefaultIfEmpty();
+            foreach (var item in temp)
+            {
+                result.Add((item.ID, item.CatName, item.Total));
+            }
 
             return result;
         }
@@ -614,7 +649,67 @@ namespace CakeShop.Data
             else { }
             return result;
         }
+        public List<(long, string, long)> TotalReceives_CakeCat(int week, int month, int year)
+        {
+            var result = new List<(long, string, long)>();
+            long deFault = 0;
+            int start = 1;
+            int end = 7;
 
+            switch (week)
+            {
+                case 0: break;
+                case 1: start = 8; end = 14; break;
+                case 2: start = 15; end = 21; break;
+                case 3:
+                    start = 8; end = DateTime.DaysInMonth(year, month); break;
+            }
+
+            var receives = Database.RECEIVEs
+                           .Where(o => o.DateAdded.Month == month
+                           && o.DateAdded.Year == year
+                           && o.DateAdded.Day > start
+                           && o.DateAdded.Day < end
+                           )
+                           .Join(Database.ORDER_DETAIL, o => o.ID, od => od.OrderID, (o, od) => new
+                           {
+                               od.OrderID,
+                               od.ProductID,
+                               od.ProductNum,
+                               od.Price
+                           });
+
+            var order_cake = Database.CAKEs
+                .Join(receives,
+                     c => c.ID,
+                     o => o.ProductID,
+                     (c, o) => new
+                     {
+                         o.OrderID,
+                         c.CatID,
+                         o.ProductID,
+                         Money = o.ProductNum * o.Price
+                     }).DefaultIfEmpty();
+
+            var temp = Database.CATEGORies
+                .GroupJoin(order_cake,
+                    cat => cat.ID,
+                    od_c => od_c.CatID,
+                    (cat, od_c) => new
+                    {
+                        cat.ID,
+                        CatName = cat.Name,
+                        Total = (od_c.ToList().Count != 0) ? od_c.Select(o => o.Money).Sum() : deFault
+                    }).DefaultIfEmpty();
+
+
+            foreach (var item in temp)
+            {
+                result.Add((item.ID, item.CatName, item.Total));
+            }
+
+            return result;
+        }
         /// <summary>
         /// 
         /// </summary>

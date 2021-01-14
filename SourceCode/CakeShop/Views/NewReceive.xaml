@@ -78,7 +78,7 @@
                 <DatePicker Name="receiveDatePicker" Width="150" Margin="10" materialDesign:HintAssist.Hint="Pick a Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" FontSize="20"
                             SelectedDate="{Binding Path=MainReceive.Date, Mode=TwoWay}"
                             />
-                <TextBlock Name="CreatedDate" Width="300" Text="{Binding Path=MainReceive.Date}" FontSize="20" Foreground="blue"></TextBlock>
+                <!--<TextBlock Name="CreatedDate" Width="300" Text="{Binding Path=MainReceive.Date}" FontSize="20" Foreground="blue"></TextBlock>-->
 
             </StackPanel>
 
