@@ -60,7 +60,7 @@
                         <TextBlock FontSize="25" Foreground="Black"  Text="Giá tăng dần"></TextBlock>
                     </ComboBoxItem>
                     <ComboBoxItem>
-                        <TextBlock FontSize="25" Foreground="black"  Text="Giá tăng dần"></TextBlock>
+                        <TextBlock FontSize="25" Foreground="black"  Text="Giá giảm dần"></TextBlock>
                     </ComboBoxItem>
                     <ComboBoxItem>
                         <TextBlock FontSize="25" Foreground="black"  Text="Lượng tồn tăng dần"></TextBlock>

@@ -8,7 +8,6 @@
     xmlns:global="clr-namespace:CakeShop" mc:Ignorable="d" Height="680" Width="1200" Loaded="Page_Loaded">
     <Page.Resources>
         <global:ByteArrayToImageConveter x:Key="Converter"/>
-        <global:MarginLeftConverter x:Key="LeftMargin"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>

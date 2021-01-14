@@ -71,7 +71,7 @@
                             </Label.Content>
                         </Label>
                         <TextBlock Name="cakeIntroTextBlock"
-                                   FontSize="18" Foreground="LightYellow" TextWrapping="Wrap" TextAlignment="Justify" FontStyle="Italic" 
+                                   FontSize="18" Foreground="#FF010204" TextWrapping="Wrap" TextAlignment="Justify" FontStyle="Italic" 
                                    Padding="2"
                                    HorizontalAlignment="Center" FontWeight="Bold">
                             <Run Text="&#x09;"/>
@@ -103,23 +103,31 @@
 
                     </StackPanel>
                     <TextBlock  Margin="289.308,0,385.808,0" FontSize="14" FontStyle="Italic" FontFamily="Times New Roman"><Run Text="Tư động tắt sau "/><Run Text=" "/><Run Text="{Binding TimeLeft}"/><Run Text=" "/><Run Text=" giây"/></TextBlock>
-                    <StackPanel Orientation="Horizontal"
+                    <DockPanel >
+                        <StackPanel VerticalAlignment="Center">
+                            
+                        <TextBlock Text="CAKE SHOP" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="45" FontWeight="Bold" TextDecorations="{x:Null}" Foreground="#FF3B3C32">
+                            
+                        </TextBlock>
+                        </StackPanel>
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 Margin="10">
-                        <CheckBox x:Name="neverShowAgainCheckBox"
+                            <CheckBox x:Name="neverShowAgainCheckBox"
                               VerticalAlignment="Center"
                               IsChecked="False"
                               Style="{StaticResource MaterialDesignCheckBox}"
                                   Height="22.222" Margin="10 0" Foreground="#FFFFFF02">
-                            <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
-                            </CheckBox.LayoutTransform>
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                </CheckBox.LayoutTransform>
 
-                        </CheckBox>
-                        <TextBlock Width="Auto" VerticalAlignment="Center"
+                            </CheckBox>
+                            <TextBlock Width="Auto" VerticalAlignment="Center"
                             FontFamily="Verdana" FontSize="20"
                             Text="Không hiện hộp thoại này khi khởi động" FontWeight="Bold" Foreground="Black"/>
-                    </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
 
                 </StackPanel>
             </Grid>

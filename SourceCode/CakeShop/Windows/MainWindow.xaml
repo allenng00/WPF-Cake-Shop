@@ -101,7 +101,7 @@
                 <RadioButton  Uid="4" x:Name="Button04" GroupName="TabMenuButton"
                               Style="{StaticResource MaterialDesignTabRadioButton}"
                               Height="50"
-                              Click="TabMenuButton_Click" Cursor="Hand">
+                              Click="TabMenuButton_Click" Cursor="Hand" IsEnabled="False">
                     <RadioButton.BorderBrush>
                         <SolidColorBrush Color="{DynamicResource BorderBrushTabMenu}"/>
                     </RadioButton.BorderBrush>

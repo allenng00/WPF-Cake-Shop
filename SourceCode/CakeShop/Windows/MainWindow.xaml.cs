@@ -76,9 +76,9 @@ namespace CakeShop.Windows
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Button02.IsChecked = true;
-            App.statisticsPage = new Views.Statistics();
-            mainContentFrame.Content = App.statisticsPage;
+            Button00.IsChecked = true;
+            App.homePage = new Views.Home();
+            mainContentFrame.Content = App.homePage;
         }
 
         /// <summary>

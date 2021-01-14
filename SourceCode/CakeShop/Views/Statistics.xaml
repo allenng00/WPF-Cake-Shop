@@ -67,7 +67,7 @@
                                 </TextBlock>
                             </Label.Content>
                         </Label>
-                        <lvc:CartesianChart Name="Chart01a" LegendLocation="Bottom" Height="459" Margin="49,0">
+                        <lvc:CartesianChart Name="Chart01a" LegendLocation="Bottom" Height="260" Margin="49,0">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Tuần" Labels="{Binding Path=Labels02}">
                                     <lvc:Axis.Separator>
@@ -81,19 +81,18 @@
                                 <lvc:Axis Title="Doanh thu (USD)"/>
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
-                        <!--<Label HorizontalAlignment="Center" VerticalAlignment="Top" d:IsHidden="True">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Top">
                             <Label.Content>
                                 <TextBlock FontSize="20" FontWeight="DemiBold" TextAlignment="Justify" TextWrapping="Wrap">
-                                <Run Text="BIỂU ĐỒ DOANH THU THEO TỪNG TUẦN VÀO THÁNG"/>
-                                <Run Text="{Binding Path=Month}"/>
-                                <Run Text="/"/>
-                                <Run Text="{Binding Path=Year}"/>
+                                    <Run Text="TỈ LỆ DOANH THU THEO LOẠI(CẢ THÁNG)"/>
                                 </TextBlock>
                             </Label.Content>
                         </Label>
-                        <lvc:CartesianChart Name="Chart01b" Height="250" Width="350" d:IsHidden="True">
-                        
-                        </lvc:CartesianChart>-->
+                        <lvc:PieChart Name="cat_cakeProfitPieChart"
+                            VerticalAlignment="Bottom" LegendLocation="Bottom" 
+                                DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" 
+                                Height="195">
+                        </lvc:PieChart>
                     </StackPanel>
                 </materialDesign:Card>
 

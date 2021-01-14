@@ -9,21 +9,6 @@ using System.Windows.Media.Imaging;
 
 namespace CakeShop
 {
-    class MarginLeftConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            long marginleft = (long)(value);
-
-            return new Thickness(marginleft, 0, 0, 0);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     class DateTimeToSpecifiedStyleString : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
